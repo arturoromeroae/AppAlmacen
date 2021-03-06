@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
 
+use App\Http\Controllers\Controller;
 
 class MaintanceController extends Controller
 {
@@ -16,10 +15,6 @@ class MaintanceController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.

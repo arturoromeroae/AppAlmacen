@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\MaintanceController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\SpareController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +23,14 @@ Route::get('/', function () {
 
 Route::get('/almacen', [StockController::class, 'stock'])->name('almacen');
 
-Route::any('/almacen/{id}', [App\Http\Controllers\StockController::class, 'put_stock'])->name('stock.edit');
+Route::any('/almacen/{id}', [StockController::class, 'put_stock'])->name('stock.edit');
 
-Route::get('/mantenimiento', [App\Http\Controllers\MaintanceController::class, 'index'])->name('mantenimiento');
+Route::get('/mantenimiento', [MaintanceController::class, 'index'])->name('mantenimiento');
 
-Route::post('/mantenimiento', [App\Http\Controllers\MaintanceController::class, 'sender'])->name('mantenimiento.add');
+Route::post('/mantenimiento', [MaintanceController::class, 'sender'])->name('mantenimiento.add');
 
-Route::any('/mantenimiento/{id}', [App\Http\Controllers\MaintanceController::class, 'put_product'])->name('mantenimiento.edit');
+Route::any('/mantenimiento/{id}', [MaintanceController::class, 'put_product'])->name('mantenimiento.edit');
 
-Route::get('/ventas', [App\Http\Controllers\SalesController::class, 'index'])->name('ventas');
+Route::get('/ventas', [SalesController::class, 'index'])->name('ventas');
 
-Route::get('/repuestos', [App\Http\Controllers\SpareController::class, 'index'])->name('repuestos');
+Route::get('/repuestos', [SpareController::class, 'index'])->name('repuestos');
