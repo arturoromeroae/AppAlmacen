@@ -1,0 +1,54 @@
+html{
+    background-color: #f8f9fa;
+  }
+  
+  #session{
+    margin-left: auto;
+  }
+  
+  .text-navbar{
+    color: 
+    black;
+    margin-right: 30px;
+  }
+  
+  .hover-navbar:hover{
+    color: white;
+  }
+  
+  .hover-table:hover{
+    color: black;
+  }
+  
+  .dropdown{
+    min-width: 0 !important;
+  }
+  
+  #title{
+    color: black;
+    font-size: 70px;
+  }
+  
+  .special-card{
+    margin-top: 20%;
+  }
+  
+  .text-align{
+    text-align: center;
+  }
+  
+  .icons-table{
+    display: flex;
+  }
+  
+  .modal{
+    display: none;
+  }
+  
+  #toolbar {
+    margin: 0;
+  }
+  
+  .alert-form{
+    float: right;
+  }  
