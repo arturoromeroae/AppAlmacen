@@ -33,7 +33,7 @@ class StockController extends Controller
         $codeModal = $request->codeModal; // codigo del producto
         $cuantityModal = $request->stockModal; // cantidad del producto
         $idModal = $request->idModal; // cantidad del producto
-        $idUser = Auth::id();
+        $idUser = "test";
 
         // obtener productos
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
