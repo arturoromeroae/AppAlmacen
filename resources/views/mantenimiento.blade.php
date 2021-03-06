@@ -237,11 +237,11 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <!-- Buscador -->
-<script src="{{ asset('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
-<script src="{{ asset('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/table-maintance.js') }}"></script>
-<script src="{{ asset('bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js') }}"></script>
-<script type="text/javascript" src="{{ asset('libs/FileSaver/FileSaver.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('export/libs/js-xlsx/xlsx.core.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('export/tableExport.min.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
+<script type="text/javascript" src="{{ url('js/table-maintance.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js') }}"></script>
+<script type="text/javascript" src="{{ url('libs/FileSaver/FileSaver.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('export/libs/js-xlsx/xlsx.core.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('export/tableExport.min.js') }}"></script>
 @endsection
