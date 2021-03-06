@@ -2,31 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Facades\Auth;
 
-class SpareController extends Controller
+use App\Http\Controllers\Controller;
+
+
+
+class StockController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    
+    public function stock()
     {
-        $this->middleware('auth');
+        $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+        $productsArray = $products -> json();
+
+        $selectMarca = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MARCA');
+        $selectArrayMarca = $selectMarca -> json();
+
+        $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
+        $selectArrayModelo = $selectModelo -> json();
+
+        return view('almacen', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
+    public function put_stock($id, Request $request){
+
+        // asignacion de variables
+        $codeModal = $request->codeModal; // codigo del producto
+        $cuantityModal = $request->stockModal; // cantidad del producto
+        $idModal = $request->idModal; // cantidad del producto
+        $idUser = Auth::id();
+
         // obtener productos
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
         $productsArray = $products -> json();
+
+        // envio de datos
+        $pro = [
+            'idProducto' => $idModal,
+            'codProd' => $codeModal,
+            'cantidad' => $cuantityModal,
+            'idOrigen' => 0,
+            'usuario' => $idUser
+        ];
 
         // obtener marcas
         $selectMarca = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MARCA');
@@ -36,6 +59,18 @@ class SpareController extends Controller
         $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
         $selectArrayModelo = $selectModelo -> json();
 
-        return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
+        // metodo para envio de datos
+        $r = Http::post('http://appdemo1.solarc.pe/api/Productos/ActualizaStock', $pro);
+
+        if( ($r -> getStatusCode()) == 200 ){
+            $result = '<strong>Se modificó</strong> el producto.';
+            // obtener productos
+            $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+            $productsArray = $products -> json();
+        }else{
+            $result = '<strong>Error</strong> al modificar el producto.';
+        }
+
+        return view('almacen', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'result'));
     }
 }

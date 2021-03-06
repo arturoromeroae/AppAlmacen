@@ -13,15 +13,6 @@
     </div>
 @endisset
 
-<!-- Alerta de bienvenida -->
-<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        @if (session('status'))
-            {{ session('status') }}
-        @endif
-        {{ __('Bienvenido!') }} <strong>{{ Auth::user()->name }}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> -->
-
 <div class="container-float rounded px-3">
 
     <!-- titulo -->

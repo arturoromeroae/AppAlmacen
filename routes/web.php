@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/almacen', [App\Http\Controllers\StockController::class, 'stock'])->name('almacen');
+Route::get('/almacen', [StockController::class, 'stock'])->name('almacen');
 
 Route::any('/almacen/{id}', [App\Http\Controllers\StockController::class, 'put_stock'])->name('stock.edit');
 

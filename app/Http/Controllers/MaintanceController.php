@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\RequestException;
 
-class HomeController extends Controller
+
+class MaintanceController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,11 +26,138 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    
     public function index()
     {
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
         $productsArray = $products -> json();
 
-        return view('almacen', compact('productsArray'));
+        $selectMarca = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MARCA');
+        $selectArrayMarca = $selectMarca -> json();
+
+        $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
+        $selectArrayModelo = $selectModelo -> json();
+
+        return view('mantenimiento', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
+    }
+    
+    public function sender(Request $request){
+        // valores de los inputs del formulario de mantenimiento
+        $code = $request->code; // codigo del producto
+        $name = $request->name; // nombre del producto
+        $price = $request->price; // precio base del producto
+        $brand = $request->select_marca; // marca del producto
+        $model = $request->select_modelo; // modelo del producto
+        $description = $request->description; // descrpcion del producto
+        $cuantity = $request->cuantity; // cantidad del producto
+        
+        // array del formulario de mantenimiento
+        $product = [
+            'codProd' => $code, 
+            'nombreProducto' => $name,
+            'descripcion' => $description,
+            'idMarca' => $brand,
+            'idModelo' => $model,
+            'idUnidadMedida' => 1,
+            'idTienda' => 1,
+            'precioBase' => $price,
+            'imagen' => 'string',
+            'rutaImagen' => 'string',
+            'idProducto' => 0,
+            'stock' => $cuantity,
+        ];
+        // obtener productos
+        $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+        $productsArray = $products -> json();
+
+        // obtener marcas
+        $selectMarca = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MARCA');
+        $selectArrayMarca = $selectMarca -> json();
+
+        // obtener modelos
+        $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
+        $selectArrayModelo = $selectModelo -> json();
+        
+        // enviar form mantenimiento
+        $res = Http::post('http://appdemo1.solarc.pe/api/Productos/Productos', $product);
+
+        if(($res -> successful()) == true){
+            echo'<div class="alert alert-success alert-dismissible fade show text-align" role="alert">
+                <strong>Se agregaron los productos correctamente!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+            $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+            $productsArray = $products -> json();
+        }else{
+            echo'<div class="alert alert-danger alert-dismissible fade show text-align" role="alert">
+                    <strong>Se produjo un error</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+        };
+        header("Refresh:0");
+        return view('mantenimiento', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
+
+    //    $code_product = $request -> code_product;
+    //    $name_product = $request -> name_product;
+    //    $price_base_product = $request -> price_base_product;
+    //    $cuantity_product = $request -> cuantity_product;
+    //    $image_product = $request -> image_product;
+    //    $description_product = $request -> description_product;
+    }
+
+    public function put_product($id, Request $request){
+
+        $codeModal = $request->codeModal; // codigo del producto
+        $nameModal = $request->nameModal; // nombre del producto
+        $priceModal = $request->priceModal; // precio base del producto
+        $brandModal = $request->selectModalMarca; // marca del producto
+        $modelModal = $request->selectModalModelo; // modelo del producto
+        $descriptionModal = $request->descriptionModal; // descrpcion del producto
+        $cuantityModal = $request->stockModal; // cantidad del producto
+        $idModal = $request->idModal; // cantidad del producto
+
+        $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+        $productsArray = $products -> json();
+        $pro = [
+            'codProd' => $codeModal , 
+            'nombreProducto' => $nameModal,
+            'descripcion' => $descriptionModal,
+            'precioBase' => $priceModal,
+            'idMarca' => (int)$brandModal,
+            'idModelo' => (int)$modelModal,
+            'idUnidadMedida' => 1,
+            'idTienda' => 1,
+            'imagen' => "string",
+            'rutaImagen' => "string",
+            'idProducto' => $idModal,
+        ];
+
+        $bran = [
+            'valor' => 'code-modal', 
+            'nombreProducto' => 'name-modal',
+            'descripcion' => 'description-modal',
+            'precioBase' => (int)'price-modal',  
+        ];
+
+        // obtener marcas
+        $selectMarca = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MARCA');
+        $selectArrayMarca = $selectMarca -> json();
+ 
+        // obtener modelos
+        $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
+        $selectArrayModelo = $selectModelo -> json();
+
+        $r = Http::post('http://appdemo1.solarc.pe/api/Productos/ActualizarProducto', $pro);
+
+        if( ($r -> getStatusCode()) == 200 ){
+            $result_maintance = '<strong>Se modificó</strong> el producto.';
+            // obtener productos
+            $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+            $productsArray = $products -> json();
+        }else{
+            $result_maintance = '<strong>Error</strong> al modificar el producto.';
+        }
+
+        return view('mantenimiento', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'result_maintance'));
     }
 }
