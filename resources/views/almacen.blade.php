@@ -70,7 +70,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">Editar stock del producto</h5>
+                    <h5 class="modal-title" id="ModalLabel">Modificacion de Stock y Precio Base</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -88,12 +88,27 @@
                             <div class="col-md-6">
                                 <label for="stock-modal" class="col-form-label">Aumento de stock:</label>
                                 <input type="number" class="form-control" name="stockModal">
-                            </div> 
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="stock-modal" class="col-form-label">Cantidad:</label>
                                 <input type="number" class="form-control" name="stock" value="{{ $product['stock'] }}" disabled>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="stock-modal" class="col-form-label">Aumento sobre el precio base:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Total:&nbsp;<span id="MiTotal">0.00</span></span>
+                                    <span class="input-group-text" id="basic-addon1">%</span>
+                                    <input id="minumero2" max="100" min="0" type="number" class="form-control" name="priceModal" aria-describedby="basic-addon1">
+                                    <button class="btn btn-outline-primary" onclick="SumarAutomatico()" type="button" id="button-addon2">Calcular Precio</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="stock-modal" class="col-form-label">Precio Base:</label>
+                                <input id="minumero1" type="number" class="form-control" name="stockPrice" value="{{ $product['precioBase'] }}" disabled>
                             </div>
                         </div>
                         <br>
@@ -141,7 +156,7 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <!-- Buscador -->
-<script src="{{ asset('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
-<script src="{{ asset('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/table-stock.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
+<script type="text/javascript" src="{{ url('js/table-stock.js') }}"></script>
 @endsection
