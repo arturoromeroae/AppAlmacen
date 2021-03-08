@@ -107,14 +107,14 @@
                                     <span class="input-group-text">Total: <span class="stock-print">0.00</span></span>
                                     <input id="minumero{{$i}}" max="100" min="0" type="number" class="form-control price-stock" name="priceModal{{$i}}" aria-describedby="basic-addon1">
                                     <span class="input-group-text basic-addon" id="">%</span>
-                                    <button class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
+                                    <button id="minumero1{{$i}}" class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="stock-modal" class="col-form-label">Precio Base:</label>
-                                <input id="minumero1" type="number" class="form-control stock-stock" name="stockPrice{{$i}}" value="{{ $product['precioBase'] }}" disabled>
+                                <input id="minumero1{{$i}}" type="number" data-prod=@json($product["precioBase"]) class="form-control stock-stock" name="stockPrice{{$i}}" value="{{ $product['precioBase'] }}" disabled>
                             </div>
                         </div>
                         <br>
@@ -161,14 +161,8 @@
 </div>
 
 <script>
+   var appSettings = @json( $product['precioBase']);
 
-   var appSettings = {product :"{{ $product['precioBase'] }}"};
-
-   function iterate(item) {
-       console.log(item);
-    }
-
-   alert(appSettings.forEach(iterate));
 </script>
 
 

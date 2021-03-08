@@ -9,14 +9,25 @@ window.customSearchFormatter = function(value, searchText) {
 }
 
 $(".button-addon").click(function (e) {
-    
+    var product = $('.stock-stock');
+    var now_id = $(this).attr('id');
+    var i;
+
+    // total = parseFloat(stock) + parseFloat(porcent);
+    // 
+    for (i = 0; i < product.length; i++) {
+        var my_product = product[i];
+
+        if (String(now_id) == String(my_product.id)) {
+            var stock = parseFloat(my_product.value);
+        }
+    }
+
     const $row = $(this).closest('.row'),
     price = $row.find('input.price-stock').val(),
-    stock = appSettings.product,
     porcent = stock * price/100;
-    total = parseFloat(stock) + parseFloat(porcent);
+    total = stock + porcent
     $row.find('span.stock-print').html(total);
-    console.log(appSettings.product);
 
     // if (typeof(TotalSuma) == undefined || isNaN(TotalSuma)) {
     //     document.querySelector('span[name = MiTotal]').innerHTML = valor1;
@@ -24,13 +35,4 @@ $(".button-addon").click(function (e) {
     //     document.querySelector('span[name = MiTotal]').innerHTML = TotalSuma;
     // }
 
-    $.ajax({
-        type: "",
-        url: "http://appdemo1.solarc.pe/api/Productos/GetProductos",
-        data: "data",
-        dataType: "JSON",
-        success: function (response) {
-            alert('correcto' + response);
-        }
-    });
 });
