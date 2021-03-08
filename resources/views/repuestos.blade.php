@@ -42,7 +42,7 @@
     
         <div class="col-4 p-2">
             <p class="h3 text-center">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
-            <table class="table mt-3">
+            <table class="table mt-3" id="table-2">
 
                 <thead>
                     <tr>
@@ -83,8 +83,7 @@
                 </div>
                 <p class="h3 text-center text-capitalize">{{ $product['nombreProducto'] }}</p>
                 <div class="modal-body">
-                    <form id="myform" action="{{ route('repuestos') }}/{{ $product['idProducto'] }}" method="POST">
-                        @csrf
+                    <form id="myform" action="">
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
                         </div>
@@ -122,9 +121,9 @@
                         <div class="modal-footer text-center">
                             <div class="col-md-12 text-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="submit" class="btn btn-info">Editar repuestos</button>
+                                    <button type="" class="btn btn-info">Editar repuestos</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                                    <a type="button" onclick="addRow()" class="btn btn-primary">Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>
