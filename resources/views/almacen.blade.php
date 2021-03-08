@@ -65,6 +65,7 @@
     </div>
 
     <!-- modal editar cantidad -->
+    <?php $i=0 ?>
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -78,37 +79,42 @@
                     <form id="myform" action="{{ route('almacen') }}/{{ $product['idProducto'] }}" method="POST">
                         @csrf
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
+                            <input type="text" class="form-control" name="idModal{{$i}}" value="{{ $product['idProducto'] }}" hidden>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="code-modal" class="col-form-label">Codigo del Producto:</label>
-                                <input type="text" class="form-control" name="codeModal" value="{{ $product['codProd'] }}" disabled>
+                                <input type="text" class="form-control" name="codeModal{{$i}}" value="{{ $product['codProd'] }}" disabled>
                             </div>
                             <div class="col-md-6">
                                 <label for="stock-modal" class="col-form-label">Aumento de stock:</label>
-                                <input type="number" class="form-control" name="stockModal">
+                                <input type="number" class="form-control" name="stockModal{{$i}}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="stock-modal" class="col-form-label">Cantidad:</label>
-                                <input type="number" class="form-control" name="stock" value="{{ $product['stock'] }}" disabled>
+                                <input type="number" class="form-control" name="stock{{$i}}" value="{{ $product['stock'] }}" disabled>
                             </div>
-                            <div class="col-sm-6">
+                            <!-- <div class="col-sm-3">
+                                <label class="col-form-label mt-4">
+                                    <p class="h3">Total: <strong id="MiTotal"></strong></p>
+                                </label>
+                            </div> -->
+                            <div name="prueba" class="col-sm-6 row">
                                 <label for="stock-modal" class="col-form-label">Aumento sobre el precio base:</label>
                                 <div class="input-group">
-                                    <span class="input-group-text">Total:&nbsp;<span id="MiTotal">0.00</span></span>
-                                    <span class="input-group-text" id="basic-addon1">%</span>
-                                    <input id="minumero2" max="100" min="0" type="number" class="form-control" name="priceModal" aria-describedby="basic-addon1">
-                                    <button class="btn btn-outline-primary" onclick="SumarAutomatico()" type="button" id="button-addon2">Calcular Precio</button>
+                                    <span class="input-group-text">Total: <span class="stock-print">0.00</span></span>
+                                    <input id="minumero{{$i}}" max="100" min="0" type="number" class="form-control price-stock" name="priceModal{{$i}}" aria-describedby="basic-addon1">
+                                    <span class="input-group-text basic-addon" id="">%</span>
+                                    <button class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="stock-modal" class="col-form-label">Precio Base:</label>
-                                <input id="minumero1" type="number" class="form-control" name="stockPrice" value="{{ $product['precioBase'] }}" disabled>
+                                <input id="minumero1" type="number" class="form-control stock-stock" name="stockPrice{{$i}}" value="{{ $product['precioBase'] }}" disabled>
                             </div>
                         </div>
                         <br>
@@ -121,6 +127,7 @@
             </div>
         </div>
     </div>
+    <?php $i++ ?>
     @endforeach
 
     <!-- modal eliminar -->
