@@ -65,7 +65,7 @@
     </div>
 
     <!-- modal editar cantidad -->
-    <?php $i=0 ?>
+    <?php $i=0; $x=10; ?>
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -106,15 +106,15 @@
                                 <div class="input-group">
                                     <span class="input-group-text">Total:&nbsp;<span class="stock-print">0.00</span></span>
                                     <input id="minumero{{$i}}" max="100" min="0" type="number" class="form-control price-stock" name="priceModal" aria-describedby="basic-addon1">
-                                    <span class="input-group-text basic-addon" id="">%</span>
-                                    <button id="minumero1{{$i}}" class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
+                                    <span class="input-group-text basic-addon">%</span>
+                                    <button id="minumero{{$x}}" class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="stock-modal" class="col-form-label">Precio Base:</label>
-                                <input id="minumero1{{$i}}" type="number" data-prod=@json($product["precioBase"]) class="form-control stock-stock" name="stockPrice" value="{{ $product['precioBase'] }}" disabled>
+                                <input id="minumero{{$x}}" type="number" data-prod=@json($product["precioBase"]) class="form-control stock-stock" name="stockPrice" value="{{ $product['precioBase'] }}" disabled>
                             </div>
                         </div>
                         <br>
@@ -127,7 +127,7 @@
             </div>
         </div>
     </div>
-    <?php $i++ ?>
+    <?php $i++; $x++; ?>
     @endforeach
 
     <!-- modal eliminar -->
