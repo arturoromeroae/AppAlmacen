@@ -8,31 +8,32 @@ window.customSearchFormatter = function(value, searchText) {
     return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: #bdd7fa;border: 1px solid blue;border-radius:90px;padding:4px">$1</span>')
 }
 
-function addRow() {
-    "use strict";
+$(document).ready(function(){
+    $(".button-add").click(function(){
+        var now_id = $(this).attr('id');
+        var productCode = $('.codeModal');
+        var productName = $('.nameModal');
+        var productDescription = $('.descriptionModal');
+        var productPrice = $('.priceModal');
+        var i;
+        
+        for (i = 0; i < productCode.length; i++) {
+            var product_code = productCode[i];
+            var product_name = productName[i];
+            var product_description = productDescription[i];
+            var product_price = productPrice[i];
 
-     var table = document.getElementById("table-2");
+            if (String(now_id) == String(product_code.id) && String(product_code.id) != undefined && String(now_id) != undefined) {
+                var code = product_code.value;
+                var name = product_name.value;
+                var description = product_description.value;
+                var price = product_price.value;
+            }
+            console.log(name, code, description, price);
+        }
 
-     var row = document.createElement("tr");
-     console.log(row);
-     var td1 = document.createElement("td");
-     var td2 = document.createElement("td");
-     var td3 = document.createElement("td");
-     var td4 = document.createElement("td");
-     var td5 = document.createElement("td");
-     row.style.cssText = "background: #ccc;"
+        var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td>" + price + "</td></tr>";
+        $("#table-2 tbody").append(markup);
 
-     td1.innerHTML = document.getElementById("code_product").value;
-     td2.innerHTML  = document.getElementById("name_product").value;
-     td3.innerHTML  = document.getElementById("description_product").value;
-     td4.innerHTML  = document.getElementById("cuantity_product").value;
-     td5.innerHTML  = document.getElementById("price_base_product").value;
-
-     row.appendChild(td1);
-     row.appendChild(td2);
-     row.appendChild(td3);
-     row.appendChild(td4);
-     row.appendChild(td5);
-
-     table.children[0].appendChild(row);
- };
+    });
+});

@@ -47,15 +47,17 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
                     </tr>
                 </thead>
                 
                 <tbody>
                     <tr>
                         <th scope="row"></th>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -73,6 +75,7 @@
 </div>
 
 <!-- modal edit -->
+<?php $i=0 ?>
 @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -99,15 +102,18 @@
                                 <input type="text" class="form-control" name="codeModal" value="{{ $product['codProd'] }}" hidden>
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="nameModal" value="{{ $product['nombreProducto'] }}" hidden>
+                                <input id="parts-modal{{$i}}" type="text" class="form-control codeModal" value="{{ $product['codProd'] }}" hidden>
+                                <input id="parts-modal{{$i}}" type="text" class="form-control nameModal" value="{{ $product['nombreProducto'] }}" hidden>
+                                <input id="parts-modal{{$i}}" type="text" class="form-control descriptionModal"  value="{{ $product['descripcion'] }}" hidden>
+                                <input id="parts-modal{{$i}}" type="text" class="form-control priceModal" value="{{ $product['precioVenta'] }}" hidden>
                                 <label for="price-modal" class="col-form-label">Nuevo precio de venta:</label>
-                                <input type="text" class="form-control" name="newPriceModal">
+                                <input id="parts-modal{{$i}}" type="text" class="form-control" name="newPriceModal">
                                 <label for="price-modal" class="col-form-label">Cantidad a vender:</label>
-                                <input type="text" class="form-control" name="newPriceModal">
+                                <input id="parts-modal{{$i}}" type="text" class="form-control cuantityModal" name="cuantityModal">
                             </div>
                         </div>
                         <div class="mb-3">
-                            <textarea class="form-control" name="descriptionModal" hidden>{{ $product['descripcion'] }}</textarea>
+                            <textarea class="form-control" hidden>{{ $product['descripcion'] }}</textarea>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
@@ -123,7 +129,7 @@
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button type="" class="btn btn-info">Editar repuestos</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <a type="button" onclick="addRow()" class="btn btn-primary">Agregar al carrito</a>
+                                    <a id="parts-modal{{$i}}" type="button" class="btn btn-primary button-add">Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -132,6 +138,7 @@
             </div>
         </div>
     </div>
+<?php $i++ ?>
 @endforeach
 
 <!-- jQuery -->
