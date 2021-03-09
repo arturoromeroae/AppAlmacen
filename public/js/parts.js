@@ -28,12 +28,30 @@ $(document).ready(function(){
                 var name = product_name.value;
                 var description = product_description.value;
                 var price = product_price.value;
+
             }
-            console.log(name, code, description, price);
         }
 
-        var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td>" + price + "</td></tr>";
-        $("#table-2 tbody").append(markup);
+        var markup = "<tr><td class='prueba[$i]'><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td class='subtotal prueba{{$i}}'>" + price + "</td></tr><?php $i++ ?>";
+        $("#table-shop tbody").append(markup);
 
+        $('#table-shop .subtotal').each(function() {
+            calculateColumn();
+        });
+        function calculateColumn() {
+            var subtotal = parseFloat($('.subtotal').text());
+            var hola = parseInt($('#table-shop td.subtotal').text()||0,10)
+            var suma = 0;
+
+            $('#table-shop td.subtotal').each(function() {
+                
+                suma += parseFloat($(this).text()||0,10)
+            });
+
+            console.log(suma);
+
+            $(".resultado_total").val(suma);
+        }
     });
+
 });

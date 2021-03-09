@@ -5,6 +5,7 @@
 <!-- estilos tabla -->
 <link rel="stylesheet" href="{{ asset('bootstrap-table-master/dist/bootstrap-table.css') }}">
 
+<!-- tabla de repuestos -->
 @section('content')
 
 <div class="container-fluid">
@@ -39,10 +40,14 @@
                 </tbody>
             </table>
         </div>
-    
+
+        <!-- tabla de carrito -->
         <div class="col-4 p-2">
             <p class="h3 text-center">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
-            <table class="table mt-3" id="table-2">
+            <table 
+            class="table mt-3" 
+            id="table-shop"
+            >
 
                 <thead>
                     <tr>
@@ -56,17 +61,13 @@
                 
                 <tbody>
                     <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                     </tr>
                 </tbody>
             </table>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center mt-4">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-info">Realizar venta</button>
+                    <input class="resultado_total" type="number" disabled>
+                    <button type="button" class="btn btn-primary">Realizar venta</button>
                     <button type="button" class="btn btn-danger">Cancelar</button>
                 </div>
             </div>
