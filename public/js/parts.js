@@ -15,6 +15,7 @@ $(document).ready(function(){
     // añadir producto al carrito
     $(".button-add").click(function(){
         var now_id = $(this).attr('id');
+        var productModalId = $('.idModal');
         var productCode = $('.codeModal');
         var productName = $('.nameModal');
         var productDescription = $('.descriptionModal');
@@ -28,6 +29,7 @@ $(document).ready(function(){
             var product_description = productDescription[i];
             var product_price = productPrice[i];
             var product_cuantity = productCuantity[i];
+            var product_id = productModalId[i];
 
             if (String(now_id) == String(product_code.id) && 
             String(product_code.id) != undefined && 
@@ -37,20 +39,24 @@ $(document).ready(function(){
                 var description = product_description.value;
                 var price = product_price.value;
                 var cuantity = product_cuantity.value;
+                var id = product_id.value;
             }
         }
 
         var idNum = ($('#table-shop tbody').find('tr').length + 1);
         var rowId = 'row-' + idNum;
+        var productId = idNum;
+        var count = $('.select').length;
+        var input_count = $('.count').val(count);
 
         if (cuantity == 0) {
             cuantity = 1;
             var subtotal = price * cuantity;
-            var markup = "<tr id=" + rowId + "><td class='prueba[$i]'><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td class='productPrice price{{$i}}'>" + price + "</td><td class='productCuantity cuantity{{$i}}'>" + cuantity + "</td><td class='productSubtotal subtotal{{$i}}'>" + subtotal + "</td></tr>";
+            var markup = "<tr name=hola-" + count + " id=" + rowId + "><td><input type='checkbox' name='record' class='select'></td><td name=idTable-" + productId + " style='display:none;'>" + id + "</td><td name=codeTable-" + productId + ">" + code + "</td><td name=nameTable-" + productId + ">" + name + "</td><td name=priceTable-" + productId + " class='productPrice price'>" + price + "</td><td name=cuantityTable-" + productId + " class='productCuantity cuantity'>" + cuantity + "</td><td name=subtotalTable-" + productId + " class='productSubtotal subtotal'>" + subtotal + "</td></tr>";
             $("#table-shop tbody").append(markup);
         }else{
             var subtotal = price * cuantity;
-            var markup = "<tr id=" + rowId + "><td class='prueba[$i]'><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td class='productPrice price{{$i}}'>" + price + "</td><td class='productCuantity cuantity{{$i}}'>" + cuantity + "</td><td class='productSubtotal subtotal{{$i}}'>" + subtotal + "</td></tr>";
+            var markup = "<tr name=" + count + " id=" + rowId + "><td><input type='checkbox' name='record'></td><td name=idTable-" + productId + " style='display:none;'>" + id + "</td><td name=codeTable-" + productId + ">" + code + "</td><td name=nameTable-" + productId + ">" + name + "</td><td name=priceTable-" + productId + " class='productPrice price'>" + price + "</td><td name=cuantityTable-" + productId + " class='productCuantity cuantity'>" + cuantity + "</td><td name=subtotalTable-" + productId + " class='productSubtotal subtotal'>" + subtotal + "</td></tr>";
             $("#table-shop tbody").append(markup);
         }
 

@@ -52,6 +52,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col" style='display:none;'>#</th>
                         <th scope="col">Código</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Precio</th>
@@ -65,12 +66,16 @@
                 </tbody>
             </table>
             <div class="col-md-12 mt-4">
-                <label for="price-modal" class="col-form-label">Total:</label>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <input class="resultado_total" type="number" disabled>
-                    <button type="button" class="btn btn-primary">Realizar venta</button>
-                    <button type="button" class="btn btn-danger">Cancelar</button>
-                </div>
+                <form id="myparts" action="{{ route('repuestos') }}/1" method="POST">
+                @csrf
+                    <label for="price-modal" class="col-form-label">Total:</label>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <input class="resultado_total" step=".01" name="resultadoTotal" type="number" disabled>
+                        <input class="count" name="count" type="number" hidden>
+                        <button type="submit" class="btn btn-primary">Realizar venta</button>
+                        <button type="button" class="btn btn-danger">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -104,6 +109,7 @@
                                 <input type="text" class="form-control" name="codeModal" value="{{ $product['codProd'] }}" hidden>
                             </div>
                             <div class="col-sm-6">
+                                <input id="parts-modal{{$i}}" type="text" class="form-control idModal" value="{{ $product['idProducto'] }}" hidden>
                                 <input id="parts-modal{{$i}}" type="text" class="form-control codeModal" value="{{ $product['codProd'] }}" hidden>
                                 <input id="parts-modal{{$i}}" type="text" class="form-control nameModal" value="{{ $product['nombreProducto'] }}" hidden>
                                 <input id="parts-modal{{$i}}" type="text" class="form-control descriptionModal"  value="{{ $product['descripcion'] }}" hidden>

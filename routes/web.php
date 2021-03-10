@@ -34,3 +34,5 @@ Route::any('/mantenimiento/{id}', [MaintanceController::class, 'put_product'])->
 Route::get('/ventas', [SalesController::class, 'index'])->name('ventas');
 
 Route::get('/repuestos', [SpareController::class, 'index'])->name('repuestos');
+
+Route::post('/repuestos/{id}', [SpareController::class, 'shop'])->name('repuestos.post');
