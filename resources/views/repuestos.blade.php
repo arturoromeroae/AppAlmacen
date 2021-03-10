@@ -60,11 +60,11 @@
                 </thead>
                 
                 <tbody>
-                    <tr>
-                    </tr>
+                    
                 </tbody>
             </table>
-            <div class="col-md-12 text-center mt-4">
+            <div class="col-md-12 mt-4">
+                <label for="price-modal" class="col-form-label">Total:</label>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <input class="resultado_total" type="number" disabled>
                     <button type="button" class="btn btn-primary">Realizar venta</button>
