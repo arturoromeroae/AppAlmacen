@@ -56,5 +56,5 @@ html{
   #table-shop{
     display: block;
     height: 400px;
-    overflow-y:scroll;
+    overflow-y:auto;
   }

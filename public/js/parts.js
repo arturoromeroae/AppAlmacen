@@ -1,3 +1,4 @@
+// tabla bootstrap
 $('#table-parts').bootstrapTable({
     locale: 'es-ES',
     pagination: false,
@@ -28,13 +29,14 @@ $(document).ready(function(){
             var product_price = productPrice[i];
             var product_cuantity = productCuantity[i];
 
-            if (String(now_id) == String(product_code.id) && String(product_code.id) != undefined && String(now_id) != undefined) {
+            if (String(now_id) == String(product_code.id) && 
+            String(product_code.id) != undefined && 
+            String(now_id) != undefined) {
                 var code = product_code.value;
                 var name = product_name.value;
                 var description = product_description.value;
                 var price = product_price.value;
                 var cuantity = product_cuantity.value;
-
             }
         }
 
@@ -43,32 +45,29 @@ $(document).ready(function(){
 
         if (cuantity == 0) {
             cuantity = 1;
-            var markup = "<tr id=" + rowId + "><td class='prueba[$i]'><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td class='subtotal prueba{{$i}}'>" + price + "</td><td>" + cuantity + "</td></tr>";
+            var subtotal = price * cuantity;
+            var markup = "<tr id=" + rowId + "><td class='prueba[$i]'><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td class='productPrice price{{$i}}'>" + price + "</td><td class='productCuantity cuantity{{$i}}'>" + cuantity + "</td><td class='productSubtotal subtotal{{$i}}'>" + subtotal + "</td></tr>";
             $("#table-shop tbody").append(markup);
         }else{
-            var markup = "<tr id=" + rowId + "><td class='prueba[$i]'><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td class='subtotal prueba{{$i}}'>" + price + "</td><td>" + cuantity + "</td></tr>";
+            var subtotal = price * cuantity;
+            var markup = "<tr id=" + rowId + "><td class='prueba[$i]'><input type='checkbox' name='record'></td><td>" + code + "</td><td>" + name + "</td><td class='productPrice price{{$i}}'>" + price + "</td><td class='productCuantity cuantity{{$i}}'>" + cuantity + "</td><td class='productSubtotal subtotal{{$i}}'>" + subtotal + "</td></tr>";
             $("#table-shop tbody").append(markup);
         }
 
-        // activa la funcion para calcular precio
-        $('#table-shop .subtotal').each(function() {
+        // activa la funcion para calcular precio y cantidad
+        $('#table-shop .productSubtotal').each(function() {
             calculateColumn();
         });
 
         // obtener el precio total
         function calculateColumn() {
-            var subtotal = parseFloat($('.subtotal').text());
-            var hola = parseInt($('#table-shop td.subtotal').text()||0,10)
-            var suma = 0;
+            var sumaSubtotal = 0;
 
-            $('#table-shop td.subtotal').each(function() {
-                
-                suma += parseFloat($(this).text()||0,10)
+            $('#table-shop td.productSubtotal').each(function() {
+                sumaSubtotal += parseFloat($(this).text()||0,10)
             });
 
-            console.log(suma);
-
-            $(".resultado_total").val(suma);
+            $(".resultado_total").val(sumaSubtotal);
         }
     });
 

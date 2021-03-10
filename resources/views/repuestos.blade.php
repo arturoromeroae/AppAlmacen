@@ -10,7 +10,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-8 p-2">
+        <div class="col-7 p-2">
             <p class="h1 text-center">Repuestos</p>
             <table
                 class="table table-sm" 
@@ -42,7 +42,7 @@
         </div>
 
         <!-- tabla de carrito -->
-        <div class="col-4 p-2">
+        <div class="col-5 p-2">
             <p class="h3 text-center">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
             <table 
             class="table mt-3" 
@@ -56,6 +56,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Cantidad</th>
+                        <th scope="col">Subtotal</th>
                     </tr>
                 </thead>
                 
