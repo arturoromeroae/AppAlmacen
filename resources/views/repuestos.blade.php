@@ -44,39 +44,40 @@
         <!-- tabla de carrito -->
         <div class="col-5 p-2">
             <p class="h3 text-center">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
-            <table 
-            class="table mt-3" 
-            id="table-shop"
-            >
-
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" style='display:none;'>#</th>
-                        <th scope="col">Código</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Subtotal</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    
-                </tbody>
-            </table>
-            <div class="col-md-12 mt-4">
-                <form id="myparts" action="{{ route('repuestos') }}/1" method="POST">
+            <form id="myparts" action="{{ route('repuestos') }}/1" method="POST">
                 @csrf
-                    <label for="price-modal" class="col-form-label">Total:</label>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <input class="resultado_total" step=".01" name="resultadoTotal" type="number" disabled>
-                        <input class="count" name="count" type="number" hidden>
-                        <button type="submit" class="btn btn-primary">Realizar venta</button>
-                        <button type="button" class="btn btn-danger">Cancelar</button>
-                    </div>
-                </form>
-            </div>
+                <table 
+                class="table mt-3" 
+                id="table-shop"
+                >
+
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                <div class="col-md-12 mt-4">
+                    
+                        <label for="price-modal" class="col-form-label">Total:</label>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <input class="resultado" step=".01" name="resultado" type="number" disabled>
+                            <input class="resultado_total" step=".01" name="resultadoTotal" type="number" hidden>
+                            <input class="count" name="count" type="number" hidden>
+                            <button type="submit" class="btn btn-primary">Realizar venta</button>
+                            <button type="button" class="btn btn-danger button-delete">Borrar</button>
+                        </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

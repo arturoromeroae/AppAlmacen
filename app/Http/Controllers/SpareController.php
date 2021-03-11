@@ -42,39 +42,42 @@ class SpareController extends Controller
         $productsArray = $products -> json();
         $selects = $request->count; // selects del producto
 
-        // valores de la lista del carrito
-            
-        $id = $request->input('idTable-1'); // id del producto
-        $priceNew = $request->input('priceTable-1'); // precio de venta del producto
-        $cuantity = $request->input('cuantityTable-1'); // cantidad del producto
-        $subtotal = $request->input('subtotalTable-1'); // subtotal del producto
-        $totalParts = $request->input('resultadoTotal'); // total de los productos
-
-            $article = [
-                "idProducto" => (int)$id,
-                "nuevoPrecioVenta" => floatval($priceNew),
-                "cantidad" => (int)$cuantity,
-                "subTotal" => floatval($subtotal)
-            ];
-
-        $pro = [
-            "usuario" => "test",
-            "idOrigen" => 1,
-            "total" => (int)$totalParts,
-            "carritoDet" => [$article]
-        ];
-
         // obtener marcas
         $selectMarca = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MARCA');
         $selectArrayMarca = $selectMarca -> json();
- 
+
         // obtener modelos
         $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
         $selectArrayModelo = $selectModelo -> json();
 
-        // enviar productos del carrito
-        $shopCar = Http::post('http://appdemo1.solarc.pe/api/Carrito/InsertaCarrito', $pro);
-        echo($shopCar -> getStatusCode());
+        // valores de la lista del carrito
+
+        $all_products = $request->except('_token', 'resultadoTotal', 'count');
+        $count = $request->count; // contador de productos en lista
+        $id = $request->idTable1; // id del producto
+        $priceNew = $request->priceTable; // precio de venta del producto
+        $cuantity = $request->cuantityTable1; // cantidad del producto
+        $subtotal = $request->subtotalTable1; // subtotal del producto
+        $totalParts = $request->resultadoTotal; // total de los productos
+
+        for ($i = 1; $i <= $count ; $i++) {
+            $article = [
+            "idProducto" => $all_products["idTable{$i}"],
+            "nuevoPrecioVenta" => $all_products["priceTable{$i}"],
+            "cantidad" => $all_products["cuantityTable{$i}"],
+            "subTotal" => $all_products["subtotalTable{$i}"]
+            ];
+
+            $pro = [
+                "usuario" => "test",
+                "idOrigen" => 1,
+                "total" => floatval($totalParts),
+                "carritoDet" => [$article]
+            ];
+
+            // enviar productos del carrito
+            $shopCar = Http::post('http://appdemo1.solarc.pe/api/Carrito/InsertaCarrito', $pro);
+        }
 
         return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
     }

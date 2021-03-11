@@ -46,23 +46,29 @@ $(document).ready(function(){
         var idNum = ($('#table-shop tbody').find('tr').length + 1);
         var rowId = 'row-' + idNum;
         var productId = idNum;
-        var count = $('.select').length;
+        var count = parseInt($('.select').length) + 1;
         var input_count = $('.count').val(count);
 
         if (cuantity == 0) {
             cuantity = 1;
             var subtotal = price * cuantity;
-            var markup = "<tr name=hola-" + count + " id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable-" + productId + ">" + code + " <input name=idTable-" + productId + " type='number' value=" + id + " style='display:none;'> </td> <td name=nameTable-" + productId + ">" + name + "</td> <td class='productPrice price'>" + price + " <input name=priceTable-" + productId + " type='number' value=" + price + " style='display:none;'> </td> <td class='productCuantity cuantity'>" + cuantity + " <input name=cuantityTable-" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable-" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> </tr>";
+            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=idTable" + productId + " type='number' value=" + id + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "</td> <td class='productPrice price'>" + price + " <input name=priceTable" + productId + " type='number' value=" + price + " style='display:none;'> </td> <td class='productCuantity cuantity'>" + cuantity + " <input name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> </tr>";
             $("#table-shop tbody").append(markup);
         }else{
             var subtotal = price * cuantity;
-            var markup = "<tr name=hola-" + count + " id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable-" + productId + ">" + code + " <input name=idTable-" + productId + " type='number' value=" + id + " style='display:none;'> </td> <td name=nameTable-" + productId + ">" + name + "</td> <td class='productPrice price'>" + price + " <input name=priceTable-" + productId + " type='number' value=" + price + " style='display:none;'> </td> <td class='productCuantity cuantity'>" + cuantity + " <input name=cuantityTable-" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable-" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> </tr>";
+            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=idTable" + productId + " type='number' value=" + id + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "</td> <td class='productPrice price'>" + price + " <input name=priceTable" + productId + " type='number' value=" + price + " style='display:none;'> </td> <td class='productCuantity cuantity'>" + cuantity + " <input name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> </tr>";
             $("#table-shop tbody").append(markup);
         }
 
         // activa la funcion para calcular precio y cantidad
         $('#table-shop .productSubtotal').each(function() {
             calculateColumn();
+        });
+
+        $('.button-delete').on('click', function(){
+            $('.select:checked').each(function () {
+                $(this).closest('tr').remove()
+            });
         });
 
         // obtener el precio total
@@ -74,6 +80,7 @@ $(document).ready(function(){
             });
 
             $(".resultado_total").val(sumaSubtotal);
+            $(".resultado").val(sumaSubtotal);
         }
     });
 
