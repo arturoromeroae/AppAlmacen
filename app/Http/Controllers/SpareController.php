@@ -43,14 +43,12 @@ class SpareController extends Controller
         $selects = $request->count; // selects del producto
 
         // valores de la lista del carrito
-        for ($i = 1; $i <= $selects; $i++) {
             
-            $id = $request->idTable-$i; // id del producto
-            $priceNew = $request->priceTable-$i; // precio de venta del producto
-            $cuantity = $request->cuantityTable-$i; // cantidad del producto
-            $subtotal = $request->subtotalTable-$i; // subtotal del producto
-        }
-            $totalParts = $request->resultadoTotal; // total de los productos
+        $id = $request->idTable-1; // id del producto
+        $priceNew = $request->priceTable-1; // precio de venta del producto
+        $cuantity = $request->cuantityTable-1; // cantidad del producto
+        $subtotal = $request->subtotalTable-1; // subtotal del producto
+        $totalParts = $request->resultadoTotal; // total de los productos
 
             $article = [
                 "idProducto" => $id,
@@ -58,6 +56,7 @@ class SpareController extends Controller
                 "cantidad" => (int)$cuantity,
                 "subTotal" => floatval($subtotal)
             ];
+        echo( $priceNew );
 
         $pro = [
             "usuario" => "test",
