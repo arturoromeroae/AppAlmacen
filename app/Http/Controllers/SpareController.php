@@ -75,9 +75,12 @@ class SpareController extends Controller
                 "carritoDet" => [$article]
             ];
 
-            // enviar productos del carrito
-            $shopCar = Http::post('http://appdemo1.solarc.pe/api/Carrito/InsertaCarrito', $pro);
+            print_r($article);
         }
+
+        // enviar productos del carrito
+        $shopCar = Http::post('http://appdemo1.solarc.pe/api/Carrito/InsertaCarrito', $pro);
+        echo($shopCar -> getStatusCode());
 
         return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
     }

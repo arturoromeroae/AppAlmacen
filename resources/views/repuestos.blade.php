@@ -106,7 +106,7 @@
                                 <br>
                                 <p class="h5">Stock del producto: <strong>{{ $product['stock'] }}</strong></p>
                                 <br>
-                                <p class="h5">Precio de Venta: <strong>{{ $product['precioVenta'] }}</strong></p>
+                                <p class="h5">Precio de Venta Actual: <strong>{{ $product['precioVenta'] }}</strong></p>
                                 <input type="text" class="form-control" name="codeModal" value="{{ $product['codProd'] }}" hidden>
                             </div>
                             <div class="col-sm-6">
@@ -114,10 +114,10 @@
                                 <input id="parts-modal{{$i}}" type="text" class="form-control codeModal" value="{{ $product['codProd'] }}" hidden>
                                 <input id="parts-modal{{$i}}" type="text" class="form-control nameModal" value="{{ $product['nombreProducto'] }}" hidden>
                                 <input id="parts-modal{{$i}}" type="text" class="form-control descriptionModal"  value="{{ $product['descripcion'] }}" hidden>
-                                <input id="parts-modal{{$i}}" type="text" class="form-control priceModal" value="{{ $product['precioVenta'] }}" hidden>
-                                <label for="price-modal" class="col-form-label">Nuevo precio de venta:</label>
-                                <input id="parts-modal{{$i}}" type="text" class="form-control" name="newPriceModal">
-                                <label for="price-modal" class="col-form-label">Cantidad a vender:</label>
+                                
+                                <label for="price-modal" class="col-form-label">Precio de venta:</label>
+                                <input id="parts-modal{{$i}}" type="text" class="form-control priceModal" value="{{ $product['precioVenta'] }}">
+                                <label for="parts-modal{{$i}}" class="col-form-label">Cantidad a vender:</label>
                                 <input id="parts-modal{{$i}}" type="text" class="form-control cuantityModal" name="cuantityModal">
                             </div>
                         </div>
@@ -136,9 +136,9 @@
                         <div class="modal-footer text-center">
                             <div class="col-md-12 text-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="" class="btn btn-info">Editar repuestos</button>
+                                    <a href="{{ route('mantenimiento') }}" class="btn btn-info">Editar repuestos</a>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <a id="parts-modal{{$i}}" type="button" class="btn btn-primary button-add">Agregar al carrito</a>
+                                    <a id="parts-modal{{$i}}" type="button" onclick="empty()" class="btn btn-primary button-add">Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>
