@@ -21,6 +21,7 @@ $(document).ready(function(){
         var productName = $('.nameModal');
         var productDescription = $('.descriptionModal');
         var productPrice = $('.priceModal');
+        var productPriceDefault = $('.priceDefault');
         var productCuantity = $('.cuantityModal');
         
         var i;
@@ -31,6 +32,7 @@ $(document).ready(function(){
             var product_name = productName[i];
             var product_description = productDescription[i];
             var product_price = productPrice[i];
+            var product_price_default = productPriceDefault[i];
             var product_cuantity = productCuantity[i];
             var product_id = productModalId[i];
 
@@ -40,9 +42,16 @@ $(document).ready(function(){
                 var code = product_code.value;
                 var name = product_name.value;
                 var description = product_description.value;
-                var price = product_price.value;
+                var price1 = product_price.value;
+                var price2 = product_price_default.value;
+                if (price1 == null || price1 == undefined || price1 == 0) {
+                    var price = price2;
+                }else{
+                    var price = price1;
+                }
                 var cuantity = product_cuantity.value;
                 var id = product_id.value;
+                console.log(price);
             }
         }
 
