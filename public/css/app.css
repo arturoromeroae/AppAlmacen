@@ -52,9 +52,3 @@ html{
   .alert-form{
     float: right;
   }
-
-  #table-shop{
-    display: block;
-    height: 400px;
-    overflow-y:auto;
-  }

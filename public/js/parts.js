@@ -5,6 +5,14 @@ $('#table-parts').bootstrapTable({
     search: true,
 });
 
+
+$('#table-shop').bootstrapTable({
+    pagination: false,
+    formatNoMatches: function () {
+        return;
+    }
+});
+
 // formato de busqueda
 window.customSearchFormatter = function(value, searchText) {
     return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: #bdd7fa;border: 1px solid blue;border-radius:90px;padding:4px">$1</span>')
@@ -81,6 +89,7 @@ $(document).ready(function(){
             $('.select:checked').each(function () {
                 $(this).closest('tr').remove()
             });
+            calculateColumn();
         });
 
         // obtener el precio total
@@ -93,16 +102,6 @@ $(document).ready(function(){
 
             $(".resultado_total").val(sumaSubtotal);
             $(".resultado").val(sumaSubtotal);
-        }
-
-        function empty()
-        {
-          var x;
-          x = document.getElementsByClassName("priceModal").value;
-          if (x == "") 
-           { 
-              alert("Enter a Valid Roll Number");
-           };
         }
 
     });

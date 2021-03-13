@@ -75,7 +75,6 @@ class SpareController extends Controller
                 "carritoDet" => [$article]
             ];
 
-            print_r($article);
         }
 
         // enviar productos del carrito

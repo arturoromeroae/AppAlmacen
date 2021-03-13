@@ -8,6 +8,7 @@ window.customSearchFormatter = function(value, searchText) {
     return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: #bdd7fa;border: 1px solid blue;border-radius:90px;padding:4px">$1</span>')
 }
 
+
 $(".button-addon").click(function (e) {
     var product = $('.stock-stock');
     var now_id = $(this).attr('id');
