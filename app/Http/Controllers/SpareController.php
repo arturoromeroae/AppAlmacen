@@ -60,7 +60,7 @@ class SpareController extends Controller
         $subtotal = $request->subtotalTable1; // subtotal del producto
         $totalParts = $request->resultadoTotal; // total de los productos
 
-        for ($i = 2; $i <= $count ; $i++) {
+        for ($i = 1; $i <= $count ; $i++) {
             $article = [
             "idProducto" => $all_products["idTable{$i}"],
             "nuevoPrecioVenta" => $all_products["priceTable{$i}"],
@@ -74,12 +74,10 @@ class SpareController extends Controller
                 "total" => floatval($totalParts),
                 "carritoDet" => [$article]
             ];
-
         }
 
         // enviar productos del carrito
         $shopCar = Http::post('http://appdemo1.solarc.pe/api/Carrito/InsertaCarrito', $pro);
-        echo($shopCar -> getStatusCode());
 
         return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
     }

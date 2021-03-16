@@ -52,3 +52,7 @@ html{
   .alert-form{
     float: right;
   }
+
+  .click{
+    cursor: pointer;
+  }
