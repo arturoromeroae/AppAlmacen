@@ -97,7 +97,7 @@ $(document).ready(function(){
 
     });
 
-    // añadir producto al carrito
+    // añadir producto al carrito desde boton de tabla
     $(".button-add-table").click(function(){
 
         var now_id_table = $(this).attr('id');
