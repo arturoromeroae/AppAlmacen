@@ -28,7 +28,7 @@
             data-search-highlight="true">
             <thead>
                 <tr>
-                    <th data-width="80" data-search-highlight-formatter="customSearchFormatter" data-field="code" scope="col">Código</th>
+                    <th data-halign="center" data-width="80" data-search-highlight-formatter="customSearchFormatter" data-field="code" scope="col">Código</th>
                     <th data-width="300" data-search-highlight-formatter="customSearchFormatter" data-field="name" data-sortable="true" data-sort-name="name" data-sort-order="asc" scope="col">Nombre</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Descripcion</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Cantidad</th>

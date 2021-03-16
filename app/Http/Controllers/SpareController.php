@@ -60,7 +60,7 @@ class SpareController extends Controller
         $subtotal = $request->subtotalTable1; // subtotal del producto
         $totalParts = $request->resultadoTotal; // total de los productos
 
-        for ($i = 1; $i <= $count ; $i++) {
+        for ($i = 2; $i <= $count ; $i++) {
             $article = [
             "idProducto" => $all_products["idTable{$i}"],
             "nuevoPrecioVenta" => $all_products["priceTable{$i}"],
