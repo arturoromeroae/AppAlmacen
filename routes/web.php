@@ -5,6 +5,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\MaintanceController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SpareController;
+use App\Http\Controllers\BillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::post('/mantenimiento', [MaintanceController::class, 'sender'])->name('man
 Route::any('/mantenimiento/{id}', [MaintanceController::class, 'put_product'])->name('mantenimiento.edit');
 
 Route::get('/ventas', [SalesController::class, 'index'])->name('ventas');
+
+Route::get('/facturas', [BillController::class, 'bill'])->name('facturas');
 
 Route::get('/repuestos', [SpareController::class, 'index'])->name('repuestos');
 
