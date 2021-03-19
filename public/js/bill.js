@@ -130,41 +130,44 @@ $(document).ready(function(){
                 sumaSubtotal += parseFloat($(this).text()||0,10)
             });
 
-            var money = $('.pay-bill').val();
-            var money2 = $(".total-bill").val(sumaSubtotal);
-            $(".resultado").val(sumaSubtotal);
         
         }
 
     });
 
-    $('.rest-discount').focusout(function() {
-        var dis = $(this).val();
-        var select = $('.select-discount').val();
-        var tol = $('.total-bill').val();
+    // $('.rest-discount').focusout(function() {
+    //     var dis = $(this).val();
+    //     var select = $('.select-discount').val();
+    //     var tol = $('.total-bill').val();
+    //     var bill = $('.pay-bill').val()
         
-        if (select == 'sol') {
-            $('.discount').val(tol - dis);
-            $('.back-bill').val($('.discount').val(tol - dis));
-        }else{
-            $('.discount').val(tol - ((dis * tol)/100));
-            $('.back-bill').val($('.discount').val(tol - ((dis * tol)/100)));
-        }
-    });
+    //     if (select == 'sol') {
+    //         var discountTotal = $('.discount').val(tol - dis);
+    //         $('.back-bill').val(bill - discountTotal);
+    //     }else if(select == 'por'){
+    //         var porcent = (dis * tol)/100;
+    //         var discountTotal = $('.discount').val(tol - porcent);
+    //         $('.back-bill').val(discountTotal);
+    //     }else if(select == 'no'){
+    //         $('.discount').val(0)
+    //     }
+    // });
 
-    $('.pay-bill').focusout(function() {
-        var x = $(this).val();
-        var y = $('.total-bill').val()
-        if (y == '') {
-            y = 0
-        }
+    // $('.pay-bill').focusout(function() {
+    //     var x = $(this).val();
+    //     var y = $('.total-bill').val()
+    //     var select = $('.select-discount').val();
+    //     if (y == '') {
+    //         y = 0
+    //     }
         
-        if ($('.discount').val() == 0 || $('.discount').val() == '' || $('.discount').val() == null || $('.discount').val() == undefined) {
-            $('.back-bill').val(x - y);
-        }else{
-            $('.back-bill').val(($('.discount').val()) - x);
-        }
-    });
+    //     console.log(select);
+    //     if ($('.rest-discount').val() == 0 || $('.rest-discount').val() == '' || $('.rest-discount').val() == null || $('.rest-discount').val() == undefined) {
+    //         $('.back-bill').val(x - y);
+    //     }else{
+    //         $('.back-bill').val(x - ($('.discount').val()));
+    //     }
+    // });
 
     $(".button-add").click(function(){
 

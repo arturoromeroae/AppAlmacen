@@ -102,7 +102,7 @@
             <div class="col">
                 <label>Descuento</label>
                 <select class="form-select select-discount" aria-label="Default select example">
-                    <option selected>Seleccione S/ ó %</option>
+                    <option value="no" selected>Seleccione S/ ó %</option>
                     <option value="sol">S/</option>
                     <option value="por">%</option>
                 </select>
@@ -181,7 +181,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ModalLabel">Agregar productos</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table 
@@ -220,7 +220,7 @@
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Modificar</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Modificar</button>
                         </div>
                     </div>
                 </div>
@@ -284,7 +284,7 @@
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('mantenimiento') }}" class="btn btn-info">Editar repuestos</a>
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                            <a id="parts-modal{{$i}}" type="button" onclick="empty()" class="btn btn-primary button-add">Agregar al carrito</a>
+                                            <a id="parts-modal{{$i}}" type="button" data-bs-dismiss="modal" class="btn btn-primary button-add">Agregar al carrito</a>
                                         </div>
                                     </div>
                                 </div>
