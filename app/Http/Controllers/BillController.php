@@ -37,17 +37,20 @@ class BillController extends Controller
         $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
         $selectArrayModelo = $selectModelo -> json();
 
+        // obtener clientes
+        $selectClientes = HTTP::get('http://appdemo1.solarc.pe/api/Cliente/GetClientes');
+        $selectArrayClientes = $selectClientes -> json();
+
         // valores de la lista del carrito
+        // $all_products = $request->except('_token', 'resultadoTotal', 'count');
+        // $count = $request->count; // contador de productos en lista
+        // $id = $request->idTable1; // id del producto
+        // $priceNew = $request->priceTable; // precio de venta del producto
+        // $cuantity = $request->cuantityTable1; // cantidad del producto
+        // $subtotal = $request->subtotalTable1; // subtotal del producto
+        // $totalParts = $request->resultadoTotal; // total de los productos
 
-        $all_products = $request->except('_token', 'resultadoTotal', 'count');
-        $count = $request->count; // contador de productos en lista
-        $id = $request->idTable1; // id del producto
-        $priceNew = $request->priceTable; // precio de venta del producto
-        $cuantity = $request->cuantityTable1; // cantidad del producto
-        $subtotal = $request->subtotalTable1; // subtotal del producto
-        $totalParts = $request->resultadoTotal; // total de los productos
-
-        return view('facturas', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
+        return view('facturas', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'selectArrayClientes', 'selectArrayCarrito'));
     }
 
 }

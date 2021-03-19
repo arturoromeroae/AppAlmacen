@@ -32,7 +32,11 @@ class SpareController extends Controller
         $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
         $selectArrayModelo = $selectModelo -> json();
 
-        return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
+        // obtener carrito
+        $selectCarrito = HTTP::get('http://appdemo1.solarc.pe/api/Carrito/GetCarrito');
+        $selectArrayCarrito = $selectCarrito -> json();
+
+        return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'selectArrayCarrito'));
     }
 
     public function shop($id, Request $request)
@@ -59,6 +63,7 @@ class SpareController extends Controller
         $cuantity = $request->cuantityTable1; // cantidad del producto
         $subtotal = $request->subtotalTable1; // subtotal del producto
         $totalParts = $request->resultadoTotal; // total de los productos
+        $pr = [];
 
         for ($i = 1; $i <= $count ; $i++) {
             $article = [
@@ -67,18 +72,26 @@ class SpareController extends Controller
             "cantidad" => $all_products["cuantityTable{$i}"],
             "subTotal" => $all_products["subtotalTable{$i}"]
             ];
-
-            $pro = [
-                "usuario" => "test",
-                "idOrigen" => 1,
-                "total" => floatval($totalParts),
-                "carritoDet" => [$article]
-            ];
+            array_push($pr, $article);
+            print_r($article);
         }
+
+        $pro = [
+            "usuario" => "test",
+            "idOrigen" => 1,
+            "total" => floatval($totalParts),
+            "carritoDet" => $pr
+        ];
 
         // enviar productos del carrito
         $shopCar = Http::post('http://appdemo1.solarc.pe/api/Carrito/InsertaCarrito', $pro);
+        $response = $shopCar->json();
+        $idResponse = $response['data'];
 
-        return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
+        // obtener carrito
+        $selectCarrito = HTTP::get("http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito={$idResponse}");
+        $selectArrayCarrito = $selectCarrito -> json();
+        
+        return view('facturas', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'selectArrayCarrito', 'idResponse'));
     }
 }

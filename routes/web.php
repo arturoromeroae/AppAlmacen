@@ -34,8 +34,8 @@ Route::any('/mantenimiento/{id}', [MaintanceController::class, 'put_product'])->
 
 Route::get('/ventas', [SalesController::class, 'index'])->name('ventas');
 
-Route::get('/facturas', [BillController::class, 'bill'])->name('facturas');
+Route::any('/facturas', [BillController::class, 'bill'])->name('facturas');
 
 Route::get('/repuestos', [SpareController::class, 'index'])->name('repuestos');
 
-Route::post('/repuestos/{id}', [SpareController::class, 'shop'])->name('repuestos.post');
+Route::any('/repuestos/{id}', [SpareController::class, 'shop'])->name('repuestos.post');

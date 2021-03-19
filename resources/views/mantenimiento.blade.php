@@ -24,7 +24,6 @@
         <table 
             class="table table-sm table-bordered border-dark pagination-detail" 
             id="table-maintance" 
-            data-height="400"
             data-search-highlight="true">
             <thead>
                 <tr>
@@ -43,18 +42,18 @@
             <tbody>
                 @foreach($productsArray['data'] as $product)
                 <tr>
-                    <td>{{ $product['codProd'] }}</td>
-                    <td>{{ $product['nombreProducto'] }}</td>
-                    <td>{{ $product['descripcion'] }}</td>
-                    <td>{{ $product['stock'] }}</td>
-                    <td>{{ $product['precioBase'] }}</td>
-                    <td>{{ $product['precioVenta'] }}</td>
-                    <td>{{ $product['marca'] }}</td>
-                    <td>{{ $product['modelo'] }}</td>
-                    <td>
+                    <td class="fs-6">{{ $product['codProd'] }}</td>
+                    <td class="fs-6">{{ $product['nombreProducto'] }}</td>
+                    <td class="fs-6">{{ $product['descripcion'] }}</td>
+                    <td class="fs-6">{{ $product['stock'] }}</td>
+                    <td class="fs-6">{{ $product['precioBase'] }}</td>
+                    <td class="fs-6">{{ $product['precioVenta'] }}</td>
+                    <td class="fs-6">{{ $product['marca'] }}</td>
+                    <td class="fs-6">{{ $product['modelo'] }}</td>
+                    <td class="fs-6">
                         <div class="container icons-table" id="icons-table">
-                            <a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:20px;">create</i></a>
-                            <a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:20px;">delete</i></a>
+                            <a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">create</i></a>
+                            <a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">delete</i></a>
                         </div>
                     </td>
                 </tr>
