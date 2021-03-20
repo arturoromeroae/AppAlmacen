@@ -137,7 +137,7 @@
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="{{ route('mantenimiento') }}" class="btn btn-info">Editar repuestos</a>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <a id="parts-modal{{$i}}" type="button" onclick="empty()" class="btn btn-primary button-add">Agregar al carrito</a>
+                                    <a id="parts-modal{{$i}}" type="button" class="btn btn-primary button-add" data-bs-dismiss="modal">Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>
