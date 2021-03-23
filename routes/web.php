@@ -39,3 +39,5 @@ Route::any('/facturas', [BillController::class, 'bill'])->name('facturas');
 Route::get('/repuestos', [SpareController::class, 'index'])->name('repuestos');
 
 Route::any('/repuestos/{id}', [SpareController::class, 'shop'])->name('repuestos.post');
+
+Route::any('/repuestos/{id}/{product}', [SpareController::class, 'send'])->name('repuestos.complete');
