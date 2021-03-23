@@ -86,7 +86,6 @@ class SpareController extends Controller
         $shopCar = Http::post('http://appdemo1.solarc.pe/api/Carrito/InsertaCarrito', $pro);
         $response = $shopCar->json();
         $idResponse = $response['data'];
-        print_r($pr);
 
         // obtener carrito
         $selectCarrito = HTTP::get("http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito={$idResponse}");
