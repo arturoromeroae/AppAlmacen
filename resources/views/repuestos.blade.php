@@ -10,7 +10,7 @@
 <?php $i=0 ?>
 <div class="container-xxl px-5">
     <div>
-        <p class="h1 text-center">Repuestos</p>
+        <p class="h3 text-center">Repuestos</p>
         <div id="table-buy">
             <table
                 class="table table-sm" 
@@ -21,9 +21,9 @@
                         <th scope="col">Código</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripcion</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">P. Venta</th>
-                        <th scope="col">Agregar</th>
+                        <th data-align="right" scope="col">Cantidad</th>
+                        <th data-align="right" scope="col">P. Venta</th>
+                        <th data-align="center" scope="col">Agregar</th>
                     </tr>
                 </thead>
             
@@ -45,9 +45,22 @@
 
         <!-- tabla de carrito -->
         <div class="container text-center">
-            <p class="h3 text-center mt-1">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
+            <p class="h4 text-center mt-1">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
             <form id="myparts" action="{{ route('repuestos') }}/1" method="POST">
                 @csrf
+
+                <div class="col-md-12 mt-4">
+                    
+                        <label for="price-modal" class="col-form-label">Total:</label>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <input class="resultado" step=".01" name="resultado" type="number" disabled>
+                            <input class="resultado_total" step=".01" name="resultadoTotal" type="number" hidden>
+                            <input class="count" name="count" type="number" hidden>
+                            <button type="submit" class="btn btn-primary">Realizar venta</button>
+                            <button type="button" class="btn btn-danger button-delete">Borrar</button>
+                        </div>
+                </div>
+
                 <table class="table" id="table-shop" >
 
                     <thead>
@@ -65,17 +78,7 @@
                         
                     </tbody>
                 </table>
-                <div class="col-md-12 mt-4">
-                    
-                        <label for="price-modal" class="col-form-label">Total:</label>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <input class="resultado" step=".01" name="resultado" type="number" disabled>
-                            <input class="resultado_total" step=".01" name="resultadoTotal" type="number" hidden>
-                            <input class="count" name="count" type="number" hidden>
-                            <button type="submit" class="btn btn-primary">Realizar venta</button>
-                            <button type="button" class="btn btn-danger button-delete">Borrar</button>
-                        </div>
-                </div>
+                
             </form>
         </div>
     </div>

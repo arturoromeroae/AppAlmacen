@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    $("#ruc-input").css("display", "none");
     // se le asigna el valor de la url con el json
     var url = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
 
@@ -10,17 +10,17 @@ $(document).ready(function(){
         datatype: "json",
         success: function(data){
             client = data['data'];
-            var fuseOptions = {keys: ["nombres", "dni"]};
-            var options = {display: "nombres", key: "dni", fuseOptions: fuseOptions};
-            $("#client").fuzzyComplete(client, options);
+            var fuseOptions = {keys: ["rucCliente", "dni"]};
+            var options = {display: "rucCliente", key: "dni", fuseOptions: fuseOptions};
+            $("#ruc-client").fuzzyComplete(client, options);
             
             // si el input cambia realiza la siguiente funcion
-            $('#client').change(function () { 
-                var currentClient = $('#client').val(); // se asigna valor del input cliente
+            $('#ruc-client').change(function () { 
+                var currentClient = $('#ruc-client').val(); // se asigna valor del input cliente
                 
                 // recorriendo array de nombres
                 for (let i = 0; i < client.length; i++) {
-                    getClient = data['data'][i]['nombres']; // se asigna valor de los nombres del array
+                    getClient = data['data'][i]['rucCliente']; // se asigna valor de los nombres del array
 
                     // condicional para obtener dni
                     if (currentClient == getClient) {
@@ -39,12 +39,34 @@ $(document).ready(function(){
     });
 
     $('.type_shop').change(function () { 
+        var select = $(this).val();
+        $.ajax({
+        type:"GET",
+        datatype: "json",
+        url: `http://appdemo1.solarc.pe/api/Maestro/GetNroComprobante?IdTipoDoc=${select}`,
+        success: function(data){
+            var serie = data['data'][0]['serieDoc'];
+            var document = data['data'][0]['nroDoc'];
+            $(".codeBilles").text( serie + '-' + document);
+            }
+        });
+        
+    });
+    
+
+    $('.type_shop').change(function () { 
         var conceptName = $('.type_shop').find(":selected").val();
         
-        if (conceptName == 1 || conceptName == '') {
+        if (conceptName == 1 || conceptName == "") {
             $("#dni-input").css("display", "none");
+            $("#client-input").css("display", "block");
+            $("#ruc-input").css("display", "none");
+            $("#razon-input").css("display", "none");
             $('#client-dni').val(0);
         }else{
+            $("#client-input").css("display", "none");
+            $("#ruc-input").css("display", "block");
+            $("#razon-input").css("display", "block");
             $("#dni-input").css("display", "block");
         }
     });
@@ -273,4 +295,89 @@ $(document).ready(function(){
     var getYr = getDate.getFullYear();
     
     $("#billDate").val(getYr + "-" + getMonFormat + "-" + getDy + ' T' + getH + ':' + getM + ':' + getS);
+
+    // GENERA FACTURA PDF
+    $('#download').click(function() {
+        var doc = new jsPDF('landscape');
+
+        // Empty square
+        doc.rect(200, 20, 60, 40);
+
+        doc.setFontSize(15);
+                doc.text(205, 30, 'R.U.C.:');
+            
+        doc.setFontSize(20);
+                doc.text(219, 40, 'Factura');
+                
+        doc.setFontSize(15);
+                doc.text(205, 50, 'Nº');
+
+        doc.setFontSize(30);
+                doc.text(20, 40, 'Motos');
+                
+        doc.setFontSize(15);
+                doc.text(20, 50, 'Dirección: is simply dummy text of the printing');
+                
+        doc.setFontSize(15);
+                doc.text(20, 56, 'and typesetting industry.');
+                
+        doc.setFontSize(15);
+                doc.text(20, 65, 'Tlf:');
+                
+        doc.setFontSize(15);
+                doc.text(20, 80, 'Cliente:');
+        doc.setFontSize(15);
+                doc.text(20, 85, `RUC: `);
+        doc.setFontSize(15);
+                doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
+        doc.setFontSize(15);
+                doc.text(20, 95, 'Fecha:');
+                
+        var generateData = function(amount) {
+        var result = [];
+        var data = {
+            coin: "100",
+            game_group: "GameGroup",
+            game_name: "XPTO2",
+            game_version: "25",
+            machine: "20485861",
+            vlt: "0"
+        };
+        
+        
+        for (var i = 0; i < amount; i += 1) {
+            data.id = (i + 1).toString();
+            result.push(Object.assign({}, data));
+        }
+        return result;
+        };
+            
+        function createHeaders(keys) {
+        var result = [];
+        for (var i = 0; i < keys.length; i += 1) {
+            result.push({
+            id: keys[i],
+            name: keys[i],
+            prompt: keys[i],
+            width: 50,
+            align: "center",
+            padding: 10
+            });
+        }
+        return result;
+        }
+                
+        var headers = createHeaders([
+        "id",
+        "coin",
+        "game_group",
+        "game_name",
+        "game_version",
+        "machine",
+        "vlt"
+        ]);
+
+        doc.table(20, 110, generateData(5), headers, { autoSize: false });
+    });
+
 });

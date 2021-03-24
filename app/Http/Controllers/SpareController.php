@@ -171,7 +171,7 @@ class SpareController extends Controller
                 "idProducto" => $all_products_bill["idTable{$i}"],
                 "cantidad" => $all_products_bill["cuantityTable{$i}"],
                 "precioVenta" => $all_products_bill["priceTable{$i}"],
-                "valorVenta" => 1300,
+                "valorVenta" => $all_products_bill["subtotalTable{$i}"],
                 "subTotal" => $all_products_bill["subtotalTable{$i}"],
                 "total" => $all_products_bill["totalTable{$i}"],
                 "idOrigen" => 1
@@ -189,7 +189,7 @@ class SpareController extends Controller
             "vuelto" => $all_products_bill['backBill'],
             "porcDscto" => $discountValuePor,
             "valorDscto" => $discountValue,
-            "valorVenta" => 0,
+            "valorVenta" => $all_products_bill['subtotalBill'],
             "idSede" => 1,
             "idPedCab" => $all_products_bill['idBill'],
             "usuario" => "string",

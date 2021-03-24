@@ -24,22 +24,33 @@
                 <div class="mb-3">
                     <label for="inputGroupSelect01">Comprobante</label>
                     <select name="selectBill" class="form-select type_shop" id="inputGroupSelect01" required>
-                        <option value='' selected>Seleccione</option>
+                        <option value="" selected>Seleccione</option>
                         <option value="1">Nota de Venta</option>
                         <option value="2">Boleta de Venta</option>
                         <option value="3">Factura</option>
                     </select>
                     <input type="number" id="igv" hidden>
                 </div>
+                <div class="mb-3">
+                    <h1 class="h4 ml-4 codeBilles"></h1>
+                </div>
             </div>
             <div class="col">
-                <label for="client">Cliente</label>
-                <input id="client" type="text" class="form-control" placeholder="Cliente" aria-label="cliente" required>
+
+                <div id="client-input" style="display:none;">
+                    <label for="client">Cliente</label>
+                    <input id="client" type="text" class="form-control" placeholder="Cliente" aria-label="cliente" required>
+                </div>
+                <div id="ruc-input">
+                    <label for="ruc-client">RUC</label>
+                    <input name="rucBill" type="text" id="ruc-client" class="form-control" required>
+                </div>
+                <div id="razon-input" style="display:none;">
+                    <label for="razon-client">Razon Social</label>
+                    <input type="text" id="razon-client" class="form-control" required>
+                </div>
                 <input type="number" id="id-client" value="0" hidden>
-                <label for="razon-client">Razon Social</label>
-                <input type="text" id="razon-client" class="form-control" required>
-                <label for="ruc-client">RUC</label>
-                <input name="rucBill" type="text" id="ruc-client" class="form-control" required>
+                
             </div>
         </div>
 
@@ -51,6 +62,10 @@
         </div>
 
         <div class="row">
+            <div class="col">
+                <label>Subtotal</label>
+                <input name="subtotalBill" type="number" class="form-control subtotalClient" disabled>
+            </div>
             <div class="col">
                 <label>Monto a pagar</label>
                 <input id="total-pay" type="number" class="form-control total-bill" value="" disabled>
@@ -314,6 +329,11 @@
             </div>
         <?php $i++ ?>
         @endforeach
+
+        <!-- generar PDF -->
+        <div class="pull-right">
+            <button href="#" id="download" class="download-pdf">DESCARGAR PDF</button>
+        </div>
         
     </div>
 </div>
@@ -331,5 +351,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 <script src="{{ url('fuzzyComplete/src/js/fuzzycomplete.js') }}"></script>
 
+<!-- PDF -->
+<script src="{{ url('jsPDF-1.3.2/dist/jspdf.min.js') }}"></script>
 
 @endsection
