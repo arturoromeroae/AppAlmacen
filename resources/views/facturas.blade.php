@@ -18,7 +18,11 @@
         <input name="backBill" type="number" class="back" hidden>
         <input name="clientBill" type="number" class="idclient" hidden>
         <input name="razonBill" type="text" class="razonClient" hidden>
+        <input name="rucBill" type="number" class="rucClient" hidden>
+        <input name="nameBill" type="text" class="nameClient" hidden>
+        <input name="numberBill" type="text" class="numberBillClient" hidden>
         <input name="subtotalBill" type="text" class="subtotalClient" hidden>
+        <input name="direccionBill" type="text" class="direccionClient" hidden>
         <div class="row">
             <div class="col">
                 <div class="mb-3">
@@ -37,17 +41,17 @@
             </div>
             <div class="col">
 
-                <div id="client-input" style="display:none;">
+                <div id="client-input" style="display:;">
                     <label for="client">Cliente</label>
-                    <input id="client" type="text" class="form-control" placeholder="Cliente" aria-label="cliente" required>
+                    <input id="client" type="text" class="form-control" placeholder="Cliente" aria-label="cliente">
                 </div>
                 <div id="ruc-input">
                     <label for="ruc-client">RUC</label>
-                    <input name="rucBill" type="text" id="ruc-client" class="form-control" required>
+                    <input name="rucBill" type="text" id="ruc-client" class="form-control">
                 </div>
                 <div id="razon-input" style="display:none;">
                     <label for="razon-client">Razon Social</label>
-                    <input type="text" id="razon-client" class="form-control" required>
+                    <input type="text" id="razon-client" class="form-control">
                 </div>
                 <input type="number" id="id-client" value="0" hidden>
                 
@@ -106,10 +110,10 @@
                 @foreach($selectArrayCarrito['data'] as $carrito)
                     <tr>
                         <td><input type='checkbox' name='record' class='select'></td>
-                        <td><input type="text" class="form-control" name="codeTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['codProd'] }}" hidden><input type="text" class="form-control" name="idTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['idProducto'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['codProd'] }}</td>
-                        <td><input type="text" class="form-control" name="codeModal{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['nombreProducto'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['nombreProducto'] }}</td>
-                        <td><input type="text" class="form-control" name="priceTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['precioVenta'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['precioVenta'] }}</td>
-                        <td><input type="text" class="form-control" name="cuantityTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['cantidad'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['cantidad'] }}</td>
+                        <td><input type="text" class="form-control code-b" name="codeTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['codProd'] }}" hidden><input type="text" class="form-control" name="idTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['idProducto'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['codProd'] }}</td>
+                        <td><input type="text" class="form-control name-b" name="codeModal{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['nombreProducto'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['nombreProducto'] }}</td>
+                        <td><input type="text" class="form-control price-b" name="priceTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['precioVenta'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['precioVenta'] }}</td>
+                        <td><input type="text" class="form-control cuantity-b" name="cuantityTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['cantidad'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['cantidad'] }}</td>
                         <td class='productSubtotal subtotal'><input type="text" class="form-control" name="codeModal" value="{{ $selectArrayCarrito['data'][$i]['subTotal'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['subTotal'] }}</td>
                         <td class='total-product'><input type="text" class="form-control" name="igvTable{{$i}}" value="{{ ($selectArrayCarrito['data'][$i]['subTotal'] * $igv) }}" hidden>{{ round(($selectArrayCarrito['data'][$i]['subTotal'] * $igv), 2) }}</td>
                         <td class='productTotal'><input type="text" class="form-control" name="totalTable{{$i}}" value="{{ ($selectArrayCarrito['data'][$i]['subTotal'] * $igv) + $selectArrayCarrito['data'][$i]['subTotal'] }}" hidden>{{ round(($selectArrayCarrito['data'][$i]['subTotal'] * $igv) + $selectArrayCarrito['data'][$i]['subTotal'], 2) }}</td>
@@ -150,7 +154,7 @@
         </div>
         <div class="col mt-4 mb-4">
         
-            <button type="submit" class="btn btn-primary">Emitir comprobante</button>
+            <button type="submit" class="btn btn-primary submit-bill">Emitir comprobante</button>
             <button type="" class="btn btn-danger">Borrar</button>
         
         </div>
@@ -329,11 +333,6 @@
             </div>
         <?php $i++ ?>
         @endforeach
-
-        <!-- generar PDF -->
-        <div class="pull-right">
-            <button href="#" id="download" class="download-pdf">DESCARGAR PDF</button>
-        </div>
         
     </div>
 </div>

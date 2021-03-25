@@ -24,12 +24,15 @@ $(document).ready(function(){
 
                     // condicional para obtener dni
                     if (currentClient == getClient) {
+                        $('#client').attr('value', data['data'][i]['nombres']); // valor que tendra el input ruc cliente
+                        $('.direccionClient').attr('value', data['data'][i]['direccion']); // valor que tendra el input ruc cliente
                         $('#client-dni').val(data['data'][i]['dni']); // valor que tendra el input dni
                         $('#id-client').val(data['data'][i]['idCliente']); // valor que tendra el input id cliente
                         $('.idclient').attr('value', data['data'][i]['idCliente']); // valor que tendra el input id cliente
                         $('#razon-client').val(data['data'][i]['razonSocial']); // valor que tendra el input razon social cliente
                         $('.razonClient').attr('value', data['data'][i]['razonSocial']); // valor que tendra el input id cliente
                         $('#ruc-client').val(data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
+                        $('.rucClient').attr('value', data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
                     }
                 }
                 
@@ -48,6 +51,7 @@ $(document).ready(function(){
             var serie = data['data'][0]['serieDoc'];
             var document = data['data'][0]['nroDoc'];
             $(".codeBilles").text( serie + '-' + document);
+            $(".numberBillClient").attr('value', (serie + document));
             }
         });
         
@@ -64,7 +68,7 @@ $(document).ready(function(){
             $("#razon-input").css("display", "none");
             $('#client-dni').val(0);
         }else{
-            $("#client-input").css("display", "none");
+            $("#client-input").css("display", "");
             $("#ruc-input").css("display", "block");
             $("#razon-input").css("display", "block");
             $("#dni-input").css("display", "block");
@@ -148,13 +152,13 @@ $(document).ready(function(){
         var rowIdTable = 'row-' + idNumTable;
         var productIdTable = idNumTable;
         var cuantity_table = 1;
-        var count = parseInt($('.select').length) + 1;
+        var count = parseInt($('.select').length);
         var input_count = $('.count').val(count);
         var subtotal = price_table * cuantity_table;
         var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
         var total_product = Math.round((igv_product + subtotal) * 100) / 100;
 
-        var markup = "<tr id=" + rowIdTable + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productIdTable + ">" + code_table + " <input name=idTable" + productIdTable + " type='number' value=" + id_table + " style='display:none;'> </td> <td name=nameTable" + productIdTable + ">" + name_table + "</td> <td class='productPrice price'>" + price_table + " <input name=priceTable" + productIdTable + " type='number' value=" + price_table + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity_table + " <input name=cuantityTable" + productIdTable + " type='number' value=" + cuantity_table + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productIdTable + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productIdTable + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productIdTable + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
+        var markup = "<tr id=" + rowIdTable + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productIdTable + ">" + code_table + " <input name=codeTable" + productIdTable + " class='code-b' type='text' value=" + code_table + " style='display:none;'> </td> <td name=nameTable" + productIdTable + ">" + name_table + "<input name=codeModal" + productIdTable + " class='name-b' type='text' value=" + name_table + " style='display:none;'> </td> <td class='productPrice price'>" + price_table + " <input class='price-b' name=priceTable" + productIdTable + " type='number' value=" + price_table + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity_table + " <input class='cuantity-b' name=cuantityTable" + productIdTable + " type='number' value=" + cuantity_table + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productIdTable + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productIdTable + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productIdTable + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
         $("#table-bill tbody").append(markup);
 
         // activa la funcion para calcular total
@@ -255,13 +259,13 @@ $(document).ready(function(){
             var subtotal = price * cuantity;
             var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
             var total_product = Math.round((igv_product + subtotal) * 100) / 100;
-            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=idTable" + productId + " type='number' value=" + id + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "</td> <td class='productPrice price'>" + price + " <input name=priceTable" + productId + " type='number' value=" + price + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity + " <input name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productId + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productId + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
+            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=codeTable" + productId + " class='code-b' type='number' value=" + code + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "<input name=codeModal" + productId + " class='name-b' type='text' value=" + name + " style='display:none;'> </td> <td class='productPrice price'>" + price + " <input class='price-b' name=priceTable" + productId + " type='number' value=" + price + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity + " <input class='cuantity-b' name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productId + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productId + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
             $("#table-bill tbody").append(markup);
         }else{
             var subtotal = price * cuantity;
             var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
             var total_product = Math.round((igv_product + subtotal) * 100) / 100;
-            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=idTable" + productId + " type='number' value=" + id + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "</td> <td class='productPrice price'>" + price + " <input name=priceTable" + productId + " type='number' value=" + price + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity + " <input name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productId + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productId + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
+            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=codeTable" + productId + " class='code-b' type='number' value=" + code + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "<input name=codeModal" + productId + " class='name-b' type='text' value=" + name + " style='display:none;'> </td> <td class='productPrice price'>" + price + " <input class='price-b' name=priceTable" + productId + " type='number' value=" + price + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity + " <input class='cuantity-b' name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productId + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productId + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
             $("#table-bill tbody").append(markup);
         }
 
@@ -297,7 +301,7 @@ $(document).ready(function(){
     $("#billDate").val(getYr + "-" + getMonFormat + "-" + getDy + ' T' + getH + ':' + getM + ':' + getS);
 
     // GENERA FACTURA PDF
-    $('#download').click(function() {
+    $('.submit-bill').click(function() {
         var doc = new jsPDF('landscape');
 
         // Empty square
@@ -310,7 +314,7 @@ $(document).ready(function(){
                 doc.text(219, 40, 'Factura');
                 
         doc.setFontSize(15);
-                doc.text(205, 50, 'Nº');
+                doc.text(205, 50, `Nº ${$('.numberBillClient').val()}`);
 
         doc.setFontSize(30);
                 doc.text(20, 40, 'Motos');
@@ -325,30 +329,32 @@ $(document).ready(function(){
                 doc.text(20, 65, 'Tlf:');
                 
         doc.setFontSize(15);
-                doc.text(20, 80, 'Cliente:');
+                doc.text(20, 80, `Cliente: ${$('#client').val()}`);
         doc.setFontSize(15);
-                doc.text(20, 85, `RUC: `);
+                doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
         doc.setFontSize(15);
                 doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
         doc.setFontSize(15);
-                doc.text(20, 95, 'Fecha:');
+                doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
                 
         var generateData = function(amount) {
+        var all = $(".code-b").map(function() {
+                    return this.innerHTML;
+                    }).get();
+        
         var result = [];
-        var data = {
-            coin: "100",
-            game_group: "GameGroup",
-            game_name: "XPTO2",
-            game_version: "25",
-            machine: "20485861",
-            vlt: "0"
-        };
-        
-        
-        for (var i = 0; i < amount; i += 1) {
-            data.id = (i + 1).toString();
-            result.push(Object.assign({}, data));
+        for (let x = 0; x < all.length; x++) {
+            var name = {
+                Código: $(`input[name="codeTable${x}"]`).val(),
+                Nombre: $(`input[name="codeModal${x}"]`).val(),
+                Descripcion: "XPTO2",
+                Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
+                Precio: $(`input[name="priceTable${x}"]`).val(),
+                Total: $(`input[name="totalTable${x}"]`).val(),
+            };
+            result.push(name);
         }
+        
         return result;
         };
             
@@ -360,7 +366,7 @@ $(document).ready(function(){
             name: keys[i],
             prompt: keys[i],
             width: 50,
-            align: "center",
+            align: "left",
             padding: 10
             });
         }
@@ -368,16 +374,16 @@ $(document).ready(function(){
         }
                 
         var headers = createHeaders([
-        "id",
-        "coin",
-        "game_group",
-        "game_name",
-        "game_version",
-        "machine",
-        "vlt"
+        "Código",
+        "Nombre",
+        "Descripcion",
+        "Cantidad",
+        "Precio",
+        "Total",
         ]);
 
         doc.table(20, 110, generateData(5), headers, { autoSize: false });
+        doc.save(`factura-${$('.numberBillClient').val()}.pdf`);
     });
 
 });
