@@ -302,19 +302,19 @@ $(document).ready(function(){
 
     // GENERA FACTURA PDF
     $('.submit-bill').click(function() {
-        var doc = new jsPDF('landscape');
+        var doc = new jsPDF();
 
         // Empty square
-        doc.rect(200, 20, 60, 40);
+        doc.rect(140, 20, 60, 40);
 
         doc.setFontSize(15);
-                doc.text(205, 30, 'R.U.C.:');
+                doc.text(145, 30, 'R.U.C.:');
             
         doc.setFontSize(20);
-                doc.text(219, 40, 'Factura');
+                doc.text(159, 40, 'Factura');
                 
         doc.setFontSize(15);
-                doc.text(205, 50, `Nº ${$('.numberBillClient').val()}`);
+                doc.text(145, 50, `Nº ${$('.numberBillClient').val()}`);
 
         doc.setFontSize(30);
                 doc.text(20, 40, 'Motos');
@@ -336,6 +336,12 @@ $(document).ready(function(){
                 doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
         doc.setFontSize(15);
                 doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
+        doc.setFontSize(15);
+                doc.text(150, 85, `Subtotal: ${$('.subtotalClient').val()}`);
+        doc.setFontSize(15);
+                doc.text(150, 90, `IGV: 18%`);
+        doc.setFontSize(15);
+                doc.text(150, 95, `Total: ${$('.total-bill').val()}`);
                 
         var generateData = function(amount) {
         var all = $(".code-b").map(function() {
@@ -365,9 +371,10 @@ $(document).ready(function(){
             id: keys[i],
             name: keys[i],
             prompt: keys[i],
-            width: 50,
+            width: 40,
             align: "left",
-            padding: 10
+            padding: 0,
+            size: 10
             });
         }
         return result;
