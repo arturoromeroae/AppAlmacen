@@ -2,7 +2,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 <!-- estilos tabla -->
-<link rel="stylesheet" href="{{ asset('bootstrap-table-master/dist/bootstrap-table.css') }}">
+<!--<link rel="stylesheet" href="{{ asset('bootstrap-table-master/dist/bootstrap-table.css') }}">-->
+
+<link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap.css') }}">
+<link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css') }}">
 
 @section('content')
 
@@ -13,8 +16,9 @@
     </div>
 @endisset
 
-<div class="container-float rounded px-3">
-
+<div class="container">
+	<br />
+	<br />
     <!-- titulo -->
     <h1 class="h3 text-center mt-3">Almacén</h1>
 
@@ -22,9 +26,9 @@
     <div class="container-float">
         <table 
         id="table-stock" 
-        class="table table-sm table-bordered border-dark"
+        class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap"
         data-search-highlight="true">
-            <thead>
+            <thead class="bg-dark" style="color:white;">
                 <tr>
                     <th data-search-highlight-formatter="customSearchFormatter" data-width="80" scope="col">Código</th>
                     <th data-search-highlight-formatter="customSearchFormatter" data-width="300" scope="col">Nombre</th>
@@ -34,7 +38,7 @@
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Venta</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Marca</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Modelo</th>
-                    <th data-width="100" scope="col">Acción</th>
+                    <th data-width="100" width="100" scope="col">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,9 +53,13 @@
                     <td class="fs-6">{{ $product['marca'] }}</td>
                     <td class="fs-6">{{ $product['modelo'] }}</td>
                     <td>
-                        <div class="container icons-table" id="icons">
-                            <a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">create</i></a>
-                            <a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">delete</i></a>
+                        <div class="row" id="icons">
+							<div class="col-md-10" >
+								<div class="form-group row">
+									<a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">create</i></a>
+									<a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">delete</i></a>
+								</div>
+							</div>
                         </div>
                     </td>
                 </tr>
@@ -170,7 +178,11 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <!-- Buscador -->
-<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
-<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
+<!--<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>-->
+
+<script src="{{ url('DataTables/DataTables-1.10.24/js/jquery.dataTables.js') }}"></script>
+<script src="{{ url('DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ url('js/table-stock.js') }}"></script>
 @endsection

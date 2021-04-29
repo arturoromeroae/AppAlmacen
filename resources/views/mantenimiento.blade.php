@@ -3,7 +3,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 <!-- estilos tabla -->
-<link rel="stylesheet" href="{{ asset('bootstrap-table-master/dist/bootstrap-table.css') }}">
+<!--<link rel="stylesheet" href="{{ asset('bootstrap-table-master/dist/bootstrap-table.css') }}">-->
+
+<link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap.css') }}">
+<link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css') }}">
 
 @section('content')
 
@@ -14,18 +17,19 @@
     </div>
 @endisset
 
-<div id="container-maintance" class="container-float rounded px-4">
-
+<div id="container-maintance" class="container">
+	<br />
+	<br />
     <!-- titulo -->
     <h1 class="h3 text-center mt-3">Mantenimiento - "Nuevos Repuestos"</h1>
     
     <!-- tabla -->
     <div class="container-float">
         <table 
-            class="table table-sm table-bordered border-dark pagination-detail" 
+            class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap" 
             id="table-maintance" 
             data-search-highlight="true">
-            <thead>
+            <thead class="bg-dark" style="color:white;">
                 <tr>
                     <th data-halign="center" data-width="80" data-search-highlight-formatter="customSearchFormatter" data-field="code" scope="col">Código</th>
                     <th data-width="300" data-search-highlight-formatter="customSearchFormatter" data-field="name" data-sortable="true" data-sort-name="name" data-sort-order="asc" scope="col">Nombre</th>
@@ -51,9 +55,13 @@
                     <td class="fs-6">{{ $product['marca'] }}</td>
                     <td class="fs-6">{{ $product['modelo'] }}</td>
                     <td class="fs-6">
-                        <div class="container icons-table" id="icons-table">
-                            <a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">create</i></a>
-                            <a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">delete</i></a>
+                        <div class="row" id="icons-table">
+							<div class="col-md-10" >
+								<div class="form-group row">
+									<a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">create</i></a>
+									<a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">delete</i></a>
+								</div>
+							</div>
                         </div>
                     </td>
                 </tr>
@@ -236,11 +244,16 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <!-- Buscador -->
-<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
-<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
+<!--<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>-->
+
+<script src="{{ url('DataTables/DataTables-1.10.24/js/jquery.dataTables.js') }}"></script>
+<script src="{{ url('DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ url('js/table-maintance.js') }}"></script>
 <script src="{{ url('bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js') }}"></script>
 <script type="text/javascript" src="{{ url('libs/FileSaver/FileSaver.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('export/libs/js-xlsx/xlsx.core.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('export/tableExport.min.js') }}"></script>
+
 @endsection
