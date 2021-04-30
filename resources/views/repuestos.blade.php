@@ -2,20 +2,21 @@
 <!-- estilos bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-<!-- estilos tabla -->
+<!-- estilos tabla bootstrap -->
 <!--<link rel="stylesheet" href="{{ url('bootstrap-table-master/dist/bootstrap-table.css') }}">-->
-
+<!-- estilos DataTable -->
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap.css') }}">
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css') }}">
 
-<!-- tabla de repuestos -->
 @section('content')
 <?php $i=0 ?>
 <section class="container">
     <div>
 		<br />
 		<br />
+        <!-- Titulo de la pagina -->
         <h3 class="h3 text-center">Repuestos</h3>
+        <!-- Tabla de repuestos -->
         <div id="table-buy" class="container-float">
             <table
                 class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap" 
@@ -48,8 +49,9 @@
             </table>
         </div>
 
-        <!-- tabla de carrito -->
+        <!-- Carrito -->
         <div class="text-center">
+            <!-- Titulo de carrito -->
             <p class="h4 text-center mt-1">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
             <form id="myparts" action="{{ route('repuestos') }}/1" method="POST">
                 @csrf
@@ -65,7 +67,7 @@
                             <button type="button" class="btn btn-danger button-delete">Borrar</button>
                         </div>
                 </div>
-
+                <!-- tabla de carrito -->
                 <table class="table" id="table-shop" >
 
                     <thead>
@@ -159,12 +161,15 @@
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
 <!-- Buscador -->
 <!--<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
 <script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>-->
 
+<!-- DataTable -->
 <script src="{{ url('DataTables/DataTables-1.10.24/js/jquery.dataTables.js') }}"></script>
 <script src="{{ url('DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js') }}"></script>
 
+<!-- Archivo Javascript -->
 <script type="text/javascript" src="{{ url('js/parts.js') }}"></script>
 @endsection

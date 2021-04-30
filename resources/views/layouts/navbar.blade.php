@@ -39,7 +39,7 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>-->
 
-				<a id="logo-navbar" class="navbar-brand text-navbar hover-navbar" href="#">Almacen</a>
+				<a id="logo-navbar" class="navbar-brand text-navbar hover-navbar" href="#">Motos</a>
 				<button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
 				  <span class="navbar-toggler-icon"></span>
 				</button>
