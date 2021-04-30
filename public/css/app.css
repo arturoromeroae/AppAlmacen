@@ -1,3 +1,7 @@
-.button-add-table{
+main{
+    background-color: #f8f9fa;
+}
+
+.button-add-table, .button-add-bill{
     cursor: pointer;
 }

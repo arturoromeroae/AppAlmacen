@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#ruc-input").css("display", "none");
+    $("#ruc-input").css("display", "");
     // se le asigna el valor de la url con el json
     var url = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
 
@@ -13,21 +13,21 @@ $(document).ready(function(){
             var fuseOptions = {keys: ["rucCliente", "dni"]};
             var options = {display: "rucCliente", key: "dni", fuseOptions: fuseOptions};
             $("#ruc-client").fuzzyComplete(client, options);
-            
+
             // si el input cambia realiza la siguiente funcion
-            $('#ruc-client').change(function () { 
+            $('#ruc-client').focusout(function () {
                 var currentClient = $('#ruc-client').val(); // se asigna valor del input cliente
-                
+
                 // recorriendo array de nombres
                 for (let i = 0; i < client.length; i++) {
                     getClient = data['data'][i]['rucCliente']; // se asigna valor de los nombres del array
 
                     // condicional para obtener dni
                     if (currentClient == getClient) {
-                        $('#client').attr('value', data['data'][i]['nombres']); // valor que tendra el input ruc cliente
+                        $('#client').attr('value', data['data'][i]['nombres']); // valor que tendra el input cliente
                         $('.direccionClient').attr('value', data['data'][i]['direccion']); // valor que tendra el input ruc cliente
                         $('#client-dni').val(data['data'][i]['dni']); // valor que tendra el input dni
-                        $('#id-client').val(data['data'][i]['idCliente']); // valor que tendra el input id cliente
+                        $('#id-client').val(data['data'][i]['idCliente']); // valor que tendra el input id cliente oculto
                         $('.idclient').attr('value', data['data'][i]['idCliente']); // valor que tendra el input id cliente
                         $('#razon-client').val(data['data'][i]['razonSocial']); // valor que tendra el input razon social cliente
                         $('.razonClient').attr('value', data['data'][i]['razonSocial']); // valor que tendra el input id cliente
@@ -35,13 +35,13 @@ $(document).ready(function(){
                         $('.rucClient').attr('value', data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
                     }
                 }
-                
+
             });
-            
+
         }
     });
 
-    $('.type_shop').change(function () { 
+    $('.type_shop').change(function () {
         var select = $(this).val();
         $.ajax({
         type:"GET",
@@ -54,13 +54,13 @@ $(document).ready(function(){
             $(".numberBillClient").attr('value', (serie + document));
             }
         });
-        
-    });
-    
 
-    $('.type_shop').change(function () { 
+    });
+
+
+    $('.type_shop').change(function () {
         var conceptName = $('.type_shop').find(":selected").val();
-        
+
         if (conceptName == 1 || conceptName == "") {
             $("#dni-input").css("display", "none");
             $("#client-input").css("display", "block");
@@ -102,7 +102,7 @@ $(document).ready(function(){
         var money2 = $(".total-bill").val(Math.round(sumaTotal * 100) / 100);
         var money3 = $(".send-bill").attr('value', sumaTotal);
         $(".resultado").val(sumaTotal);
-    
+
     }
 
     function calculateColumnSubtotal() {
@@ -113,7 +113,7 @@ $(document).ready(function(){
         });
 
         var money3 = $(".subtotalClient").attr('value', Math.round(sumaSubtotal * 100) / 100);
-    
+
     }
 
     $(".button-add-bill").click(function(){
@@ -137,8 +137,8 @@ $(document).ready(function(){
             var product_price_shop = productTablePrice[i];
             var product_cuantity_shop = productTableCuantity[i];
 
-            if (String(now_id_table) == String(product_id_shop.id) && 
-            String(product_id_shop.id) != undefined && 
+            if (String(now_id_table) == String(product_id_shop.id) &&
+            String(product_id_shop.id) != undefined &&
             String(now_id_table) != undefined) {
                 var id_table = product_id_shop.value;
                 var code_table = product_code_shop.value;
@@ -178,10 +178,10 @@ $(document).ready(function(){
         var total_bill = $('.total-bill').val();
         var pay = $('.total-bill').val();
         var disc = $('.discount').val(0);
-        
+
         $('.back-bill').val(Math.round((cash - pay) * 100) / 100);
         $('.back').attr('value', Math.round((cash - pay) * 100) / 100);
-        
+
     });
 
     $('.rest-discount').keyup(function () {
@@ -217,11 +217,11 @@ $(document).ready(function(){
         var productPrice = $('.priceModal');
         var productPriceDefault = $('.priceDefault');
         var productCuantity = $('.cuantityModal');
-        
+
         var i;
 
         for (i = 0; i < productCode.length; i++) {
-            
+
             var product_code = productCode[i];
             var product_name = productName[i];
             var product_description = productDescription[i];
@@ -230,8 +230,8 @@ $(document).ready(function(){
             var product_cuantity = productCuantity[i];
             var product_id = productModalId[i];
 
-            if (String(now_id) == String(product_code.id) && 
-            String(product_code.id) != undefined && 
+            if (String(now_id) == String(product_code.id) &&
+            String(product_code.id) != undefined &&
             String(now_id) != undefined) {
                 var code = product_code.value;
                 var name = product_name.value;
@@ -297,7 +297,7 @@ $(document).ready(function(){
 
 
     var getYr = getDate.getFullYear();
-    
+
     $("#billDate").val(getYr + "-" + getMonFormat + "-" + getDy + ' T' + getH + ':' + getM + ':' + getS);
 
     // GENERA FACTURA PDF
@@ -309,25 +309,25 @@ $(document).ready(function(){
 
         doc.setFontSize(15);
                 doc.text(145, 30, 'R.U.C.:');
-            
+
         doc.setFontSize(20);
                 doc.text(159, 40, 'Factura');
-                
+
         doc.setFontSize(15);
                 doc.text(145, 50, `Nº ${$('.numberBillClient').val()}`);
 
         doc.setFontSize(30);
                 doc.text(20, 40, 'Motos');
-                
+
         doc.setFontSize(15);
                 doc.text(20, 50, 'Dirección: is simply dummy text of the printing');
-                
+
         doc.setFontSize(15);
                 doc.text(20, 56, 'and typesetting industry.');
-                
+
         doc.setFontSize(15);
                 doc.text(20, 65, 'Tlf:');
-                
+
         doc.setFontSize(15);
                 doc.text(20, 80, `Cliente: ${$('#client').val()}`);
         doc.setFontSize(15);
@@ -342,12 +342,12 @@ $(document).ready(function(){
                 doc.text(150, 90, `IGV: 18%`);
         doc.setFontSize(15);
                 doc.text(150, 95, `Total: ${$('.total-bill').val()}`);
-                
+
         var generateData = function(amount) {
         var all = $(".code-b").map(function() {
                     return this.innerHTML;
                     }).get();
-        
+
         var result = [];
         for (let x = 0; x < all.length; x++) {
             var name = {
@@ -360,10 +360,10 @@ $(document).ready(function(){
             };
             result.push(name);
         }
-        
+
         return result;
         };
-            
+
         function createHeaders(keys) {
         var result = [];
         for (var i = 0; i < keys.length; i += 1) {
@@ -379,7 +379,7 @@ $(document).ready(function(){
         }
         return result;
         }
-                
+
         var headers = createHeaders([
         "Código",
         "Nombre",
