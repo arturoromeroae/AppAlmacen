@@ -10,7 +10,7 @@
 
 <div class="container bg-light">
     <div class="container bg-light">
-        <form action="{{ route('repuestos') }}/1/12" method="POST">
+        <form id="repuestos-form" action="{{ route('repuestos') }}/1/12" method="POST">
         @csrf
             <input name="idBill" type="text" value="{{ $idResponse }}" hidden>
             <input name="dateBill" type="text" id="billDate" hidden>
@@ -24,6 +24,7 @@
             <input name="numberBill" type="text" class="numberBillClient" hidden>
             <input name="subtotalBill" type="text" class="subtotalClient" hidden>
             <input name="direccionBill" type="text" class="direccionClient" hidden>
+            <input name="description" type="text" class="descriptionBill" hidden>
             <div class="row">
                 <div class="col">
                     <div class="mb-3">

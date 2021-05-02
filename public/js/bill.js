@@ -33,6 +33,7 @@ $(document).ready(function(){
                         $('.razonClient').attr('value', data['data'][i]['razonSocial']); // valor que tendra el input id cliente
                         $('#ruc-client').val(data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
                         $('.rucClient').attr('value', data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
+                        $('.descriptionBill').attr('value', data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
                     }
                 }
 
@@ -301,7 +302,7 @@ $(document).ready(function(){
     $("#billDate").val(getYr + "-" + getMonFormat + "-" + getDy + ' T' + getH + ':' + getM + ':' + getS);
 
     // GENERA FACTURA PDF
-    $('.submit-bill').click(function() {
+    $('#repuestos-form').submit(function() {
         var doc = new jsPDF();
 
         // Empty square
@@ -353,7 +354,6 @@ $(document).ready(function(){
             var name = {
                 Código: $(`input[name="codeTable${x}"]`).val(),
                 Nombre: $(`input[name="codeModal${x}"]`).val(),
-                Descripcion: "XPTO2",
                 Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
                 Precio: $(`input[name="priceTable${x}"]`).val(),
                 Total: $(`input[name="totalTable${x}"]`).val(),
@@ -383,7 +383,6 @@ $(document).ready(function(){
         var headers = createHeaders([
         "Código",
         "Nombre",
-        "Descripcion",
         "Cantidad",
         "Precio",
         "Total",
