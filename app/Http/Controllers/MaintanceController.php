@@ -57,7 +57,7 @@ class MaintanceController extends Controller
             'idUnidadMedida' => 1,
             'idTienda' => 1,
             'precioBase' => $price,
-            'imagen' => $photo,
+            'imagen' => 'string',
             'rutaImagen' => 'string',
             'idProducto' => 0,
             'stock' => $cuantity,
@@ -77,15 +77,14 @@ class MaintanceController extends Controller
         // enviar form mantenimiento
         $res = Http::post('http://appdemo1.solarc.pe/api/Productos/Productos', $product);
 
-        if(($res -> successful()) == true){
-            $result_maintance = 'Se agregaron los <strong>productos correctamente!</strong>';
+        if(($res -> getStatusCode()) == 200 ){
+            $result_maintance = 'Se <strong>agregó</strong> el producto <strong>correctamente!</strong>.';
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
         }else{
-            $result_maintance = '<strong>Se produjo un error</strong>';
+            $result_maintance = '<strong>Se produjo un error</strong>.';
         };
-        header("Refresh:0");
-        return view('mantenimiento', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo'));
+        return view('mantenimiento', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'result_maintance'));
 
     //    $code_product = $request -> code_product;
     //    $name_product = $request -> name_product;

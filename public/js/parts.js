@@ -51,11 +51,11 @@ $(document).ready(function(){
         var productPrice = $('.priceModal');
         var productPriceDefault = $('.priceDefault');
         var productCuantity = $('.cuantityModal');
-        
+
         var i;
 
         for (i = 0; i < productCode.length; i++) {
-            
+
             var product_code = productCode[i];
             var product_name = productName[i];
             var product_description = productDescription[i];
@@ -64,8 +64,8 @@ $(document).ready(function(){
             var product_cuantity = productCuantity[i];
             var product_id = productModalId[i];
 
-            if (String(now_id) == String(product_code.id) && 
-            String(product_code.id) != undefined && 
+            if (String(now_id) == String(product_code.id) &&
+            String(product_code.id) != undefined &&
             String(now_id) != undefined) {
                 var code = product_code.value;
                 var name = product_name.value;
@@ -146,8 +146,8 @@ $(document).ready(function(){
             var product_price_shop = productTablePrice[i];
             var product_cuantity_shop = productTableCuantity[i];
 
-            if (String(now_id_table) == String(product_id_shop.id) && 
-            String(product_id_shop.id) != undefined && 
+            if (String(now_id_table) == String(product_id_shop.id) &&
+            String(product_id_shop.id) != undefined &&
             String(now_id_table) != undefined) {
                 var id_table = product_id_shop.value;
                 var code_table = product_code_shop.value;
