@@ -11,8 +11,10 @@
 @section('content')
 
 @isset($result_maintance)
+    <br />
+	<br />
     <div class="alert alert-success alert-dismissible fade show alert-form" role="alert">
-        <?php echo $result_maintance; ?> 
+        <?php echo $result_maintance; ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endisset
@@ -21,13 +23,13 @@
 	<br />
 	<br />
     <!-- titulo -->
-    <h1 class="h3 text-center mt-3">Mantenimiento - "Nuevos Repuestos"</h1>
-    
+    <h1 class="h3 text-center mt-3">Mantenimiento</h1>
+
     <!-- tabla -->
     <div class="container-float">
-        <table 
-            class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap" 
-            id="table-maintance" 
+        <table
+            class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap"
+            id="table-maintance"
             data-search-highlight="true">
             <thead class="bg-dark" style="color:white;">
                 <tr>
@@ -42,7 +44,7 @@
                     <th data-width="90" data-align="center" scope="col">Acción</th>
                 </tr>
             </thead>
-        
+
             <tbody>
                 @foreach($productsArray['data'] as $product)
                 <tr>
@@ -114,7 +116,7 @@
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label">Marca</label>
                                 <select class="form-select" aria-label="Default select example" id="select_marca" name="selectModalMarca" required>
-                                    
+
                                     @foreach($selectArrayMarca['data'] as $selectMarca)
                                         <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
                                     @endforeach
@@ -123,13 +125,13 @@
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label">Modelo</label>
                                 <select class="form-select" aria-label="Default select example" id="select_modelo" name="selectModalModelo" required>
-                                    
+
                                     @foreach($selectArrayModelo['data'] as $selectModelo)
                                         <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            
+
                         </div>
                         <br>
                         <div class="modal-footer">
@@ -170,7 +172,7 @@
         </div>
     </div>
     @endforeach
-    
+
     <!-- Modal formulario para agregar productos -->
     <div class="modal fade modal-fullscreen-sm-down" id="exampleModal" aria-labelledby="exampleModalLabel" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -199,7 +201,7 @@
                             <label for="cuantity" class="form-label">Cantidad *</label>
                             <input type="number" class="form-control" id="cuantity_product" name="cuantity" required>
                         </div>
-                        
+
                         <!-- <div class="col-md-12 mt-0">
                             <button type="button" class="btn btn-primary" onclick="addRow()">Agregar Producto a la tabla</button>
                         </div> -->
@@ -229,7 +231,7 @@
                             <label for="description" class="form-label">Descripcion</label>
                             <textarea class="form-control" id="description_product" rows="3" name="description"></textarea>
                         </div>
-                        
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>

@@ -10,8 +10,8 @@
 @section('content')
 
 @isset($result)
-    <div class="alert alert-success alert-dismissible fade show alert-form" role="alert">
-        <?php echo $result; ?> 
+    <div class="alert alert-success alert-dismissible fade show alert-form mt-5" role="alert">
+        <?php echo $result; ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endisset
@@ -24,8 +24,8 @@
 
     <!-- tabla -->
     <div class="container-float">
-        <table 
-        id="table-stock" 
+        <table
+        id="table-stock"
         class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap"
         data-search-highlight="true">
             <thead class="bg-dark" style="color:white;">
@@ -38,7 +38,7 @@
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Venta</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Marca</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Modelo</th>
-                    <th data-width="100" width="100" scope="col">Acción</th>
+                    <th class="accion-stock" data-width="100" width="100" scope="col">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,7 +52,7 @@
                     <td class="fs-6">{{ $product['precioVenta'] }}</td>
                     <td class="fs-6">{{ $product['marca'] }}</td>
                     <td class="fs-6">{{ $product['modelo'] }}</td>
-                    <td>
+                    <td class="accion-stock">
                         <div class="row" id="icons">
 							<div class="col-md-10" >
 								<div class="form-group row">
@@ -68,10 +68,9 @@
         </table>
         <!-- botones de reportes -->
         <div class="container mt-2">
-            <button class="btn btn-primary" type="button">Reporte de Stock</button>
-            <button class="btn btn-primary" type="button">Reporte de Catalogo</button>  
+            <button id="report-stk" class="btn btn-primary" type="button">Descargar</button>
         </div>
-        
+
     </div>
 
     <!-- modal editar cantidad -->
@@ -155,7 +154,7 @@
                         @method('DELETE')
                         <h1 class="text-center">¿Desea eliminar el producto {{ $product['nombreProducto'] }}?</h1>
                         <input type="number" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
-                        
+
                         <br>
                         <div class="modal-footer d-block text-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="padding-left: 20px; padding-right: 20px;">No</button>
@@ -180,9 +179,11 @@
 <!-- Buscador -->
 <!--<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
 <script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>-->
-
+<!-- DataTable -->
 <script src="{{ url('DataTables/DataTables-1.10.24/js/jquery.dataTables.js') }}"></script>
 <script src="{{ url('DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js') }}"></script>
-
+<!-- table2csv -->
+<script src="{{ url('Data-To-CSV-File-table2csv/src/table2csv.js') }}"></script>
+<!-- JavaScript Local -->
 <script type="text/javascript" src="{{ url('js/table-stock.js') }}"></script>
 @endsection

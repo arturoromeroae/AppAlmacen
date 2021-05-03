@@ -42,7 +42,7 @@ $(".button-addon").click(function (e) {
     var i;
 
     // total = parseFloat(stock) + parseFloat(porcent);
-    // 
+    //
     for (i = 0; i < product.length; i++) {
         var my_product = product[i];
 
@@ -63,4 +63,16 @@ $(".button-addon").click(function (e) {
     //     document.querySelector('span[name = MiTotal]').innerHTML = TotalSuma;
     // }
 
+});
+
+$("#report-stk").click(function(tableEle, separator = ','){
+    $("#table-stock").table2csv({
+        filename:'tabla_stock_.csv',
+        separator: ',',
+        newline: '\n',
+        quoteFields: true,
+        excludeColumns: '.accion-stock',
+        excludeRows: '',
+        trimContent: true // Trims the content of individual <th>, <td> tags of whitespaces.
+    });
 });
