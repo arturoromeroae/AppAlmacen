@@ -56,11 +56,11 @@ class MaintanceController extends Controller
             'idModelo' => $model,
             'idUnidadMedida' => 1,
             'idTienda' => 1,
-            'precioBase' => $price,
+            'precioBase' => (float)$price,
             'imagen' => 'string',
             'rutaImagen' => 'string',
             'idProducto' => 0,
-            'stock' => $cuantity,
+            'cantidad' => (int)$cuantity,
         ];
         // obtener productos
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
@@ -112,14 +112,15 @@ class MaintanceController extends Controller
             'codProd' => $codeModal ,
             'nombreProducto' => $nameModal,
             'descripcion' => $descriptionModal,
-            'precioBase' => $priceModal,
             'idMarca' => (int)$brandModal,
             'idModelo' => (int)$modelModal,
             'idUnidadMedida' => 1,
             'idTienda' => 1,
-            'imagen' => $photoModal,
+            'precioBase' => (float)$priceModal,
+            'imagen' => 'string',
             'rutaImagen' => "string",
             'idProducto' => $idModal,
+            'cantidad' => (int)$cuantityModal
         ];
 
         $bran = [

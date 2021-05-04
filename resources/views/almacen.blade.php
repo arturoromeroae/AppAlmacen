@@ -114,7 +114,7 @@
                                 <label for="stock-modal" class="col-form-label">Aumento sobre el precio base:</label>
                                 <div class="input-group">
                                     <span class="input-group-text">Total:&nbsp;<span class="stock-print">0.00</span></span>
-                                    <input id="minumero{{$i}}" max="100" min="0" type="number" class="form-control price-stock" name="priceModal" aria-describedby="basic-addon1">
+                                    <input id="minumero{{$i}}" max="100" min="0" step=".01" type="number" class="form-control price-stock" name="priceModal" aria-describedby="basic-addon1">
                                     <span class="input-group-text basic-addon">%</span>
                                     <button id="minumero{{$x}}" class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
                                 </div>
