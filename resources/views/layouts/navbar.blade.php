@@ -32,68 +32,109 @@
     <div id="app">
         <!--<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f0f9ff;">
             <div class="container-fluid">-->
-		<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark " aria-label="Main navigation">
-			<div class="container-fluid">
-                <!--<a id="logo-navbar" class="navbar-brand text-navbar hover-navbar" href="#">Almacen</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>-->
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark " aria-label="Main navigation">
+        <div class="container-fluid">
+                  <!--<a id="logo-navbar" class="navbar-brand text-navbar hover-navbar" href="#">Almacen</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  </button>-->
 
-				<a id="logo-navbar" class="navbar-brand text-navbar hover-navbar" href="#">Motos</a>
-				<button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
-				  <span class="navbar-toggler-icon"></span>
-				</button>
+          <a id="logo-navbar" class="navbar-brand text-navbar hover-navbar" href="#">Motos</a>
+          <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-                <div id="navbarSupportedContent" class="navbar-collapse offcanvas-collapse justify-content-end">
+          <div id="navbarSupportedContent" class="navbar-collapse offcanvas-collapse justify-content-end">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <!--<a class="nav-link text-navbar hover-navbar text-align" aria-current="page" href="{{ url('/') }}"><i class="material-icons" style="font-size:25px;">home</i> Inicio</a>-->
-								<a aria-current="page" href="{{ url('/') }}" class="nav-link text-navbar hover-navbar bi">
-									<i class="material-icons d-block mb-1" style="font-size:25px;">home</i> Inicio
-								</a>
-                            </li>
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav">
 
-                            <li class="nav-item">
-                                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/repuestos') }}">
-									<i class="material-icons d-block mb-1" style="font-size:25px;">shopping_cart</i> Repuestos
-								</a>
-                            </li>
+              @if(Request::path() === '/')
+              <li class="nav-item">
+                <!--<a class="nav-link text-navbar hover-navbar text-align" aria-current="page" href="{{ url('/') }}"><i class="material-icons" style="font-size:25px;">home</i> Inicio</a>-->
+                <a id="nav-menu" aria-current="page" href="{{ url('/') }}" class="nav-link text-navbar hover-navbar bi active">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">home</i> Inicio
+                </a>
+              </li>
+              @else
+              <li class="nav-item">
+              <!--<a class="nav-link text-navbar hover-navbar text-align" aria-current="page" href="{{ url('/') }}"><i class="material-icons" style="font-size:25px;">home</i> Inicio</a>-->
+                <a id="nav-menu" aria-current="page" href="{{ url('/') }}" class="nav-link text-navbar hover-navbar bi">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">home</i> Inicio
+                </a>
+              </li>
+              @endif
 
-                            <li class="nav-item">
-                                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/almacen') }}">
-									<i class="material-icons d-block mb-1" style="font-size:25px;">local_shipping</i> Almacen
-								</a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/mantenimiento') }}">
-									<i class="material-icons d-block mb-1" style="font-size:25px;">settings</i> Mantenimiento
-								</a>
-                            </li>
+              @if(Request::path() === 'repuestos')
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/repuestos') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">shopping_cart</i> Repuestos
+                </a>
+              </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/repuestos') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">shopping_cart</i> Repuestos
+                </a>
+              </li>
+              @endif
 
-                            <li class="nav-item">
-                                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/ventas') }}">
-									<i class="material-icons d-block mb-1" style="font-size:25px;">attach_money</i> Ventas
-								</a>
-                            </li>
+              @if(Request::path() === 'almacen')
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/almacen') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">local_shipping</i> Almacen
+                </a>
+              </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/almacen') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">local_shipping</i> Almacen
+                </a>
+              </li>
+              @endif
 
-						
-							<li class="nav-item dropdown">
-							  <a class="nav-link dropdown-toggle bi" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="material-icons d-block mb-1" style="font-size:25px;">account_circle</i>
+              @if(Request::path() === 'mantenimiento')
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/mantenimiento') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">settings</i> Mantenimiento
+                </a>
+              </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/mantenimiento') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">settings</i> Mantenimiento
+                </a>
+              </li>
+              @endif
+
+              @if(Request::path() === 'ventas')
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/ventas') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">attach_money</i> Ventas
+                </a>
+              </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/ventas') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">attach_money</i> Ventas
+                </a>
+              </li>
+              @endif
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle bi" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">account_circle</i>
                                 Usuario
-							  </a>
-							  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
-							  </ul>
-							</li>
-							
-                    </ul>
-                </div>
-			</div>
-        </nav>
+                </a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                </ul>
+              </li>
+        
+            </ul>
+          </div>
+        </div>
+      </nav>
 
         <main class="flex-shrink-0">
 			<div class="container">
