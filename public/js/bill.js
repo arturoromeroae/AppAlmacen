@@ -308,40 +308,40 @@ $(document).ready(function(){
         // Empty square
         doc.rect(140, 20, 60, 40);
 
-        doc.setFontSize(15);
-                doc.text(145, 30, 'R.U.C.:');
-
-        doc.setFontSize(20);
-                doc.text(159, 40, 'Factura');
+        doc.setFontSize(10);
+                doc.text(145, 30, 'R.U.C.: 20604470081');
 
         doc.setFontSize(15);
+                doc.text(159, 40, 'Comprobante');
+
+        doc.setFontSize(10);
                 doc.text(145, 50, `Nº ${$('.numberBillClient').val()}`);
 
-        doc.setFontSize(30);
-                doc.text(20, 40, 'Motos');
+        doc.setFontSize(20);
+                doc.text(20, 40, 'Importaciones NOARG E.I.R.L');
 
-        doc.setFontSize(15);
-                doc.text(20, 50, 'Dirección: is simply dummy text of the printing');
+        doc.setFontSize(10);
+                doc.text(20, 50, 'Dirección: Av. Matias Manzanilla Nro. 760 (1 Cdra del Seguro)');
 
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(20, 56, 'and typesetting industry.');
 
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(20, 65, 'Tlf:');
 
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(20, 80, `Cliente: ${$('#client').val()}`);
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(150, 85, `Subtotal: ${$('.subtotalClient').val()}`);
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(150, 90, `IGV: 18%`);
-        doc.setFontSize(15);
+        doc.setFontSize(10);
                 doc.text(150, 95, `Total: ${$('.total-bill').val()}`);
 
         var generateData = function(amount) {
