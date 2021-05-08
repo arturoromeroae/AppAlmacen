@@ -65,7 +65,7 @@
               </li>
               @endif
 
-              @if(Request::path() === 'repuestos')
+              @if(Request::path() === 'repuestos' or Request::path() === 'repuestos/1')
               <li class="nav-item">
                 <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/repuestos') }}">
                   <i class="material-icons d-block mb-1" style="font-size:25px;">shopping_cart</i> Repuestos

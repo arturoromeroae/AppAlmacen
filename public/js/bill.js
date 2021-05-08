@@ -290,60 +290,104 @@ $(document).ready(function(){
     var getM = getDate.getMinutes();
     var getS = getDate.getSeconds();
 
+    // formateando el mes
     if (getMon < 10) {
         getMonFormat = '0'.concat(getDate.getMonth() + 1);
     }else{
         getMonFormat = getDate.getMonth() + 1;
     }
 
-
+    // se obtiene el año
     var getYr = getDate.getFullYear();
 
-    $("#billDate").val(getYr + "-" + getMonFormat + "-" + getDy + ' T' + getH + ':' + getM + ':' + getS);
+    // formateando fecha y hora
+    $("#billDate").val(getDy + "-" + getMonFormat + "-" + getYr + ' Hora: ' + getH + ':' + getM + ':' + getS);
 
     // GENERA FACTURA PDF
     $('#repuestos-form').submit(function() {
+        // variable de jsPDF
         var doc = new jsPDF();
+        // obtiene el valor del select
+        var type_bill = $('.type_shop').find(":selected").val();
 
-        // Empty square
-        doc.rect(140, 20, 60, 40);
+        // cuadrado en el pdf
+        doc.rect(140, 20, 50, 40);
 
+        // muestra ruc en el pdf
         doc.setFontSize(10);
                 doc.text(145, 30, 'R.U.C.: 20604470081');
 
-        doc.setFontSize(15);
-                doc.text(159, 40, 'Comprobante');
+        // condicional para el tipo de factura en el pdf
+        if (type_bill == 1) {
+            doc.setFontSize(15);
+                doc.text(150, 40, 'Nota de Venta');
+        } else if (type_bill == 2) {
+            doc.setFontSize(15);
+                doc.text(140, 40, 'Boleta de Venta');
+        } else if (type_bill == 3) {
+            doc.setFontSize(15);
+                doc.text(159, 40, 'Factura');
+        } else {
+            doc.setFontSize(15);
+                doc.text(159, 40, '');   
+        }
 
+        // muestra numero de factura
         doc.setFontSize(10);
                 doc.text(145, 50, `Nº ${$('.numberBillClient').val()}`);
 
+        // muestra nombre de empresa
         doc.setFontSize(20);
                 doc.text(20, 40, 'Importaciones NOARG E.I.R.L');
 
+        // muestra direccion de empresa
         doc.setFontSize(10);
                 doc.text(20, 50, 'Dirección: Av. Matias Manzanilla Nro. 760 (1 Cdra del Seguro)');
 
-        doc.setFontSize(10);
-                doc.text(20, 56, 'and typesetting industry.');
-
+        // muestra telefono de empresa
         doc.setFontSize(10);
                 doc.text(20, 65, 'Tlf:');
 
+        // muestra informacion del cliente
         doc.setFontSize(10);
                 doc.text(20, 80, `Cliente: ${$('#client').val()}`);
-        doc.setFontSize(10);
+        
+        // condicional para ruc y razon social
+        if (type_bill == 1 || type_bill == 2) {
+            doc.setFontSize(10);
+                doc.text(20, 85, ``);
+            doc.setFontSize(10);
+                doc.text(20, 90, ``);
+        } else {
+            doc.setFontSize(10);
                 doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
-        doc.setFontSize(10);
+            doc.setFontSize(10);
                 doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
+        }
+        
+        // muestra la fecha
         doc.setFontSize(10);
                 doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
-        doc.setFontSize(10);
+        
+        // condicional para subtotal e igv
+        if (type_bill == 1 || type_bill == 2) {
+            doc.setFontSize(10);
+                doc.text(150, 85, ``);
+            doc.setFontSize(10);
+                doc.text(150, 90, ``);
+        } else {
+            doc.setFontSize(10);
                 doc.text(150, 85, `Subtotal: ${$('.subtotalClient').val()}`);
-        doc.setFontSize(10);
+
+            doc.setFontSize(10);
                 doc.text(150, 90, `IGV: 18%`);
+        }
+        
+        // muestra el total
         doc.setFontSize(10);
                 doc.text(150, 95, `Total: ${$('.total-bill').val()}`);
 
+        // Tabla
         var generateData = function(amount) {
         var all = $(".code-b").map(function() {
                     return this.innerHTML;
@@ -389,6 +433,7 @@ $(document).ready(function(){
         ]);
 
         doc.table(20, 110, generateData(5), headers, { autoSize: false });
+        // descargar documento PDF
         doc.save(`factura-${$('.numberBillClient').val()}.pdf`);
     });
 
