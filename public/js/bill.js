@@ -307,6 +307,125 @@ $(document).ready(function(){
     $('#repuestos-form').submit(function() {
         // variable de jsPDF
         var doc = new jsPDF();
+        
+
+        // // muestra informacion del cliente
+        // doc.setFontSize(10);
+        //         doc.text(20, 80, `Cliente: ${$('#client').val()}`);
+        
+        // // condicional para ruc y razon social
+        // if (type_bill == 1 || type_bill == 2) {
+        //     doc.setFontSize(10);
+        //         doc.text(20, 85, ``);
+        //     doc.setFontSize(10);
+        //         doc.text(20, 90, ``);
+        // } else {
+        //     doc.setFontSize(10);
+        //         doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
+        //     doc.setFontSize(10);
+        //         doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
+        // }
+        
+        // // muestra la fecha
+        // doc.setFontSize(10);
+        //         doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
+        
+        // // condicional para subtotal e igv
+        // if (type_bill == 1 || type_bill == 2) {
+        //     doc.setFontSize(10);
+        //         doc.text(150, 85, ``);
+        //     doc.setFontSize(10);
+        //         doc.text(150, 90, ``);
+        // } else {
+        //     doc.setFontSize(10);
+        //         doc.text(150, 85, `Subtotal: ${$('.subtotalClient').val()}`);
+
+        //     doc.setFontSize(10);
+        //         doc.text(150, 90, `IGV: 18%`);
+        // }
+        
+        // // muestra el total
+        // doc.setFontSize(10);
+        //         doc.text(150, 95, `Total: ${$('.total-bill').val()}`);
+
+        // // Tabla
+        // var generateData = function(amount) {
+        // var all = $(".code-b").map(function() {
+        //             return this.innerHTML;
+        //             }).get();
+
+        // var result = [];
+        // for (let x = 0; x < all.length; x++) {
+        //     var name = {
+        //         Código: $(`input[name="codeTable${x}"]`).val(),
+        //         Nombre: $(`input[name="codeModal${x}"]`).val(),
+        //         Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
+        //         Precio: $(`input[name="priceTable${x}"]`).val(),
+        //         Total: $(`input[name="totalTable${x}"]`).val(),
+        //     };
+        //     result.push(name);
+        // }
+
+        // return result;
+        // };
+
+        // function createHeaders(keys) {
+        // var result = [];
+        // for (var i = 0; i < keys.length; i += 1) {
+        //     result.push({
+        //     id: keys[i],
+        //     name: keys[i],
+        //     prompt: keys[i],
+        //     width: 40,
+        //     align: "left",
+        //     padding: 0,
+        //     size: 10
+        //     });
+        // }
+        // return result;
+        // }
+
+        // var headers = createHeaders([
+        // "Código",
+        // "Nombre",
+        // "Cantidad",
+        // "Precio",
+        // "Total",
+        // ]);
+        
+        var inputsCode = $('.code-b');
+        var inputsName = $('.name-b');
+        var inputsCuantity = $('.cuantity-b');
+        var inputsPrice = $('.price-b');
+        var result = [];
+
+        for(var i = 0; i < inputsCode.length; i++){
+            a = $(inputsCode[i]).val() + '   ' 
+            + $(inputsName[i]).val() + '         ' 
+            + $(inputsCuantity[i]).val() + '               '
+            + $(inputsPrice[i]).val() + ' '+ 'S/.' + '\n';
+            result.push(a);
+        }
+
+        var doc = new jsPDF()
+        // sizes = [12, 16, 20],
+        // fonts = [['Times', 'Roman'], ['Helvetica', ''], ['Times', 'Italic']],
+        // font, size, lines,
+        // margin = 0.8, // inches on a 8.5 x 11 inch sheet.
+        // verticalOffset = margin,
+        // loremipsum = result
+        // console.log(result)
+        
+        // font = fonts[1]
+        // size = sizes[1]
+        // lines = doc.setFont(font[0])
+        //                 .setFontSize(size)
+        //                 .splitTextToSize(loremipsum, 7.5)
+        
+        // doc.text(0.5, verticalOffset + size / 72, lines)
+
+        // verticalOffset += (lines.length + 0.5) * size / 72
+
         // obtiene el valor del select
         var type_bill = $('.type_shop').find(":selected").val();
 
@@ -323,10 +442,10 @@ $(document).ready(function(){
                 doc.text(150, 40, 'Nota de Venta');
         } else if (type_bill == 2) {
             doc.setFontSize(15);
-                doc.text(140, 40, 'Boleta de Venta');
+                doc.text(145, 40, 'Boleta de Venta');
         } else if (type_bill == 3) {
             doc.setFontSize(15);
-                doc.text(159, 40, 'Factura');
+                doc.text(140, 40, 'Factura');
         } else {
             doc.setFontSize(15);
                 doc.text(159, 40, '');   
@@ -346,11 +465,11 @@ $(document).ready(function(){
 
         // muestra telefono de empresa
         doc.setFontSize(10);
-                doc.text(20, 65, 'Tlf:');
+                doc.text(20, 55, 'Tlf:');
 
         // muestra informacion del cliente
         doc.setFontSize(10);
-                doc.text(20, 80, `Cliente: ${$('#client').val()}`);
+                doc.text(20, 65, `Cliente: ${$('#client').val()}`);
         
         // condicional para ruc y razon social
         if (type_bill == 1 || type_bill == 2) {
@@ -360,79 +479,45 @@ $(document).ready(function(){
                 doc.text(20, 90, ``);
         } else {
             doc.setFontSize(10);
-                doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
+                doc.text(20, 75, `RUC: ${$('.rucClient').val()}`);
             doc.setFontSize(10);
-                doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
+                doc.text(20, 80, `Razón Social: ${$('.razonClient').val()}`);
         }
-        
-        // muestra la fecha
-        doc.setFontSize(10);
-                doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
         
         // condicional para subtotal e igv
         if (type_bill == 1 || type_bill == 2) {
+            // muestra la fecha
             doc.setFontSize(10);
-                doc.text(150, 85, ``);
+                doc.text(20, 70, `Fecha: ${$('#billDate').val()}`);
             doc.setFontSize(10);
-                doc.text(150, 90, ``);
+                doc.text(150, 75, ``);
+            doc.setFontSize(10);
+                doc.text(150, 80, ``);
         } else {
             doc.setFontSize(10);
-                doc.text(150, 85, `Subtotal: ${$('.subtotalClient').val()}`);
-
+                doc.text(150, 75, `Subtotal: ${$('.subtotalClient').val()}`);
             doc.setFontSize(10);
-                doc.text(150, 90, `IGV: 18%`);
+                doc.text(150, 80, `IGV: 18%`);
+            // muestra la fecha
+            doc.setFontSize(10);
+                doc.text(20, 70, `Fecha: ${$('#billDate').val()}`);
         }
         
+        // cuadrado en el pdf
+        doc.rect(147, 90, 35, 8);
+
         // muestra el total
         doc.setFontSize(10);
-                doc.text(150, 95, `Total: ${$('.total-bill').val()}`);
+                doc.text(150, 95, `Total: ${$('.total-bill').val()} S/.`);
 
-        // Tabla
-        var generateData = function(amount) {
-        var all = $(".code-b").map(function() {
-                    return this.innerHTML;
-                    }).get();
+        doc.setFontSize(10);
+                doc.text(20, 90, 'Cod.   Producto       Cantidad        Precio');
 
-        var result = [];
-        for (let x = 0; x < all.length; x++) {
-            var name = {
-                Código: $(`input[name="codeTable${x}"]`).val(),
-                Nombre: $(`input[name="codeModal${x}"]`).val(),
-                Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
-                Precio: $(`input[name="priceTable${x}"]`).val(),
-                Total: $(`input[name="totalTable${x}"]`).val(),
-            };
-            result.push(name);
-        }
+        doc.setFontSize(10);
+                doc.text(20, 95, `${result.join("")}`);
+            
 
-        return result;
-        };
-
-        function createHeaders(keys) {
-        var result = [];
-        for (var i = 0; i < keys.length; i += 1) {
-            result.push({
-            id: keys[i],
-            name: keys[i],
-            prompt: keys[i],
-            width: 40,
-            align: "left",
-            padding: 0,
-            size: 10
-            });
-        }
-        return result;
-        }
-
-        var headers = createHeaders([
-        "Código",
-        "Nombre",
-        "Cantidad",
-        "Precio",
-        "Total",
-        ]);
-
-        doc.table(20, 110, generateData(5), headers, { autoSize: false });
+        // doc.table(20, 110, generateData(5), headers, { autoSize: false });
         // descargar documento PDF
         doc.save(`factura-${$('.numberBillClient').val()}.pdf`);
     });
