@@ -445,7 +445,7 @@ $(document).ready(function(){
                 doc.text(145, 40, 'Boleta de Venta');
         } else if (type_bill == 3) {
             doc.setFontSize(15);
-                doc.text(140, 40, 'Factura');
+                doc.text(150, 40, 'Factura');
         } else {
             doc.setFontSize(15);
                 doc.text(159, 40, '');   
@@ -457,19 +457,22 @@ $(document).ready(function(){
 
         // muestra nombre de empresa
         doc.setFontSize(20);
-                doc.text(20, 40, 'Importaciones NOARG E.I.R.L');
+                doc.text(20, 30, 'Importaciones NOARG E.I.R.L');
 
         // muestra direccion de empresa
         doc.setFontSize(10);
-                doc.text(20, 50, 'Dirección: Av. Matias Manzanilla Nro. 760 (1 Cdra del Seguro)');
+                doc.text(20, 35, 'Dirección: Av. Matias Manzanilla Nro. 760 (1 Cdra del Seguro)');
+
+        // muestra una linea
+        doc.line(20, 45, 85, 45)
 
         // muestra telefono de empresa
         doc.setFontSize(10);
-                doc.text(20, 55, 'Tlf:');
+                doc.text(20, 40, 'Tlf:');
 
         // muestra informacion del cliente
         doc.setFontSize(10);
-                doc.text(20, 65, `Cliente: ${$('#client').val()}`);
+                doc.text(20, 50, `Cliente: ${$('#client').val()}`);
         
         // condicional para ruc y razon social
         if (type_bill == 1 || type_bill == 2) {
@@ -479,42 +482,45 @@ $(document).ready(function(){
                 doc.text(20, 90, ``);
         } else {
             doc.setFontSize(10);
-                doc.text(20, 75, `RUC: ${$('.rucClient').val()}`);
+                doc.text(20, 60, `RUC: ${$('.rucClient').val()}`);
             doc.setFontSize(10);
-                doc.text(20, 80, `Razón Social: ${$('.razonClient').val()}`);
+                doc.text(20, 65, `Razón Social: ${$('.razonClient').val()}`);
         }
         
         // condicional para subtotal e igv
         if (type_bill == 1 || type_bill == 2) {
             // muestra la fecha
             doc.setFontSize(10);
-                doc.text(20, 70, `Fecha: ${$('#billDate').val()}`);
+                doc.text(20, 55, `Fecha: ${$('#billDate').val()}`);
             doc.setFontSize(10);
                 doc.text(150, 75, ``);
             doc.setFontSize(10);
                 doc.text(150, 80, ``);
         } else {
             doc.setFontSize(10);
-                doc.text(150, 75, `Subtotal: ${$('.subtotalClient').val()}`);
+                doc.text(150, 70, `Subtotal: ${$('.subtotalClient').val()}`);
             doc.setFontSize(10);
-                doc.text(150, 80, `IGV: 18%`);
+                doc.text(150, 75, `IGV: 18%`);
             // muestra la fecha
             doc.setFontSize(10);
-                doc.text(20, 70, `Fecha: ${$('#billDate').val()}`);
+                doc.text(20, 55, `Fecha: ${$('#billDate').val()}`);
         }
         
         // cuadrado en el pdf
-        doc.rect(147, 90, 35, 8);
+        doc.rect(147, 80, 35, 8);
 
         // muestra el total
         doc.setFontSize(10);
-                doc.text(150, 95, `Total: ${$('.total-bill').val()} S/.`);
+                doc.text(150, 85, `Total: ${$('.total-bill').val()} S/.`);
 
-        doc.setFontSize(10);
-                doc.text(20, 90, 'Cod.   Producto       Cantidad        Precio');
+        // muestra una linea
+        doc.line(20, 70, 85, 70)
 
+        // texto de productos
         doc.setFontSize(10);
-                doc.text(20, 95, `${result.join("")}`);
+                doc.text(20, 75, 'Cod.   Producto       Cantidad        Precio');
+        doc.setFontSize(10);
+                doc.text(20, 80, `${result.join("")}`);
             
 
         // doc.table(20, 110, generateData(5), headers, { autoSize: false });
