@@ -23,7 +23,7 @@
 	<br />
 	<br />
     <!-- titulo -->
-    <h1 class="h3 text-center mt-3">Mantenimiento</h1>
+    <h1 class="h3 text-center mt-3">Mantenimiento 1</h1>
 
     <!-- tabla -->
     <div class="container-float">
