@@ -23,7 +23,7 @@
 	<br />
 	<br />
     <!-- titulo -->
-    <h1 class="h3 text-center mt-3">Mantenimiento 1</h1>
+    <h1 class="h3 text-center mt-3">Mantenimiento</h1>
 
     <!-- tabla -->
     <div class="container-float">
@@ -214,7 +214,7 @@
                         <div class="col-md-6">
                             <label for="formFile" class="form-label">Marca</label>
                             <select class="form-select" aria-label="Default select example" id="select_marca" name="select_marca">
-                                <option selected>Selecciona una marca</option>
+                                <option value= "0" selected>Selecciona una marca</option>
                                 @if ($productsArray['data'] != null)
                                 @foreach($selectArrayMarca['data'] as $selectMarca)
                                     <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
@@ -225,7 +225,7 @@
                         <div class="col-md-6">
                             <label for="formFile" class="form-label">Modelo</label>
                             <select class="form-select" aria-label="Default select example" id="select_modelo" name="select_modelo">
-                                <option selected>Selecciona un modelo</option>
+                                <option value= "0" selected>Selecciona un modelo</option>
                                 @if ($productsArray['data'] != null)
                                 @foreach($selectArrayModelo['data'] as $selectModelo)
                                     <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
