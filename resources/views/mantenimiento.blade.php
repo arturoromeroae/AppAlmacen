@@ -212,8 +212,8 @@
                             <button type="button" class="btn btn-primary" onclick="addRow()">Agregar Producto a la tabla</button>
                         </div> -->
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label">Marca *</label>
-                            <select class="form-select" aria-label="Default select example" id="select_marca" name="select_marca" required>
+                            <label for="formFile" class="form-label">Marca</label>
+                            <select class="form-select" aria-label="Default select example" id="select_marca" name="select_marca">
                                 <option selected>Selecciona una marca</option>
                                 @if ($productsArray['data'] != null)
                                 @foreach($selectArrayMarca['data'] as $selectMarca)
@@ -223,8 +223,8 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label">Modelo *</label>
-                            <select class="form-select" aria-label="Default select example" id="select_modelo" name="select_modelo" required>
+                            <label for="formFile" class="form-label">Modelo</label>
+                            <select class="form-select" aria-label="Default select example" id="select_modelo" name="select_modelo">
                                 <option selected>Selecciona un modelo</option>
                                 @if ($productsArray['data'] != null)
                                 @foreach($selectArrayModelo['data'] as $selectModelo)

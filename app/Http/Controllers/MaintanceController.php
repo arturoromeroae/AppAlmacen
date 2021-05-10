@@ -47,13 +47,27 @@ class MaintanceController extends Controller
         $cuantity = $request->cuantity; // cantidad del producto
         $photo = $request->image_product; // imagen del producto
 
+        if( $model == 0 && $brand == 0 ){
+            $modelProduct = 1;
+            $brandProduct = 1;
+        }elseif($model == 0 && $brand != 0){
+            $modelProduct = 1;
+            $brandProduct = $brand;
+        }elseif($model != 0 && $brand == 0){
+            $modelProduct = $model;
+            $brandProduct = 1;
+        }else{
+            $modelProduct = $model;
+            $brandProduct = $brand;
+        }
+
         // array del formulario de mantenimiento
         $product = [
             'codProd' => $code,
             'nombreProducto' => $name,
             'descripcion' => $description,
-            'idMarca' => $brand,
-            'idModelo' => $model,
+            'idMarca' => $brandProduct,
+            'idModelo' => $modelProduct,
             'idUnidadMedida' => 1,
             'idTienda' => 1,
             'precioBase' => (float)$price,
