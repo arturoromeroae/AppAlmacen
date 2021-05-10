@@ -46,6 +46,7 @@
             </thead>
 
             <tbody>
+                @if ($productsArray['data'] != null)
                 @foreach($productsArray['data'] as $product)
                 <tr>
                     <td class="fs-6">{{ $product['codProd'] }}</td>
@@ -68,6 +69,7 @@
                     </td>
                 </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
         <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -76,6 +78,7 @@
     </div>
 
     <!-- modal edit -->
+    @if ($productsArray['data'] != null)
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -144,8 +147,10 @@
         </div>
     </div>
     @endforeach
+    @endif
 
     <!-- modal delete -->
+    @if ($productsArray['data'] != null)
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="delete-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -172,6 +177,7 @@
         </div>
     </div>
     @endforeach
+    @endif
 
     <!-- Modal formulario para agregar productos -->
     <div class="modal fade modal-fullscreen-sm-down" id="exampleModal" aria-labelledby="exampleModalLabel" tabindex="-1" aria-hidden="true">
@@ -209,18 +215,22 @@
                             <label for="formFile" class="form-label">Marca *</label>
                             <select class="form-select" aria-label="Default select example" id="select_marca" name="select_marca" required>
                                 <option selected>Selecciona una marca</option>
+                                @if ($productsArray['data'] != null)
                                 @foreach($selectArrayMarca['data'] as $selectMarca)
                                     <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
                                 @endforeach
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="formFile" class="form-label">Modelo *</label>
                             <select class="form-select" aria-label="Default select example" id="select_modelo" name="select_modelo" required>
                                 <option selected>Selecciona un modelo</option>
+                                @if ($productsArray['data'] != null)
                                 @foreach($selectArrayModelo['data'] as $selectModelo)
                                     <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
                                 @endforeach
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6">

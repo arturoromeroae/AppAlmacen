@@ -42,6 +42,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($productsArray['data'] != null)
                 @foreach($productsArray['data'] as $product)
                 <tr>
                     <td class="fs-6">{{ $product['codProd'] }}</td>
@@ -64,8 +65,10 @@
                     </td>
                 </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
+
         <!-- botones de reportes -->
         <div class="container mt-2">
             <button id="report-stk" class="btn btn-primary" type="button">Descargar</button>
@@ -74,6 +77,7 @@
     </div>
 
     <!-- modal editar cantidad -->
+    @if ($productsArray['data'] != null)
     <?php $i=0; $x=10; ?>
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -138,8 +142,10 @@
     </div>
     <?php $i++; $x++; ?>
     @endforeach
+    @endif
 
     <!-- modal eliminar -->
+    @if ($productsArray['data'] != null)
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="delete-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -166,13 +172,14 @@
         </div>
     </div>
     @endforeach
+    
 
 </div>
 
 <script>
    var appSettings = @json( $product['precioBase']);
 </script>
-
+@endif
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

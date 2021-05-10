@@ -10,7 +10,7 @@
 
 @section('content')
 <?php $i=0 ?>
-<section class="container">
+<section id="bill" class="container">
     <div>
 		<br />
 		<br />
@@ -32,8 +32,9 @@
                         <th data-align="center" scope="col">Agregar</th>
                     </tr>
                 </thead>
-            
+
                 <tbody>
+                    @if ($productsArray['data'] != null)
                     @foreach($productsArray['data'] as $product)
                     <tr>
                         <td class="fs-6"><input id="parts-modal-shop{{$i}}" type="text" class="form-control idShop" value="{{ $product['idProducto'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['codProd'] }}</a></td>
@@ -45,6 +46,7 @@
                     </tr>
                     <?php $i++ ?>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -92,6 +94,7 @@
 </section>
 
 <!-- modal edit -->
+@if ($productsArray['data'] != null)
 <?php $i=0 ?>
 @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -158,6 +161,7 @@
     </div>
 <?php $i++ ?>
 @endforeach
+@endif
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

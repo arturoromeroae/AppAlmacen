@@ -92,7 +92,7 @@
             <hr>
 
             <!-- tabla de venta -->
-            <div class="row mt-2">
+            <div id="billTable" class="row mt-2">
                 <table class="table" id="table-bill" >
                     <thead>
                         <tr>
