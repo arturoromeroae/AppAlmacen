@@ -1,4 +1,9 @@
 $(document).ready(function(){
+
+    // contador de productos en venta
+    var count = parseInt($('.tableSelect').length) - 1;
+    $('.count-inputs').val(count);
+
     $("#ruc-input").css("display", "");
     // se le asigna el valor de la url con el json
     var url = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
@@ -252,8 +257,9 @@ $(document).ready(function(){
         var idNum = ($('#table-bill tbody').find('tr').length);
         var rowId = 'row-' + idNum;
         var productId = idNum;
-        var count = parseInt($('.select').length) + 1;
-        var input_count = $('.count').val(count);
+        var count = parseInt($('.tableSelect').length) + 1;
+        var input_count = $('.count-inputs').val(count);
+        console.log(input_count);
 
         if (cuantity == 0) {
             cuantity = 1;

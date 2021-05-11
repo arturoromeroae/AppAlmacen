@@ -165,9 +165,9 @@ class SpareController extends Controller
             $discountValue = 0;
         }
 
-        for ($i = 1; $i <= $count ; $i++) {
+        for ($i = 0; $i <= $count ; $i++) {
             $ar = [
-                "idVentaCab" => $all_products_bill['idBill'],
+                "idVentaCab" => $all_products_bill["idBillTable{$i}"],
                 "idProducto" => $all_products_bill["idTable{$i}"],
                 "cantidad" => $all_products_bill["cuantityTable{$i}"],
                 "precioVenta" => $all_products_bill["priceTable{$i}"],
@@ -180,7 +180,7 @@ class SpareController extends Controller
         }
 
         $billProducts = [
-            "fecha" => "$fecha",
+            "fecha" => $fecha,
             "idCliente" => $all_products_bill['clientBill'],
             "tipoVenta" => $all_products_bill['selectBill'],
             "subTotal" => $all_products_bill['subtotalBill'],
