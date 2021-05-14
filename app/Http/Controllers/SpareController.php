@@ -234,6 +234,9 @@ class SpareController extends Controller
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             ';
+            // obtener productos
+            $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+            $productsArray = $products -> json();
         }else{
             $resultBill = 
             '
@@ -242,6 +245,9 @@ class SpareController extends Controller
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             ';
+            // obtener productos
+            $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
+            $productsArray = $products -> json();
         }
         
         return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'selectArrayCarrito', 'idResponse', 'igv', 'resultBill'));

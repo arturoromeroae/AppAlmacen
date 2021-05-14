@@ -259,7 +259,6 @@ $(document).ready(function(){
         var productId = idNum;
         var count = parseInt($('.tableSelect').length) + 1;
         var input_count = $('.count-inputs').val(count);
-        console.log(input_count);
 
         if (cuantity == 0) {
             cuantity = 1;
@@ -316,89 +315,76 @@ $(document).ready(function(){
         
 
         // // muestra informacion del cliente
-        // doc.setFontSize(10);
-        //         doc.text(20, 80, `Cliente: ${$('#client').val()}`);
+        doc.setFontSize(10);
+                doc.text(20, 80, `Cliente: ${$('#client').val()}`);
         
-        // // condicional para ruc y razon social
-        // if (type_bill == 1 || type_bill == 2) {
-        //     doc.setFontSize(10);
-        //         doc.text(20, 85, ``);
-        //     doc.setFontSize(10);
-        //         doc.text(20, 90, ``);
-        // } else {
-        //     doc.setFontSize(10);
-        //         doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
-        //     doc.setFontSize(10);
-        //         doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
-        // }
+        // condicional para ruc y razon social
+        if (type_bill == 1 || type_bill == 2) {
+            doc.setFontSize(10);
+                doc.text(20, 85, ``);
+            doc.setFontSize(10);
+                doc.text(20, 90, ``);
+        } else {
+            doc.setFontSize(10);
+                doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
+            doc.setFontSize(10);
+                doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
+        }
         
-        // // muestra la fecha
-        // doc.setFontSize(10);
-        //         doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
+        // muestra la fecha
+        doc.setFontSize(10);
+                doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
+
+        /////////////////////////// Inicio de la Tabla /////////////////////////
+        var generateData = function(amount) {
+        var all = $(".code-b").map(function() {
+                    return this.innerHTML;
+                    }).get();
         
-        // // condicional para subtotal e igv
-        // if (type_bill == 1 || type_bill == 2) {
-        //     doc.setFontSize(10);
-        //         doc.text(150, 85, ``);
-        //     doc.setFontSize(10);
-        //         doc.text(150, 90, ``);
-        // } else {
-        //     doc.setFontSize(10);
-        //         doc.text(150, 85, `Subtotal: ${$('.subtotalClient').val()}`);
+        // Valores de cada fila
+        var result = [];
+        for (let x = 0; x < all.length; x++) {
+            var name = {
+                Código: $(`input[name="codeTable${x}"]`).val(),
+                Nombre: $(`input[name="codeModal${x}"]`).val(),
+                Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
+                Precio: (`${(Math.round($(`input[name="priceTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
+                Total: (`${(Math.round($(`input[name="totalTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
+            };
+            result.push(name);
+        }
 
-        //     doc.setFontSize(10);
-        //         doc.text(150, 90, `IGV: 18%`);
-        // }
+        return result;
+        };
+
+        function createHeaders(keys) {
+        var result = [];
+        for (var i = 0; i < keys.length; i += 1) {
+            result.push({
+            id: keys[i],
+            name: keys[i],
+            prompt: keys[i],
+            width: 40,
+            align: "left",
+            padding: 0,
+            size: 10
+            });
+        }
+        return result;
+        }
+
+        // Cabeceras de la tabla
+        var headers = createHeaders([
+        "Código",
+        "Nombre",
+        "Cantidad",
+        "Precio",
+        "Total",
+        ]);
+
+        /////////////////////////// Final de la Tabla /////////////////////////
         
-        // // muestra el total
-        // doc.setFontSize(10);
-        //         doc.text(150, 95, `Total: ${$('.total-bill').val()}`);
-
-        // // Tabla
-        // var generateData = function(amount) {
-        // var all = $(".code-b").map(function() {
-        //             return this.innerHTML;
-        //             }).get();
-
-        // var result = [];
-        // for (let x = 0; x < all.length; x++) {
-        //     var name = {
-        //         Código: $(`input[name="codeTable${x}"]`).val(),
-        //         Nombre: $(`input[name="codeModal${x}"]`).val(),
-        //         Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
-        //         Precio: $(`input[name="priceTable${x}"]`).val(),
-        //         Total: $(`input[name="totalTable${x}"]`).val(),
-        //     };
-        //     result.push(name);
-        // }
-
-        // return result;
-        // };
-
-        // function createHeaders(keys) {
-        // var result = [];
-        // for (var i = 0; i < keys.length; i += 1) {
-        //     result.push({
-        //     id: keys[i],
-        //     name: keys[i],
-        //     prompt: keys[i],
-        //     width: 40,
-        //     align: "left",
-        //     padding: 0,
-        //     size: 10
-        //     });
-        // }
-        // return result;
-        // }
-
-        // var headers = createHeaders([
-        // "Código",
-        // "Nombre",
-        // "Cantidad",
-        // "Precio",
-        // "Total",
-        // ]);
-        
+        // Variables de los inputs jQuery
         var inputsCode = $('.code-b');
         var inputsName = $('.name-b');
         var inputsCuantity = $('.cuantity-b');
@@ -408,26 +394,18 @@ $(document).ready(function(){
         var discount = $('.rest-discount')
         var cash = $('.pay-bill')
         var cashback = $('.back-bill')
-        var result = [];
 
-        for(var i = 0; i < inputsCode.length; i++){
-            a = $(inputsCode[i]).val() + '   ' 
-            + $(inputsName[i]).val() + '         ' 
-            + $(inputsCuantity[i]).val() + '               '
-            + $(inputsPrice[i]).val() + ' '+ 'S/.' + '\n';
-            result.push(a);
-        }
+        // for(var i = 0; i < inputsCode.length; i++){
+        //     a = $(inputsCode[i]).val() + '   ' 
+        //     + $(inputsName[i]).val() + '         ' 
+        //     + $(inputsCuantity[i]).val() + '               '
+        //     + $(inputsPrice[i]).val() + ' '+ 'S/.' + '\n';
+        //     result.push(a);
+        // }
 
-        var info = [
-            '\n' + '                    Monto a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
-            '                    Descuento: ' + $(discount).val() + ' ' + '\n' +
-            '                    Total a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
-            '                    Pago con: ' + $(cash).val() + ' '+ 'S/.' + '\n' +
-            '                    Vuelto: ' + ( Math.round( (cashback.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n'
-        ]
-        result.push(info);
+        
 
-        var doc = new jsPDF()
+        
         // sizes = [12, 16, 20],
         // fonts = [['Times', 'Roman'], ['Helvetica', ''], ['Times', 'Italic']],
         // font, size, lines,
@@ -448,6 +426,7 @@ $(document).ready(function(){
 
         // obtiene el valor del select
         var type_bill = $('.type_shop').find(":selected").val();
+        var infoBill = [];
 
         // cuadrado en el pdf
         doc.rect(140, 20, 50, 40);
@@ -501,8 +480,10 @@ $(document).ready(function(){
             doc.setFontSize(10);
                 doc.text(20, 90, ``);
         } else {
+            // Muestra RUC
             doc.setFontSize(10);
                 doc.text(20, 60, `RUC: ${$('.rucClient').val()}`);
+            // Muestra Razon Social
             doc.setFontSize(10);
                 doc.text(20, 65, `Razón Social: ${$('.razonClient').val()}`);
         }
@@ -517,8 +498,10 @@ $(document).ready(function(){
             doc.setFontSize(10);
                 doc.text(150, 80, ``);
         } else {
+            // Muestra Subtotal
             doc.setFontSize(10);
                 doc.text(150, 70, `Subtotal: ${$('.subtotalClient').val()} S/.`);
+            // Muestra IGV
             doc.setFontSize(10);
                 doc.text(150, 75, `IGV(18%): ${( Math.round( (totalBill.val() - subtotalBill.val())* 100)/100 ).toFixed(2)} S/.`);
             // muestra la fecha
@@ -533,18 +516,31 @@ $(document).ready(function(){
         doc.setFontSize(10);
                 doc.text(150, 85, `Total: ${( Math.round( (totalBill.val())* 100)/100 ).toFixed(2)} S/.`);
 
-        // muestra una linea
+        // Muestra una linea
         doc.line(20, 70, 85, 70)
 
-        // texto de productos
-        doc.setFontSize(10);
-                doc.text(20, 75, 'Cod.              Producto                                 Cantidad        Precio');
-        doc.setFontSize(10);
-                doc.text(20, 80, `${result.join("")}`);
-            
+        // Header de productos forma manual
+        // doc.setFontSize(10);
+        //         doc.text(20, 75, 'Cod.              Producto                                 Cantidad        Precio');
 
-        // doc.table(20, 110, generateData(5), headers, { autoSize: false });
-        // descargar documento PDF
+        // Genera la tabla
+        doc.table(20, 110, generateData(5), headers, { autoSize: false });
+
+        // lista de informacion de la venta
+        var info = [
+            '\n' + '                    Monto a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
+            '                    Descuento: ' + $(discount).val() + ' ' + '\n' +
+            '                    Total a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
+            '                    Pago con: ' + $(cash).val() + ' '+ 'S/.' + '\n' +
+            '                    Vuelto: ' + ( Math.round( (cashback.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n'
+        ]
+        infoBill.push(info);
+
+        // Muestra: Monto a pagar, Descuento, Total a pagar, Pago con, Vuelto.
+        doc.setFontSize(10);
+                doc.text(80, 75, `${infoBill.join("")}`);
+
+        // Descargar documento PDF
         doc.save(`factura-${$('.numberBillClient').val()}.pdf`);
     });
 
