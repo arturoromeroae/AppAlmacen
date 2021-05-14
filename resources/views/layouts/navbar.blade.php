@@ -65,7 +65,7 @@
               </li>
               @endif
 
-              @if(Request::path() === 'repuestos' or Request::path() === 'repuestos/1')
+              @if(Request::path() === 'repuestos' or Request::path() === 'repuestos/1' or Request::path() === 'repuestos/1/12')
               <li class="nav-item">
                 <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/repuestos') }}">
                   <i class="material-icons d-block mb-1" style="font-size:25px;">shopping_cart</i> Repuestos
@@ -103,20 +103,6 @@
               <li class="nav-item">
                 <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/mantenimiento') }}">
                   <i class="material-icons d-block mb-1" style="font-size:25px;">settings</i> Mantenimiento
-                </a>
-              </li>
-              @endif
-
-              @if(Request::path() === 'ventas')
-              <li class="nav-item">
-                <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/ventas') }}">
-                  <i class="material-icons d-block mb-1" style="font-size:25px;">attach_money</i> Ventas
-                </a>
-              </li>
-              @else
-              <li class="nav-item">
-                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/ventas') }}">
-                  <i class="material-icons d-block mb-1" style="font-size:25px;">attach_money</i> Ventas
                 </a>
               </li>
               @endif

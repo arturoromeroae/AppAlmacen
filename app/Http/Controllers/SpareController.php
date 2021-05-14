@@ -94,9 +94,9 @@ class SpareController extends Controller
         
         return view('facturas', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'selectArrayCarrito', 'idResponse', 'igv'));
     }
+    
+    public function sendBill($product, Request $request) {
 
-    public function send($product, Request $request)
-    {
         // obtener productos
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
         $productsArray = $products -> json();
@@ -111,7 +111,6 @@ class SpareController extends Controller
         $selectArrayModelo = $selectModelo -> json();
 
         // valores de la lista del carrito
-
         $all_products = $request->except('_token', 'resultadoTotal', 'count');
         $count = $request->count; // contador de productos en lista
         $id = $request->idTable1; // id del producto
@@ -148,12 +147,13 @@ class SpareController extends Controller
         $selectArrayCarrito = $selectCarrito -> json();
         $igv = 0.18;
 
-        $all_products_bill = $request->except('_token');
+        $all_products_bill = $request->except('_token'); // obtener todos los inputs excepto token
         $count = $request->count; // contador de productos en lista
-        date_default_timezone_set("America/Lima");
-        $fecha = date("Y/m/d H:i:s");
+        date_default_timezone_set("America/Lima"); // zona horaria
+        $fecha = date("Y/m/d H:i:s"); // variable de fecha
         $blpr = [];
 
+        // condicional del select descuento
         if (($all_products_bill['discountBill']) == 'no') {
             $discountValuePor = 0;
             $discountValue = 0;
@@ -165,6 +165,28 @@ class SpareController extends Controller
             $discountValue = 0;
         }
 
+        // condicional para ruc
+        if ($all_products_bill['rucBill'] == null) {
+            $ruc = "no aplica";
+        }else{
+            $ruc = $all_products_bill['rucBill'];
+        }
+
+        // condicional para razon social
+        if ($all_products_bill['razonBill'] == null) {
+            $razon = "no aplica";
+        }else{
+            $razon = $all_products_bill['razonBill'];
+        }
+
+        // condicional para id cliente
+        if ($all_products_bill['clientBill'] == null) {
+            $idCl = 0;
+        }else{
+            $idCl = $all_products_bill['clientBill'];
+        }
+
+        // ciclo for para obtener los productos en lista
         for ($i = 0; $i <= $count ; $i++) {
             $ar = [
                 "idVentaCab" => $all_products_bill["idBillTable{$i}"],
@@ -181,7 +203,7 @@ class SpareController extends Controller
 
         $billProducts = [
             "fecha" => $fecha,
-            "idCliente" => $all_products_bill['clientBill'],
+            "idCliente" => $idCl,
             "tipoVenta" => $all_products_bill['selectBill'],
             "subTotal" => $all_products_bill['subtotalBill'],
             "igv" => $all_products_bill['igvBill'],
@@ -193,8 +215,8 @@ class SpareController extends Controller
             "idSede" => 1,
             "idPedCab" => $all_products_bill['idBill'],
             "usuario" => "string",
-            "rucCliente" => $all_products_bill['rucBill'],
-            "razonSocial" => $all_products_bill['razonBill'],
+            "rucCliente" => $ruc,
+            "razonSocial" => $razon,
             "idOrigen" => 1,
             "ventaDet" => $blpr
         ];
@@ -202,7 +224,26 @@ class SpareController extends Controller
         // enviar factura
         $shopBill = Http::post('http://appdemo1.solarc.pe/api/Venta/InsertaVenta', $billProducts);
         $responseBill = $shopBill->json();
+
+        // obteniendo codigo de respuesta
+        if (($shopBill -> getStatusCode()) == 200) {
+            $resultBill =
+            '
+            <div class="alert alert-success alert-dismissible fade show alert-form mt-5" role="alert">
+                Se <strong>completó</strong> la venta.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
+        }else{
+            $resultBill = 
+            '
+            <div class="alert alert-danger alert-dismissible fade show alert-form mt-5" role="alert">
+                <strong>Error</strong> al realizar la venta.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
+        }
         
-        return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'selectArrayCarrito', 'idResponse', 'igv'));
+        return view('repuestos', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'selectArrayCarrito', 'idResponse', 'igv', 'resultBill'));
     }
 }

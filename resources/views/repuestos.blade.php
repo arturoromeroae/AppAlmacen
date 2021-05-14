@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css') }}">
 
 @section('content')
+
+<!-- resultado de la venta -->
+@isset($resultBill)
+    <?php echo $resultBill; ?>
+@endisset
+
 <?php $i=0 ?>
 <section id="bill" class="container">
     <div>

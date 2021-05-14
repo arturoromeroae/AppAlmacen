@@ -34,10 +34,10 @@ Route::any('/mantenimiento/{id}', [MaintanceController::class, 'put_product'])->
 
 Route::get('/ventas', [SalesController::class, 'index'])->name('ventas');
 
-Route::any('/facturas', [BillController::class, 'bill'])->name('facturas');
+Route::any('/facturas', [BillController::class, 'sendBill'])->name('facturas');
 
 Route::get('/repuestos', [SpareController::class, 'index'])->name('repuestos');
 
 Route::any('/repuestos/{id}', [SpareController::class, 'shop'])->name('repuestos.post');
 
-Route::any('/repuestos/{id}/{product}', [SpareController::class, 'send'])->name('repuestos.complete');
+Route::post('/repuestos/{id}/{product}', [SpareController::class, 'sendBill'])->name('repuestos.complete');
