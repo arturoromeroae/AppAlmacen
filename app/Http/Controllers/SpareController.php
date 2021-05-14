@@ -181,7 +181,7 @@ class SpareController extends Controller
 
         // condicional para id cliente
         if ($all_products_bill['clientBill'] == null) {
-            $idCl = 0;
+            $idCl = 1;
         }else{
             $idCl = $all_products_bill['clientBill'];
         }

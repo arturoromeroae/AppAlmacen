@@ -419,11 +419,11 @@ $(document).ready(function(){
         }
 
         var info = [
-            '\n' + '                    Monto a pagar: ' + $(totalBill).val() + ' '+ 'S/.' + '\n' +
+            '\n' + '                    Monto a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
             '                    Descuento: ' + $(discount).val() + ' ' + '\n' +
-            '                    Total a pagar: ' + $(totalBill).val() + ' '+ 'S/.' + '\n' +
+            '                    Total a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
             '                    Pago con: ' + $(cash).val() + ' '+ 'S/.' + '\n' +
-            '                    Vuelto: ' + $(cashback).val() + ' '+ 'S/.' + '\n'
+            '                    Vuelto: ' + ( Math.round( (cashback.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n'
         ]
         result.push(info);
 
@@ -531,14 +531,14 @@ $(document).ready(function(){
 
         // muestra el total
         doc.setFontSize(10);
-                doc.text(150, 85, `Total: ${$('.total-bill').val()} S/.`);
+                doc.text(150, 85, `Total: ${( Math.round( (totalBill.val())* 100)/100 ).toFixed(2)} S/.`);
 
         // muestra una linea
         doc.line(20, 70, 85, 70)
 
         // texto de productos
         doc.setFontSize(10);
-                doc.text(20, 75, 'Cod.            Producto                             Cantidad        Precio');
+                doc.text(20, 75, 'Cod.              Producto                                 Cantidad        Precio');
         doc.setFontSize(10);
                 doc.text(20, 80, `${result.join("")}`);
             
