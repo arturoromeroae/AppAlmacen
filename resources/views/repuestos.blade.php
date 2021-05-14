@@ -46,6 +46,9 @@
                     </tr>
                     <?php $i++ ?>
                     @endforeach
+                    @else
+                    <p>HOLA</p>
+                        <img src="{{ asset('images/Error.png') }}" alt="">
                     @endif
                 </tbody>
             </table>

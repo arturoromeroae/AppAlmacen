@@ -10,10 +10,7 @@
 @section('content')
 
 @isset($result)
-    <div class="alert alert-success alert-dismissible fade show alert-form mt-5" role="alert">
-        <?php echo $result; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <?php echo $result; ?>
 @endisset
 
 <div class="container">

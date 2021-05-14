@@ -11,12 +11,7 @@
 @section('content')
 
 @isset($result_maintance)
-    <br />
-	<br />
-    <div class="alert alert-success alert-dismissible fade show alert-form" role="alert">
-        <?php echo $result_maintance; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <?php echo $result_maintance; ?>
 @endisset
 
 <div id="container-maintance" class="container">

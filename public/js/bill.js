@@ -403,6 +403,11 @@ $(document).ready(function(){
         var inputsName = $('.name-b');
         var inputsCuantity = $('.cuantity-b');
         var inputsPrice = $('.price-b');
+        var totalBill = $('.send-bill');
+        var subtotalBill = $('.subtotalClient');
+        var discount = $('.rest-discount')
+        var cash = $('.pay-bill')
+        var cashback = $('.back-bill')
         var result = [];
 
         for(var i = 0; i < inputsCode.length; i++){
@@ -412,6 +417,15 @@ $(document).ready(function(){
             + $(inputsPrice[i]).val() + ' '+ 'S/.' + '\n';
             result.push(a);
         }
+
+        var info = [
+            '\n' + '                    Monto a pagar: ' + $(totalBill).val() + ' '+ 'S/.' + '\n' +
+            '                    Descuento: ' + $(discount).val() + ' ' + '\n' +
+            '                    Total a pagar: ' + $(totalBill).val() + ' '+ 'S/.' + '\n' +
+            '                    Pago con: ' + $(cash).val() + ' '+ 'S/.' + '\n' +
+            '                    Vuelto: ' + $(cashback).val() + ' '+ 'S/.' + '\n'
+        ]
+        result.push(info);
 
         var doc = new jsPDF()
         // sizes = [12, 16, 20],
@@ -504,9 +518,9 @@ $(document).ready(function(){
                 doc.text(150, 80, ``);
         } else {
             doc.setFontSize(10);
-                doc.text(150, 70, `Subtotal: ${$('.subtotalClient').val()}`);
+                doc.text(150, 70, `Subtotal: ${$('.subtotalClient').val()} S/.`);
             doc.setFontSize(10);
-                doc.text(150, 75, `IGV: 18%`);
+                doc.text(150, 75, `IGV(18%): ${( Math.round( (totalBill.val() - subtotalBill.val())* 100)/100 ).toFixed(2)} S/.`);
             // muestra la fecha
             doc.setFontSize(10);
                 doc.text(20, 55, `Fecha: ${$('#billDate').val()}`);
@@ -524,7 +538,7 @@ $(document).ready(function(){
 
         // texto de productos
         doc.setFontSize(10);
-                doc.text(20, 75, 'Cod.   Producto       Cantidad        Precio');
+                doc.text(20, 75, 'Cod.            Producto                             Cantidad        Precio');
         doc.setFontSize(10);
                 doc.text(20, 80, `${result.join("")}`);
             

@@ -25,7 +25,7 @@
             <input name="subtotalBill" type="text" class="subtotalClient" hidden>
             <input name="direccionBill" type="text" class="direccionClient" hidden>
             <input name="description" type="text" class="descriptionBill" hidden>
-            <input class="count-inputs" name="count" value="" type="text">
+            <input class="count-inputs" name="count" value="" type="text" hidden>
             <div class="row">
                 <div class="col">
                     <div class="mb-3">

@@ -155,12 +155,24 @@ class MaintanceController extends Controller
         $r = Http::post('http://appdemo1.solarc.pe/api/Productos/ActualizarProducto', $pro);
 
         if( ($r -> getStatusCode()) == 200 ){
-            $result_maintance = '<strong>Se modificó</strong> el producto.';
+            $result_maintance = 
+            '
+            <div class="alert alert-success alert-dismissible fade show alert-form mt-5" role="alert">
+                <strong>Se modificó</strong> el producto.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
         }else{
-            $result_maintance = '<strong>Error</strong> al modificar el producto.';
+            $result_maintance = 
+            '
+            <div class="alert alert-danger alert-dismissible fade show alert-form mt-5" role="alert">
+                <strong>Error</strong> al modificar el producto.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
         }
 
         return view('mantenimiento', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'result_maintance'));

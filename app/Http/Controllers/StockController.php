@@ -100,12 +100,24 @@ class StockController extends Controller
         $r_price = Http::post('http://appdemo1.solarc.pe/api/Productos/ActualizaPrecioBase', $pri);
 
         if( ($r -> getStatusCode()) == 200 ){
-            $result = '<strong>Se modificó</strong> el producto.';
+            $result = 
+            '
+            <div class="alert alert-success alert-dismissible fade show alert-form mt-5" role="alert">
+                <strong>Se modificó</strong> el producto.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
         }else{
-            $result = '<strong>Error</strong> al modificar el producto.';
+            $result = 
+            '
+            <div class="alert alert-danger alert-dismissible fade show alert-form mt-5" role="alert">
+                <strong>Error</strong> al modificar el producto.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
         }
 
         return view('almacen', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'result'));
