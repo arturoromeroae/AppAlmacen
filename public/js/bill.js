@@ -341,34 +341,12 @@ $(document).ready(function(){
     $('#repuestos-form').submit(function() {
         // variable de jsPDF
         var doc = new jsPDF();
-        
-
-        // // muestra informacion del cliente
-        doc.setFontSize(10);
-                doc.text(20, 80, `Cliente: ${$('#client').val()}`);
-        
-        // condicional para ruc y razon social
-        if (type_bill == 1 || type_bill == 2) {
-            doc.setFontSize(10);
-                doc.text(20, 85, ``);
-            doc.setFontSize(10);
-                doc.text(20, 90, ``);
-        } else {
-            doc.setFontSize(10);
-                doc.text(20, 85, `RUC: ${$('.rucClient').val()}`);
-            doc.setFontSize(10);
-                doc.text(20, 90, `Razón Social: ${$('.razonClient').val()}`);
-        }
-        
-        // muestra la fecha
-        doc.setFontSize(10);
-                doc.text(20, 95, `Fecha: ${$('#billDate').val()}`);
 
         /////////////////////////// Inicio de la Tabla /////////////////////////
         var generateData = function(amount) {
-        var all = $(".code-b").map(function() {
-                    return this.innerHTML;
-                    }).get();
+            var all = $(".code-b").map(function() {
+                        return this.innerHTML;
+                        }).get();
         
         // Valores de cada fila
         var result = [];
@@ -396,7 +374,7 @@ $(document).ready(function(){
             width: 40,
             align: "left",
             padding: 0,
-            size: 10
+            size: 5
             });
         }
         return result;
@@ -553,7 +531,7 @@ $(document).ready(function(){
         //         doc.text(20, 75, 'Cod.              Producto                                 Cantidad        Precio');
 
         // Genera la tabla
-        doc.table(20, 110, generateData(5), headers, { autoSize: false });
+        doc.table(30, 110, generateData(5), headers, { autoSize: false, fontSize: 8 });
 
         // lista de informacion de la venta
         var info = [
@@ -567,7 +545,7 @@ $(document).ready(function(){
 
         // Muestra: Monto a pagar, Descuento, Total a pagar, Pago con, Vuelto.
         doc.setFontSize(10);
-                doc.text(80, 75, `${infoBill.join("")}`);
+                doc.text(10, 75, `${infoBill.join("")}`);
 
         // Descargar documento PDF
         doc.save(`factura-${$('.numberBillClient').val()}.pdf`);
