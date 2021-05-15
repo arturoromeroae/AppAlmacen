@@ -21,7 +21,8 @@
 		<br />
 		<br />
         <!-- Titulo de la pagina -->
-        <h3 class="h3 text-center">Repuestos</h3>
+        <h3 class="h3 text-center mt-3">Repuestos</h3>
+        
         <!-- Tabla de repuestos -->
         <div id="table-buy" class="container-float">
             <table
@@ -52,9 +53,6 @@
                     </tr>
                     <?php $i++ ?>
                     @endforeach
-                    @else
-                    <p>HOLA</p>
-                        <img src="{{ asset('images/Error.png') }}" alt="">
                     @endif
                 </tbody>
             </table>

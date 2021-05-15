@@ -3,10 +3,10 @@
 <link href = "{{ url('fuzzyComplete/src/css/fuzzycomplete.css') }}" rel = "stylesheet">
 
 @section('content')
+<br />
+<br />
 <!-- titulo -->
-<br />
-<br />
-<h1 class="h2 text-center">Emitir Comprobante</h1>
+<h1 class="h2 text-center mt-3">Emitir Comprobante</h1>
 
 <div class="container bg-light">
     <div class="container bg-light">
@@ -46,7 +46,7 @@
 
                     <div id="client-input" style="display:;">
                         <label for="client">Cliente</label>
-                        <input id="client" type="text" class="form-control" placeholder="Cliente" aria-label="cliente">
+                        <input id="client" name="nameNotaVenta" type="text" class="form-control" placeholder="Cliente" aria-label="cliente">
                     </div>
                     <div id="ruc-input">
                         <label for="ruc-client">RUC</label>

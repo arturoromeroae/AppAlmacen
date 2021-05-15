@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
-    // contador de productos en venta
+    // contador de productos en la venta
     var count = parseInt($('.tableSelect').length) - 1;
     $('.count-inputs').val(count);
 
     $("#ruc-input").css("display", "");
-    // se le asigna el valor de la url con el json
+    // se le asigna el valor de la url con el json de los clientes
     var url = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
 
     // obteniendo valores del json con ajax
@@ -47,83 +47,93 @@ $(document).ready(function(){
         }
     });
 
+    // cuando el select cambia se ejecuta la funcion
     $('.type_shop').change(function () {
-        var select = $(this).val();
+        var select = $(this).val(); // obtener el valor seleccionado
+        // obtener el tipo de factura por ajax
         $.ajax({
         type:"GET",
         datatype: "json",
         url: `http://appdemo1.solarc.pe/api/Maestro/GetNroComprobante?IdTipoDoc=${select}`,
         success: function(data){
-            var serie = data['data'][0]['serieDoc'];
-            var document = data['data'][0]['nroDoc'];
-            $(".codeBilles").text( serie + '-' + document);
-            $(".numberBillClient").attr('value', (serie + document));
+            var serie = data['data'][0]['serieDoc']; // variable serie documento
+            var document = data['data'][0]['nroDoc']; // variable numero de documento
+            $(".codeBilles").text( serie + '-' + document); // mostar la serie - nro de documento
+            $(".numberBillClient").attr('value', (serie + document)); // input hidden que almacena el numero de factura que se va a enviar a la db
             }
         });
 
     });
 
-
+    // cuando el select cambia se ejecuta la funcion para mostrar u ocultar inputs
     $('.type_shop').change(function () {
-        var conceptName = $('.type_shop').find(":selected").val();
+        var conceptName = $('.type_shop').find(":selected").val(); // obtener el valor seleccionado en el select
 
         if (conceptName == 1 || conceptName == "") {
-            $("#dni-input").css("display", "none");
-            $("#client-input").css("display", "block");
-            $("#ruc-input").css("display", "none");
-            $("#razon-input").css("display", "none");
-            $('#client-dni').val(0);
+            $("#dni-input").css("display", "none"); // input DNI
+            $("#client-input").css("display", "block"); // input nombre cliente
+            $("#ruc-input").css("display", "none"); // input RUC
+            $("#razon-input").css("display", "none"); // input razon social
+            $('#client-dni').val(0); // input DNI
         }else{
-            $("#client-input").css("display", "");
-            $("#ruc-input").css("display", "block");
-            $("#razon-input").css("display", "block");
-            $("#dni-input").css("display", "block");
+            $("#client-input").css("display", ""); // input nombre cliente
+            $("#ruc-input").css("display", "block"); // input RUC
+            $("#razon-input").css("display", "block"); // input razon social
+            $("#dni-input").css("display", "block"); // input DNI
         }
     });
 
+    // obtener todos los elementos que tengan la clase y el id
     $('#table-bill .productTotal').each(function() {
-        calculateColumn();
+        calculateColumn(); // se llama a la funcion
     });
 
+    // obtener todos los elementos que tengan la clase y el id
     $('#table-bill .productSubtotal').each(function() {
-        calculateColumnSubtotal();
+        calculateColumnSubtotal(); // se llama a la funcion
     });
 
+    // al presionar el boton ejecutar
     $('.button-delete').on('click', function(){
         $('.select:checked').each(function () {
-            $(this).closest('tr').remove()
+            $(this).closest('tr').remove() // remueve el producto marcado
         });
-        calculateColumn();
+        calculateColumn(); // se llama a la funcion
     });
 
     // obtener el precio total
     function calculateColumn() {
-        var sumaTotal = 0;
+        var sumaTotal = 0; // se inicializa la variable en 0
 
+        // obtener todos los elementos td que tengan la clase y el id
         $('#table-bill td.productTotal').each(function() {
-            sumaTotal += parseFloat($(this).text()||0,10)
+            sumaTotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
         });
 
         var money = $('.pay-bill').val();
         var money2 = $(".total-bill").val(Math.round(sumaTotal * 100) / 100);
         var money3 = $(".send-bill").attr('value', sumaTotal);
-        $(".resultado").val(sumaTotal);
+        $(".resultado").val(sumaTotal); // coloca el valor de la suma del precio de cada producto en el input
 
     }
 
+     // obtener el precio subtotal
     function calculateColumnSubtotal() {
-        var sumaSubtotal = 0;
+        var sumaSubtotal = 0; // se inicializa la variable en 0
 
+        // obtener todos los elementos td que tengan la clase y el id
         $('#table-bill td.productSubtotal').each(function() {
-            sumaSubtotal += parseFloat($(this).text()||0,10)
+            sumaSubtotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
         });
 
         var money3 = $(".subtotalClient").attr('value', Math.round(sumaSubtotal * 100) / 100);
 
     }
 
+    // al presionar el boton agrega produtos a la tabla dentro de la pantalla factura
     $(".button-add-bill").click(function(){
 
+        // variables de los inputs jQuery
         var now_id_table = $(this).attr('id');
         var productTableId = $('.idShop');
         var productTableCode = $('.codeShop');
@@ -135,7 +145,7 @@ $(document).ready(function(){
         var productTableTotal = $('.stockShop');
 
         var i;
-
+        // agregando productos a la tabla
         for (i = 0; i < productTableId.length; i++) {
             var product_id_shop = productTableId[i];
             var product_code_shop = productTableCode[i];
@@ -154,55 +164,64 @@ $(document).ready(function(){
             }
         }
 
-        var idNumTable = ($('#table-bill tbody').find('tr').length);
-        var rowIdTable = 'row-' + idNumTable;
+        // asignacion de variables
+        var idNumTable = ($('#table-bill tbody').find('tr').length); // encontrar tr con la clase
+        var rowIdTable = 'row-' + idNumTable; // formateando el id de los elementos en la tabal
         var productIdTable = idNumTable;
         var cuantity_table = 1;
         var count = parseInt($('.select').length);
         var input_count = $('.count').val(count);
         var subtotal = price_table * cuantity_table;
         var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
-        var total_product = Math.round((igv_product + subtotal) * 100) / 100;
+        var total_product = Math.round((igv_product + subtotal) * 100) / 100;  
 
+        // crea un <tr> cada vez que se presiona el boton
         var markup = "<tr id=" + rowIdTable + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productIdTable + ">" + code_table + " <input name=codeTable" + productIdTable + " class='code-b' type='text' value=" + code_table + " style='display:none;'> </td> <td name=nameTable" + productIdTable + ">" + name_table + "<input name=codeModal" + productIdTable + " class='name-b' type='text' value=" + name_table + " style='display:none;'> </td> <td class='productPrice price'>" + price_table + " <input class='price-b' name=priceTable" + productIdTable + " type='number' value=" + price_table + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity_table + " <input class='cuantity-b' name=cuantityTable" + productIdTable + " type='number' value=" + cuantity_table + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productIdTable + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productIdTable + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productIdTable + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
         $("#table-bill tbody").append(markup);
 
-        // activa la funcion para calcular total
+        // llama la funcion para calcular total
         $('#table-bill .productTotal').each(function() {
             calculateColumn();
         });
 
-        // activa la funcion para calcular subtotal
+        // llama la funcion para calcular subtotal
         $('#table-bill .productSubtotal').each(function() {
             calculateColumnSubtotal();
         });
 
     });
 
+    // ejecuta la funcion cada vez que se suelta una tecla
     $('.pay-bill').keyup(function () {
+        // obteniendo valores de los inputs
         var cash = parseFloat($(this).val());
         var total_bill = $('.total-bill').val();
         var pay = $('.total-bill').val();
         var disc = $('.discount').val(0);
 
+        // se realiza el calculo y se redondean los resultados
         $('.back-bill').val(Math.round((cash - pay) * 100) / 100);
         $('.back').attr('value', Math.round((cash - pay) * 100) / 100);
 
     });
 
+    // ejecuta la funcion cada vez que se suelta una tecla
     $('.rest-discount').keyup(function () {
+        // obteniendo valores de los inputs
         var cash = parseFloat($('#bill').val());
         var pay = $('#total-pay').val();
         var total_bill = $('#get-total-pay').val();
         var select = $('.select-discount').val();
         var discount_bill = $(this).val();
 
+        // si se selecciona 'sol' se ejecuta el calculo de descuento en soles
         if (select == 'sol') {
             discount_sol = Math.round((total_bill - discount_bill) * 100) / 100;
             $('.discount').val(discount_sol);
             $('#total-pay').val(discount_sol);
             $('.back-bill').val(Math.round((cash - discount_sol) * 100) / 100);
             $('.back').attr('value', Math.round((cash - discount_sol) * 100) / 100);
+        // si se selecciona 'por' se ejecuta el calculo de descuento en porcentaje
         }else if (select == 'por') {
             porcent = discount_bill / 100;
             discount_por = total_bill - (total_bill * porcent);
@@ -213,8 +232,9 @@ $(document).ready(function(){
         }
     });
 
+    // añadir al presionar el boton dentro de la pantalla repuestos
     $(".button-add").click(function(){
-
+        // asignacion de variables con jQuery
         var now_id = $(this).attr('id');
         var productModalId = $('.idModal');
         var productCode = $('.codeModal');
@@ -226,8 +246,9 @@ $(document).ready(function(){
 
         var i;
 
+        // agregando productos a la tabla
         for (i = 0; i < productCode.length; i++) {
-
+            // asigancion de variables
             var product_code = productCode[i];
             var product_name = productName[i];
             var product_description = productDescription[i];
@@ -236,14 +257,19 @@ $(document).ready(function(){
             var product_cuantity = productCuantity[i];
             var product_id = productModalId[i];
 
+            // comparando el id actual con el id del producto
             if (String(now_id) == String(product_code.id) &&
             String(product_code.id) != undefined &&
             String(now_id) != undefined) {
+
+                // asignacion de variables
                 var code = product_code.value;
                 var name = product_name.value;
                 var description = product_description.value;
                 var price1 = product_price.value;
                 var price2 = product_price_default.value;
+
+                // condicional para el precio del producto
                 if (price1 == null || price1 == undefined || price1 == 0) {
                     var price = price2;
                 }else{
@@ -254,12 +280,15 @@ $(document).ready(function(){
             }
         }
 
+        // encontrar todos los elementos tr con el id y la clase
+        // asignacion de variables
         var idNum = ($('#table-bill tbody').find('tr').length);
         var rowId = 'row-' + idNum;
         var productId = idNum;
         var count = parseInt($('.tableSelect').length) + 1;
         var input_count = $('.count-inputs').val(count);
 
+        // condicional para cantidad de productos
         if (cuantity == 0) {
             cuantity = 1;
             var subtotal = price * cuantity;

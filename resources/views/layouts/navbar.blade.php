@@ -107,6 +107,20 @@
               </li>
               @endif
 
+              @if(Request::path() === 'ventas')
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/ventas') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">attach_money</i> Ventas
+                </a>
+              </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/ventas') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">attach_money</i> Ventas
+                </a>
+              </li>
+              @endif
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle bi" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="material-icons d-block mb-1" style="font-size:25px;">account_circle</i>
@@ -134,7 +148,7 @@
 
 	<footer class="footer mt-auto py-3 bg-light">
 	  <div class="container">
-		<span class="text-muted">Almacen.</span>
+		<span class="text-muted">Motos.</span>
 	  </div>
 	</footer>
 

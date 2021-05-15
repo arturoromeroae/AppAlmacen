@@ -5,12 +5,14 @@
 <!-- estilos tabla -->
 <!--<link rel="stylesheet" href="{{ asset('bootstrap-table-master/dist/bootstrap-table.css') }}">-->
 
+<!-- estilos DataTables -->
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap.css') }}">
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css') }}">
 
 @section('content')
 
 @isset($result_maintance)
+    <!-- muestra success o error -->
     <?php echo $result_maintance; ?>
 @endisset
 
@@ -20,7 +22,7 @@
     <!-- titulo -->
     <h1 class="h3 text-center mt-3">Mantenimiento</h1>
 
-    <!-- tabla -->
+    <!-- inicio de tabla para mostrar productos en la db -->
     <div class="container-float">
         <table
             class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap"
@@ -67,12 +69,14 @@
                 @endif
             </tbody>
         </table>
+        <!-- boton agregar productos -->
         <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Agregar Producto +
         </button>
     </div>
+    <!-- final de tabla -->
 
-    <!-- modal edit -->
+    <!-- inicio modal editar -->
     @if ($productsArray['data'] != null)
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -133,7 +137,9 @@
                         </div>
                         <br>
                         <div class="modal-footer">
+                            <!-- boton cancelar edicion del producto -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <!-- boton modificar el producto -->
                             <button type="submit" class="btn btn-primary">Modificar</button>
                         </div>
                     </form>
@@ -143,8 +149,9 @@
     </div>
     @endforeach
     @endif
+    <!-- final modal editar -->
 
-    <!-- modal delete -->
+    <!-- inicio modal eliminar -->
     @if ($productsArray['data'] != null)
     @foreach($productsArray['data'] as $product)
     <div class="modal fade" id="delete-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -163,7 +170,9 @@
                         <input type="number" step=".01" class="form-control" name="priceModal" value="0" hidden>
                         <br>
                         <div class="modal-footer d-block text-center">
+                            <!-- boton no eliminar producto -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="padding-left: 20px; padding-right: 20px;">No</button>
+                            <!-- boton si eliminar producto -->
                             <button type="submit" class="btn btn-primary" style="padding-left: 25px; padding-right: 25px;">Si</button>
                         </div>
                     </form>
@@ -173,8 +182,9 @@
     </div>
     @endforeach
     @endif
+    <!-- final modal eliminar -->
 
-    <!-- Modal formulario para agregar productos -->
+    <!-- Inicio modal formulario para agregar productos -->
     <div class="modal fade modal-fullscreen-sm-down" id="exampleModal" aria-labelledby="exampleModalLabel" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -238,7 +248,9 @@
                         </div>
 
                         <div class="modal-footer">
+                            <!-- boton guardar producto -->
                             <button type="submit" class="btn btn-primary">Guardar</button>
+                            <!-- boton cancelar -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
@@ -246,21 +258,32 @@
             </div>
         </div>
     </div>
+    <!-- Final modal formulario para agregar productos -->
+
 </div>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<!-- Buscador -->
+
+<!-- Buscador bootstrap -->
 <!--<script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
 <script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>-->
 
+<!-- data table -->
 <script src="{{ url('DataTables/DataTables-1.10.24/js/jquery.dataTables.js') }}"></script>
 <script src="{{ url('DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js') }}"></script>
 
+<!-- script local -->
 <script type="text/javascript" src="{{ url('js/table-maintance.js') }}"></script>
+
+<!-- bootstrap table -->
 <script src="{{ url('bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js') }}"></script>
+
+<!-- script FileSaver -->
 <script type="text/javascript" src="{{ url('libs/FileSaver/FileSaver.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('export/libs/js-xlsx/xlsx.core.min.js') }}"></script>
+
+<!-- script tableExport -->
 <script type="text/javascript" src="{{ url('export/tableExport.min.js') }}"></script>
 
 @endsection

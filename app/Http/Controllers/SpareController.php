@@ -118,6 +118,7 @@ class SpareController extends Controller
         $cuantity = $request->cuantityTable1; // cantidad del producto
         $subtotal = $request->subtotalTable1; // subtotal del producto
         $totalParts = $request->resultadoTotal; // total de los productos
+        $NameClient = $request->nameBill; // total de los productos
         $pr = [];
 
         for ($i = 1; $i <= $count ; $i++) {
@@ -174,7 +175,7 @@ class SpareController extends Controller
 
         // condicional para razon social
         if ($all_products_bill['razonBill'] == null) {
-            $razon = "no aplica";
+            $razon = $all_products_bill['nameNotaVenta'];
         }else{
             $razon = $all_products_bill['razonBill'];
         }
