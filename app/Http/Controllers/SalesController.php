@@ -20,9 +20,9 @@ class SalesController extends Controller
      */
     public function index()
     {
-        $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
-        $productsArray = $products -> json();
+        $comprobantes = HTTP::get('http://appdemo1.solarc.pe/api/Venta/ConsultaVenta?IdSede=1&Usuario=string&TipoComprobante=1&FechaDesde=2021.05.14&FechaHasta=2021.05.14');
+        $comprobantesArray = $comprobantes -> json();
 
-        return view('ventas', compact('productsArray'));
+        return view('ventas', compact('comprobantesArray'));
     }
 }

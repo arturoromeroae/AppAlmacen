@@ -24,7 +24,7 @@
         <h3 class="h3 text-center mt-3">Repuestos</h3>
         
         <!-- Tabla de repuestos -->
-        <div id="table-buy" class="container-float">
+        <div class="container-float">
             <table
                 class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap" 
                 id="table-parts" 
@@ -183,4 +183,5 @@
 
 <!-- Archivo Javascript -->
 <script type="text/javascript" src="{{ url('js/parts.js') }}"></script>
+
 @endsection
