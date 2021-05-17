@@ -41,7 +41,7 @@
         </div>
         <div class="col-1">
             <br>
-            <button id="search" class="btn btn-dark mt-2">Buscar</button>
+            <button id="search" class="btn btn-dark mt-2">Filtrar</button>
         </div>
     </div>
     <div class="container-float">
