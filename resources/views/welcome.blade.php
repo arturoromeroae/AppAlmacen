@@ -1,6 +1,7 @@
 @extends('layouts.navbar')
 
 @section('content')
+
 <section class="container">
 	<br />
 	<br />
@@ -10,6 +11,5 @@
         </div>
     </div>
 </section>
-
 
 @endsection

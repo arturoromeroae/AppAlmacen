@@ -49,17 +49,17 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">
 
-              @if(Request::path() === '/')
+              @if(Request::path() === 'inicio')
               <li class="nav-item">
                 <!--<a class="nav-link text-navbar hover-navbar text-align" aria-current="page" href="{{ url('/') }}"><i class="material-icons" style="font-size:25px;">home</i> Inicio</a>-->
-                <a id="nav-menu" aria-current="page" href="{{ url('/') }}" class="nav-link text-navbar hover-navbar bi active">
+                <a id="nav-menu" aria-current="page" href="{{ url('/inicio') }}" class="nav-link text-navbar hover-navbar bi active">
                   <i class="material-icons d-block mb-1" style="font-size:25px;">home</i> Inicio
                 </a>
               </li>
               @else
               <li class="nav-item">
               <!--<a class="nav-link text-navbar hover-navbar text-align" aria-current="page" href="{{ url('/') }}"><i class="material-icons" style="font-size:25px;">home</i> Inicio</a>-->
-                <a id="nav-menu" aria-current="page" href="{{ url('/') }}" class="nav-link text-navbar hover-navbar bi">
+                <a id="nav-menu" aria-current="page" href="{{ url('/inicio') }}" class="nav-link text-navbar hover-navbar bi">
                   <i class="material-icons d-block mb-1" style="font-size:25px;">home</i> Inicio
                 </a>
               </li>
@@ -127,7 +127,7 @@
                                 Usuario
                 </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                <li><a id="logoutNav" class="dropdown-item" href="/">Cerrar Sesion</a></li>
                 </ul>
               </li>
         
@@ -154,7 +154,12 @@
 
     <!-- Bootstrap -->
     <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>-->
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+
 	<script type="text/javascript" src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/offcanvas.js') }}"></script>
+  <script type="text/javascript" src="{{ url('js/nav.js') }}"></script>
 </body>
 </html>

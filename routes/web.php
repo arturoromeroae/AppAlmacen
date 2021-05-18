@@ -6,6 +6,7 @@ use App\Http\Controllers\MaintanceController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SpareController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,10 @@ use App\Http\Controllers\BillController;
 */
 
 Route::get('/', function () {
+    return view('login');
+});
+
+Route::get('/inicio', function () {
     return view('welcome');
 });
 
