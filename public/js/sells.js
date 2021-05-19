@@ -23,7 +23,6 @@ $( function() {
         dateFormat: "yy.mm.dd",
         dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
         monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
-        defaultDate: +7
     });
 } );
     

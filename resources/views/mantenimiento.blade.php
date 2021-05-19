@@ -31,7 +31,7 @@
             <thead class="bg-dark" style="color:white;">
                 <tr>
                     <th data-halign="center" data-width="80" data-search-highlight-formatter="customSearchFormatter" data-field="code" scope="col">Código</th>
-                    <th data-width="300" data-search-highlight-formatter="customSearchFormatter" data-field="name" data-sortable="true" data-sort-name="name" data-sort-order="asc" scope="col">Nombre</th>
+                    <th data-width="200" data-search-highlight-formatter="customSearchFormatter" data-field="name" data-sortable="true" data-sort-name="name" data-sort-order="asc" scope="col">Nombre</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Descripcion</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">Cantidad</th>
                     <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Base</th>
@@ -276,14 +276,7 @@
 <!-- script local -->
 <script type="text/javascript" src="{{ url('js/table-maintance.js') }}"></script>
 
-<!-- bootstrap table -->
-<script src="{{ url('bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js') }}"></script>
-
-<!-- script FileSaver -->
-<script type="text/javascript" src="{{ url('libs/FileSaver/FileSaver.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('export/libs/js-xlsx/xlsx.core.min.js') }}"></script>
-
-<!-- script tableExport -->
-<script type="text/javascript" src="{{ url('export/tableExport.min.js') }}"></script>
+<!-- bootstrap table
+<script src="{{ url('bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js') }}"></script> -->
 
 @endsection

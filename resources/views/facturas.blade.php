@@ -342,17 +342,22 @@
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
 <!-- tabla bootstrap -->
 <script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
 <script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
+
 <!-- Javascript local -->
 <script type="text/javascript" src="{{ url('js/bill.js') }}"></script>
+
 <!-- jQuery ui -->
 <script src="{{ url('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
 <!-- fuzzycomplete -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 <script src="{{ url('fuzzyComplete/src/js/fuzzycomplete.js') }}"></script>
+
 <!-- PDF -->
 <script src="{{ url('jsPDF-1.3.2/dist/jspdf.min.js') }}"></script>
 
