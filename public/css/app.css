@@ -9,7 +9,7 @@ main{
 .loader {
     animation: spin 2s linear infinite;
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border-top: 16px solid #000000; /* Blue */
     border-radius: 50%;
     height: 120px;
     margin-left: 45%;

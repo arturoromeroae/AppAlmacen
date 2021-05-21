@@ -8,7 +8,7 @@
 <!-- titulo -->
 <h1 class="h2 text-center mt-3">Emitir Comprobante</h1>
 
-<div id="loader" class="loader" style=''></div>
+<div id="loader" class="loader mt-3" style=''></div>
 
 <div id='bill-section' class="container bg-light" style='display: none;'>
     <div class="container bg-light">
