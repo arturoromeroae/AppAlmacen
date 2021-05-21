@@ -1,12 +1,17 @@
 $(document).ready(function(){
     // id de carrito, respuesta del post
-    const idResponse = response;
+    const idResponse = response;  
     // url getcarrito
     const urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
     $.ajax({
         type:"GET",
         datatype: "json",
         url: urlCar,
+        beforeSend: function(){
+            // Show image container
+            $("#loader").show();
+            $("#bill-section").hide();
+        },
         success: function(data){
             
             for (let i = 0; i < data['data'].length; i++) {
@@ -54,7 +59,7 @@ $(document).ready(function(){
                                 </td>
                                 <td class='productTotal'>
                                     <input type="text" class="form-control" name="totalTable${i}" value="${subtot + (Math.round(igv * 100) / 100)}" hidden>
-                                    ${subtot + (Math.round(igv * 100) / 100)}
+                                    ${(Math.round((igv + subtot) * 100) / 100)}
                                 </td>
                             </tr>`;
                 $("#table-bill tbody").append(markup);
@@ -72,7 +77,7 @@ $(document).ready(function(){
 
             }
 
-             // obtener el precio total
+            // obtener el precio total
             function calculateColumn() {
                 var sumaTotal = 0; // se inicializa la variable en 0
 
@@ -90,8 +95,14 @@ $(document).ready(function(){
 
             calculateColumn();
             calculateColumnSubtotal();
+        },
+        complete:function(data){
+            // Hide image container
+            $("#loader").hide();
+            $("#bill-section").show();
         }
     });
+
 
 
     // contador de productos en la venta

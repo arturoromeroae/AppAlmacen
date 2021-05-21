@@ -8,7 +8,9 @@
 <!-- titulo -->
 <h1 class="h2 text-center mt-3">Emitir Comprobante</h1>
 
-<div class="container bg-light">
+<div id="loader" class="loader" style=''></div>
+
+<div id='bill-section' class="container bg-light" style='display: none;'>
     <div class="container bg-light">
         <form id="repuestos-form" action="{{ route('repuestos') }}/1/12" method="POST">
         @csrf
@@ -109,7 +111,7 @@
                     </thead>
 
                     <tbody>
-        
+
                     </tbody>
                 </table>
             </div>
