@@ -1,5 +1,5 @@
 
-// obtener el tipo de factura por ajax
+// obtener usuarios por ajax
 $('#loginButton').click(function (e) { 
     e.preventDefault();
     $.ajax({

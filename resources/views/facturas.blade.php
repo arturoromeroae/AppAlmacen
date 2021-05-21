@@ -109,20 +109,7 @@
                     </thead>
 
                     <tbody>
-                    <?php (int)$i=0 ?>
-                    @foreach($selectArrayCarrito['data'] as $carrito)
-                        <tr class="selling">
-                            <td><input type='checkbox' name='record' class='select tableSelect'></td>
-                            <td><input name="idBillTable{{$i}}" type="text" value="{{ $idResponse }}" hidden><input type="text" class="form-control code-b" name="codeTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['codProd'] }}" hidden><input type="text" class="form-control" name="idTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['idProducto'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['codProd'] }}</td>
-                            <td><input type="text" class="form-control name-b" name="codeModal{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['nombreProducto'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['nombreProducto'] }}</td>
-                            <td><input type="text" class="form-control price-b" name="priceTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['precioVenta'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['precioVenta'] }}</td>
-                            <td><input type="text" class="form-control cuantity-b" name="cuantityTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['cantidad'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['cantidad'] }}</td>
-                            <td class='productSubtotal subtotal'><input type="text" class="form-control" name="subtotalTable{{$i}}" value="{{ $selectArrayCarrito['data'][$i]['subTotal'] }}" hidden>{{ $selectArrayCarrito['data'][$i]['subTotal'] }}</td>
-                            <td class='total-product'><input type="text" class="form-control" name="igvTable{{$i}}" value="{{ ($selectArrayCarrito['data'][$i]['subTotal'] * $igv) }}" hidden>{{ round(($selectArrayCarrito['data'][$i]['subTotal'] * $igv), 2) }}</td>
-                            <td class='productTotal'><input type="text" class="form-control" name="totalTable{{$i}}" value="{{ ($selectArrayCarrito['data'][$i]['subTotal'] * $igv) + $selectArrayCarrito['data'][$i]['subTotal'] }}" hidden>{{ round(($selectArrayCarrito['data'][$i]['subTotal'] * $igv) + $selectArrayCarrito['data'][$i]['subTotal'], 2) }}</td>
-                        </tr>
-                    <?php $i++ ?>
-                    @endforeach
+        
                     </tbody>
                 </table>
             </div>
@@ -164,7 +151,7 @@
         </form>
 
         <!-- modal agregar -->
-        @foreach($productsArray['data'] as $product)
+        <!-- @foreach($productsArray['data'] as $product)
         <div class="modal fade" id="edit-modal-1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -190,18 +177,7 @@
                             </thead>
 
                             <tbody>
-                                <?php $i=0 ?>
-                                @foreach($productsArray['data'] as $product)
-                                <tr>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control idShop" value="{{ $product['idProducto'] }}" hidden><a data-bs-dismiss="modal" class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['codProd'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control codeShop" value="{{ $product['codProd'] }}" hidden><a data-bs-dismiss="modal" class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['nombreProducto'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control nameShop" value="{{ $product['nombreProducto'] }}" hidden><a data-bs-dismiss="modal" class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['descripcion'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control stockShop" value="{{ $product['stock'] }}" hidden><a data-bs-dismiss="modal" class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['stock'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control priceShop" value="{{ $product['precioVenta'] }}" hidden><a data-bs-dismiss="modal" class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['precioVenta'] }}</a></td>
-                                    <td><a id="parts-modal-shop{{$i}}" class="nav-link hover-table button-add-bill click"><i class="material-icons" style="font-size:20px;">add_shopping_cart</i></a></td>
-                                </tr>
-                                <?php $i++ ?>
-                                @endforeach
+                                
                             </tbody>
                         </table>
 
@@ -213,10 +189,10 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @endforeach -->
 
         <!-- modal editar -->
-        @foreach($productsArray['data'] as $product)
+        <!-- @foreach($productsArray['data'] as $product)
         <div class="modal fade" id="edit-modal-1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -242,18 +218,7 @@
                             </thead>
 
                             <tbody>
-                                <?php $i=0 ?>
-                                @foreach($productsArray['data'] as $product)
-                                <tr>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control idShop" value="{{ $product['idProducto'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['codProd'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control codeShop" value="{{ $product['codProd'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['nombreProducto'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control nameShop" value="{{ $product['nombreProducto'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['descripcion'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control stockShop" value="{{ $product['stock'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['stock'] }}</a></td>
-                                    <td><input id="parts-modal-shop{{$i}}" type="text" class="form-control priceShop" value="{{ $product['precioVenta'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['precioVenta'] }}</a></td>
-                                    <td><a id="parts-modal-shop{{$i}}" class="nav-link hover-table button-add-bill click"><i class="material-icons" style="font-size:20px;">add_shopping_cart</i></a></td>
-                                </tr>
-                                <?php $i++ ?>
-                                @endforeach
+                                
                             </tbody>
                         </table>
 
@@ -267,10 +232,10 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @endforeach -->
 
         <!-- modal editar cantidad productos -->
-        <?php $i=0 ?>
+        <!-- <?php $i=0 ?>
         @foreach($productsArray['data'] as $product)
             <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -335,10 +300,12 @@
                 </div>
             </div>
         <?php $i++ ?>
-        @endforeach
+        @endforeach -->
 
     </div>
 </div>
+
+<script> response = '<?php echo $idResponse ?>'; </script>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

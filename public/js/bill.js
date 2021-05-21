@@ -1,4 +1,98 @@
 $(document).ready(function(){
+    // id de carrito, respuesta del post
+    const idResponse = response;
+    // url getcarrito
+    const urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
+    $.ajax({
+        type:"GET",
+        datatype: "json",
+        url: urlCar,
+        success: function(data){
+            
+            for (let i = 0; i < data['data'].length; i++) {
+                // variable igv del producto
+                const igv = (data['data'][i].subTotal) * 0.18;
+                // variable subtotal del producto
+                const subtot = data['data'][i].subTotal;
+                // variable codigo del producto
+                const codProd = data['data'][i].codProd;
+                // variable id del producto
+                const idProd = data['data'][i].idProducto;
+                // variable nombre del producto
+                const nameProd = data['data'][i].nombreProducto;
+                // variable precio del producto
+                const sellPrice = data['data'][i].precioVenta;
+                // variable cantidad del producto
+                const cuantyProd = data['data'][i].cantidad;
+                var markup = `<tr> 
+                                <td> <input type='checkbox' name='record' class='select'> </td> 
+                                <td>
+                                    <input name="idBillTable${i}" type="text" value="${idResponse}" hidden>
+                                    <input type="text" class="form-control code-b" name="codeTable${i}" value="${codProd}" hidden>
+                                    <input type="text" class="form-control" name="idTable${i}" value="${idProd}" hidden>
+                                    ${codProd}
+                                </td> 
+                                <td>
+                                    <input type="text" class="form-control name-b" name="codeModal${i}" value="${nameProd}" hidden>
+                                    ${nameProd}
+                                </td> 
+                                <td>
+                                    <input type="text" class="form-control price-b" name="priceTable${i}" value="${sellPrice}" hidden>
+                                    ${sellPrice}
+                                </td> 
+                                <td>
+                                    <input type="text" class="form-control cuantity-b" name="cuantityTable${i}" value="${cuantyProd}" hidden>
+                                    ${cuantyProd}
+                                </td> 
+                                <td class='productSubtotal subtotal'>
+                                    <input type="text" class="form-control subtotal-table${i}" name="subtotalTable${i}" value="${subtot}" hidden>
+                                    ${subtot}
+                                </td>
+                                <td class='total-product'>
+                                    <input type="text" class="form-control" name="igvTable${i}" value="${Math.round(igv * 100) / 100}" hidden>
+                                    ${Math.round(igv * 100) / 100}
+                                </td>
+                                <td class='productTotal'>
+                                    <input type="text" class="form-control" name="totalTable${i}" value="${subtot + (Math.round(igv * 100) / 100)}" hidden>
+                                    ${subtot + (Math.round(igv * 100) / 100)}
+                                </td>
+                            </tr>`;
+                $("#table-bill tbody").append(markup);
+            }
+            // obtener el precio subtotal
+            function calculateColumnSubtotal() {
+                var sumaSubtotal = 0; // se inicializa la variable en 0
+
+                // obtener todos los elementos td que tengan la clase y el id
+                $('#table-bill td.productSubtotal').each(function() {
+                    sumaSubtotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
+                });
+
+                $(".subtotalClient").attr('value', Math.round(sumaSubtotal * 100) / 100);
+
+            }
+
+             // obtener el precio total
+            function calculateColumn() {
+                var sumaTotal = 0; // se inicializa la variable en 0
+
+                // obtener todos los elementos td que tengan la clase y el id
+                $('#table-bill td.productTotal').each(function() {
+                    sumaTotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
+                });
+
+                var money = $('.pay-bill').val();
+                var money2 = $(".total-bill").val(Math.round(sumaTotal * 100) / 100);
+                var money3 = $(".send-bill").attr('value', sumaTotal);
+                $(".resultado").val(sumaTotal); // coloca el valor de la suma del precio de cada producto en el input
+
+            }
+
+            calculateColumn();
+            calculateColumnSubtotal();
+        }
+    });
+
 
     // contador de productos en la venta
     var count = parseInt($('.tableSelect').length) - 1;
@@ -101,34 +195,9 @@ $(document).ready(function(){
         calculateColumn(); // se llama a la funcion
     });
 
-    // obtener el precio total
-    function calculateColumn() {
-        var sumaTotal = 0; // se inicializa la variable en 0
+   
 
-        // obtener todos los elementos td que tengan la clase y el id
-        $('#table-bill td.productTotal').each(function() {
-            sumaTotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
-        });
-
-        var money = $('.pay-bill').val();
-        var money2 = $(".total-bill").val(Math.round(sumaTotal * 100) / 100);
-        var money3 = $(".send-bill").attr('value', sumaTotal);
-        $(".resultado").val(sumaTotal); // coloca el valor de la suma del precio de cada producto en el input
-
-    }
-
-     // obtener el precio subtotal
-    function calculateColumnSubtotal() {
-        var sumaSubtotal = 0; // se inicializa la variable en 0
-
-        // obtener todos los elementos td que tengan la clase y el id
-        $('#table-bill td.productSubtotal').each(function() {
-            sumaSubtotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
-        });
-
-        var money3 = $(".subtotalClient").attr('value', Math.round(sumaSubtotal * 100) / 100);
-
-    }
+     
 
     // al presionar el boton agrega produtos a la tabla dentro de la pantalla factura
     $(".button-add-bill").click(function(){

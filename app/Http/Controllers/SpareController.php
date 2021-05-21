@@ -41,6 +41,7 @@ class SpareController extends Controller
 
     public function shop($id, Request $request)
     {
+        
         // obtener productos
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
         $productsArray = $products -> json();
@@ -96,7 +97,9 @@ class SpareController extends Controller
     }
     
     public function sendBill($product, Request $request) {
-
+        
+        
+        
         // obtener productos
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
         $productsArray = $products -> json();

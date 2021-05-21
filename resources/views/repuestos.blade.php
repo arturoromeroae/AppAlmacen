@@ -73,7 +73,7 @@
                             <input class="resultado_total" step=".01" name="resultadoTotal" type="number" hidden>
                             <input class="count" name="count" type="number" hidden>
                             <button type="submit" class="btn btn-primary">Realizar venta</button>
-                            <button type="button" class="btn btn-danger button-delete">Borrar</button>
+                            <button id="delete-sd" type="button" class="btn btn-danger button-delete">Borrar</button>
                         </div>
                 </div>
                 <!-- tabla de carrito -->
