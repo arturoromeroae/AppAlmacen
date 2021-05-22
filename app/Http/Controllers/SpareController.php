@@ -59,7 +59,7 @@ class SpareController extends Controller
 
         $all_products = $request->except('_token', 'resultadoTotal', 'count');
         $count = $request->count; // contador de productos en lista
-        $id = $request->idTable1; // id del producto
+        $id = $request->idTable; // id del producto
         $priceNew = $request->priceTable; // precio de venta del producto
         $cuantity = $request->cuantityTable1; // cantidad del producto
         $subtotal = $request->subtotalTable1; // subtotal del producto
@@ -116,7 +116,7 @@ class SpareController extends Controller
         // valores de la lista del carrito
         $all_products = $request->except('_token', 'resultadoTotal', 'count');
         $count = $request->count; // contador de productos en lista
-        $id = $request->idTable1; // id del producto
+        $id = $request->idTable; // id del producto
         $priceNew = $request->priceTable; // precio de venta del producto
         $cuantity = $request->cuantityTable1; // cantidad del producto
         $subtotal = $request->subtotalTable1; // subtotal del producto
@@ -124,7 +124,7 @@ class SpareController extends Controller
         $NameClient = $request->nameBill; // total de los productos
         $pr = [];
 
-        for ($i = 1; $i <= $count ; $i++) {
+        for ($i = 1; $i <= $count - 1; $i++) {
             $article = [
             "idProducto" => $all_products["idTable{$i}"],
             "nuevoPrecioVenta" => $all_products["priceTable{$i}"],
@@ -191,7 +191,7 @@ class SpareController extends Controller
         }
 
         // ciclo for para obtener los productos en lista
-        for ($i = 0; $i <= $count ; $i++) {
+        for ($i = 0; $i <= $count - 1; $i++) {
             $ar = [
                 "idVentaCab" => $all_products_bill["idBillTable{$i}"],
                 "idProducto" => $all_products_bill["idTable{$i}"],
