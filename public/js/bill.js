@@ -106,8 +106,14 @@ $(document).ready(function(){
 
 
     // contador de productos en la venta
-    var count = parseInt($('.tableSelect').length) - 1;
+    var count = parseInt($('.tableSelect').length + 1);
     $('.count-inputs').val(count);
+
+    $('#client').change(function (e) {
+        const clientName = $('#client').val();
+
+        $('.nameClient').attr('value', clientName);
+    });
 
     $("#ruc-input").css("display", "");
     // se le asigna el valor de la url con el json de los clientes
@@ -141,6 +147,7 @@ $(document).ready(function(){
                         $('.idclient').attr('value', data['data'][i]['idCliente']); // valor que tendra el input id cliente
                         $('#razon-client').val(data['data'][i]['razonSocial']); // valor que tendra el input razon social cliente
                         $('.razonClient').attr('value', data['data'][i]['razonSocial']); // valor que tendra el input id cliente
+                        $('.nameClient').attr('value', data['data'][i]['nombres']); // valor que tendra el input id cliente
                         $('#ruc-client').val(data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
                         $('.rucClient').attr('value', data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente
                         $('.descriptionBill').attr('value', data['data'][i]['rucCliente']); // valor que tendra el input ruc cliente

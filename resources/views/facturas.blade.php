@@ -14,20 +14,20 @@
     <div class="container bg-light">
         <form id="repuestos-form" action="{{ route('repuestos') }}/1/12" method="POST">
         @csrf
-            <input name="idBill" type="text" value="{{ $idResponse }}" hidden>
-            <input name="dateBill" type="text" id="billDate" hidden>
-            <input name="igvBill" type="number" value="{{ $igv }}" hidden>
-            <input name="totalBill" type="number" class="send-bill" hidden>
-            <input name="backBill" type="number" class="back" hidden>
-            <input name="clientBill" type="number" class="idclient" hidden>
-            <input name="razonBill" type="text" class="razonClient" hidden>
-            <input name="rucBill" type="number" class="rucClient" hidden>
-            <input name="nameBill" type="text" class="nameClient" hidden>
-            <input name="numberBill" type="text" class="numberBillClient" hidden>
-            <input name="subtotalBill" type="text" class="subtotalClient" hidden>
-            <input name="direccionBill" type="text" class="direccionClient" hidden>
-            <input name="description" type="text" class="descriptionBill" hidden>
-            <input class="count-inputs" name="count" value="" type="text" hidden>
+            <input name="idBill" type="text" value="{{ $idResponse }}" >
+            <input name="dateBill" type="text" id="billDate" >
+            <input name="igvBill" type="number" value="{{ $igv }}" >
+            <input name="totalBill" type="number" class="send-bill" >
+            <input name="backBill" type="number" class="back" >
+            <input name="clientBill" type="number" class="idclient" >
+            <input name="razonBill" type="text" class="razonClient" >
+            <input name="rucBill" type="number" class="rucClient" >
+            <input name="nameBill" type="text" value="" class="nameClient" >
+            <input name="numberBill" type="text" class="numberBillClient" >
+            <input name="subtotalBill" type="text" class="subtotalClient" >
+            <input name="direccionBill" type="text" class="direccionClient" >
+            <input name="description" type="text" class="descriptionBill" >
+            <input class="count-inputs" name="count" value="" type="text" >
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
