@@ -95,6 +95,8 @@ $(document).ready(function(){
 
             calculateColumn();
             calculateColumnSubtotal();
+            const user = localStorage.getItem('user');
+            $(".username").attr('value', user);
         },
         complete:function(data){
             // Hide image container

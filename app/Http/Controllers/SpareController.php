@@ -170,10 +170,10 @@ class SpareController extends Controller
         }
 
         // condicional para ruc
-        if ($all_products_bill['rucBill'] == null) {
+        if ($all_products_bill['ruc-Bill'] == null || $all_products_bill['ruc-Bill'] == '') {
             $ruc = "no aplica";
         }else{
-            $ruc = $all_products_bill['rucBill'];
+            $ruc = $all_products_bill['ruc-Bill'];
         }
 
         // condicional para razon social
@@ -218,7 +218,7 @@ class SpareController extends Controller
             "valorVenta" => $all_products_bill['subtotalBill'],
             "idSede" => 1,
             "idPedCab" => $all_products_bill['idBill'],
-            "usuario" => "string",
+            "usuario" => $all_products_bill['username'],
             "rucCliente" => $ruc,
             "razonSocial" => $razon,
             "idOrigen" => 1,

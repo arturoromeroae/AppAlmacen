@@ -8,6 +8,9 @@ var getH = getDate.getHours();
 var getM = getDate.getMinutes();
 var getS = getDate.getSeconds();
 
+const user = localStorage.getItem('user');
+console.log(user)
+
 // formateando el mes
 if (getMon < 10) {
     getMonFormat = '0'.concat(getDate.getMonth() + 1);
