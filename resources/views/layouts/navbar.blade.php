@@ -126,8 +126,8 @@
                   <i class="material-icons d-block mb-1" style="font-size:25px;">account_circle</i>
                                 Usuario
                 </a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="navbarDropdown">
-                <li><a id="logoutNav" class="dropdown-item" href="/">Cerrar Sesion</a></li>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdownEdit" aria-labelledby="navbarDropdown">
+                  <li><a id="logoutNav" class="dropdown-item" href="/">Cerrar Sesion</a></li>
                 </ul>
               </li>
         

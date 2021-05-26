@@ -3,17 +3,21 @@ $(document).ready(function(){
     const idResponse = response;  
     // url getcarrito
     const urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
+    // ajax para cargar carrito
     $.ajax({
         type:"GET",
         datatype: "json",
         url: urlCar,
+        // antes de cargar el contenido
         beforeSend: function(){
-            // Show image container
+            // muestra spinner loading
             $("#loader").show();
+            // esconde pantalla de facturas
             $("#bill-section").hide();
         },
+        // si se obtiene correctamente la data
         success: function(data){
-            
+            // condicional para recorrer cada producto
             for (let i = 0; i < data['data'].length; i++) {
                 // variable igv del producto
                 const igv = (data['data'][i].subTotal) * 0.18;
@@ -29,8 +33,9 @@ $(document).ready(function(){
                 const sellPrice = data['data'][i].precioVenta;
                 // variable cantidad del producto
                 const cuantyProd = data['data'][i].cantidad;
+                // contruye tr en la tabla de productos
                 var markup = `<tr> 
-                                <td> <input type='checkbox' name='record' class='select'> </td> 
+                                <td> <input type='checkbox' name='record' class='select tableSelect'> </td> 
                                 <td>
                                     <input name="idBillTable${i}" type="text" value="${idResponse}" hidden>
                                     <input type="text" class="form-control code-b" name="codeTable${i}" value="${codProd}" hidden>
@@ -72,7 +77,7 @@ $(document).ready(function(){
                 $('#table-bill td.productSubtotal').each(function() {
                     sumaSubtotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
                 });
-
+                // mostrar solo 2 decimales
                 $(".subtotalClient").attr('value', Math.round(sumaSubtotal * 100) / 100);
 
             }
@@ -92,24 +97,27 @@ $(document).ready(function(){
                 $(".resultado").val(sumaTotal); // coloca el valor de la suma del precio de cada producto en el input
 
             }
-
+            // llama a la funcion para calcular precio total
             calculateColumn();
+            // llama a la funcion para calcular precio subtotal
             calculateColumnSubtotal();
+            // almacenar usuario en localstorage
             const user = localStorage.getItem('user');
             $(".username").attr('value', user);
         },
+        // despues de cargar el contenido
         complete:function(data){
-            // Hide image container
+            // esconde spinner loading
             $("#loader").hide();
+            // muestra pantalla de facturas
             $("#bill-section").show();
+
+            // contador de productos en la venta
+            var count = parseInt($('.name-b').length);
+            console.log(count);
+            $('.count-inputs').val(count);
         }
     });
-
-
-
-    // contador de productos en la venta
-    var count = parseInt($('.tableSelect').length + 1);
-    $('.count-inputs').val(count);
 
     $('#client').change(function (e) {
         const clientName = $('#client').val();
@@ -119,11 +127,11 @@ $(document).ready(function(){
 
     $("#ruc-input").css("display", "");
     // se le asigna el valor de la url con el json de los clientes
-    var url = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
+    var urlClient = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
 
-    // obteniendo valores del json con ajax
+    // obteniendo valores del json clientes con ajax
     $.ajax({
-        url: url,
+        url: urlClient,
         type: "GET",
         datatype: "json",
         success: function(data){
@@ -160,6 +168,21 @@ $(document).ready(function(){
 
         }
     });
+    // url de productos
+    
+    $('#inputProduct').keyup(function () {
+        $( function() {
+            const inputCode = $('#inputProduct').val();
+            const urlProducts = `http://appdemo1.solarc.pe/api/Productos/GetProductos?codProducto=${inputCode}`
+            console.log(urlProducts);
+            $( "#inputProduct" ).autocomplete({
+                source: urlProducts['data'][i][nombreProducto]
+            });
+        });
+    });
+
+    // obteniendo valores del json productos con ajax
+    
 
     // cuando el select cambia se ejecuta la funcion
     $('.type_shop').change(function () {
@@ -214,10 +237,6 @@ $(document).ready(function(){
         });
         calculateColumn(); // se llama a la funcion
     });
-
-   
-
-     
 
     // al presionar el boton agrega produtos a la tabla dentro de la pantalla factura
     $(".button-add-bill").click(function(){

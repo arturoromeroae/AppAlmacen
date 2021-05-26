@@ -124,7 +124,7 @@ class SpareController extends Controller
         $NameClient = $request->nameBill; // total de los productos
         $pr = [];
 
-        for ($i = 1; $i <= $count - 1; $i++) {
+        for ($i = 0; $i <= $count - 1; $i++) {
             $article = [
             "idProducto" => $all_products["idTable{$i}"],
             "nuevoPrecioVenta" => $all_products["priceTable{$i}"],
@@ -241,6 +241,7 @@ class SpareController extends Controller
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
+            // print_r($billProducts);
         }else{
             $resultBill = 
             '

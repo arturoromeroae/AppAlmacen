@@ -27,7 +27,7 @@
             <input name="subtotalBill" type="text" class="subtotalClient" hidden>
             <input name="direccionBill" type="text" class="direccionClient" hidden>
             <input name="description" type="text" class="descriptionBill" hidden>
-            <input class="count-inputs" name="count" value="" type="text" hidden>
+            <input class="count-inputs" name="count" value="" type="text">
             <input class="username" name="username" value="" type="text" hidden>
             <div class="row">
                 <div class="col">
@@ -154,7 +154,7 @@
         </form>
 
         <!-- modal agregar -->
-        <!-- @foreach($productsArray['data'] as $product)
+        @foreach($productsArray['data'] as $product)
         <div class="modal fade" id="edit-modal-1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -163,39 +163,40 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <table
-                            class="table table-sm table-bordered border-dark pagination-detail"
-                            id="table-maintance"
-                            data-height="400"
-                            data-search-highlight="true">
-                            <thead>
-                                <tr>
-                                    <th data-halign="center" data-width="80" data-search-highlight-formatter="customSearchFormatter" data-field="code" scope="col">Código</th>
-                                    <th data-width="300" data-search-highlight-formatter="customSearchFormatter" data-field="name" data-sortable="true" data-sort-name="name" data-sort-order="asc" scope="col">Nombre</th>
-                                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Descripcion</th>
-                                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Cantidad</th>
-                                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Venta</th>
-                                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Agregar</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
-
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="inputProduct" class="form-label">Producto</label>
+                                <input placeholder="Nombre o Código" type="text" class="form-control" id="inputProduct">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="inputCantidad" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="inputCantidad">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="inputPrecio" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="inputPrecio">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="inputSubtotal" class="form-label">Subtotal</label>
+                                <input type="number" class="form-control" id="inputSubtotal" disabled>
+                            </div>
+                            <div class="mb-12">
+                                <label for="inputDescripcion" class="form-label">Descripcion</label>
+                                <textarea class="form-control" id="inputDescripcion" rows="3" disabled></textarea>
+                            </div>
                     </div>
                         <br>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                 </div>
             </div>
         </div>
-        @endforeach -->
+        @endforeach
 
         <!-- modal editar -->
-        <!-- @foreach($productsArray['data'] as $product)
+        @foreach($productsArray['data'] as $product)
         <div class="modal fade" id="edit-modal-1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -235,7 +236,7 @@
                 </div>
             </div>
         </div>
-        @endforeach -->
+        @endforeach
 
         <!-- modal editar cantidad productos -->
         <!-- <?php $i=0 ?>
@@ -313,9 +314,13 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-<!-- tabla bootstrap -->
+<!-- tabla bootstrap
 <script src="{{ url('bootstrap-table-master/dist/bootstrap-table.js') }}"></script>
-<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script>
+<script src="{{ url('bootstrap-table-master/dist/bootstrap-table-locale-all.js') }}"></script> -->
+
+<!-- data table -->
+<script src="{{ url('DataTables/DataTables-1.10.24/js/jquery.dataTables.js') }}"></script>
+<script src="{{ url('DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js') }}"></script>
 
 <!-- Javascript local -->
 <script type="text/javascript" src="{{ url('js/bill.js') }}"></script>
