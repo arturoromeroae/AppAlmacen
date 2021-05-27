@@ -28,3 +28,14 @@ main{
 .dropdownEdit {
     left: -60px !important;
 }
+
+.ui-autocomplete {
+    position: absolute;
+    margin-top: 95px;
+    margin-left: 15px;
+    overflow-y: scroll;
+    max-height: 200px;
+    max-width: 400px;
+    font-size: 12px;
+    text-decoration: none;
+}

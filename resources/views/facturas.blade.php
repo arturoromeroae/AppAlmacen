@@ -89,7 +89,7 @@
                     <input type="number" class="form-control back-bill" value="" disabled>
                 </div>
                 <div class="col mt-3">
-                    <a class="nav-link hover-table btn btn-primary" href="#edit-modal-1" data-bs-toggle="modal" data-bs-target="#edit-modal-1">Agregar mas productos +</a>
+                    <a id="addMore" class="nav-link hover-table btn btn-primary" href="#edit-modal-1" data-bs-toggle="modal" data-bs-target="#edit-modal-1">Agregar mas productos +</a>
                 </div>
             </div>
 
@@ -154,6 +154,7 @@
         </form>
 
         <!-- modal agregar -->
+        <?php $i=0 ?>
         @foreach($productsArray['data'] as $product)
         <div class="modal fade" id="edit-modal-1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -163,10 +164,19 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                    <input id="productIdModal" type="text" class="idModal" name="idModal" hidden>
+                    <input id="productCodeModal" type="text" class="codeModal" name="codeModal" hidden>
+                    <input id="productNameModal" type="text" class="form-control nameModal" hidden>
+                    <input id="productPriceModal" type="text" class="form-control priceModal" hidden>
+                    <input id="productCuantityModal" type="text" class="form-control cuantityModal" name="cuantityModal" hidden>
                         <div class="row g-3">
-                            <div class="col-md-6">
+                            <div class="col-md-2 ui-front">
+                                <label for="inputProductCode" class="form-label">Cod. Producto</label>
+                                <input placeholder="Código" type="text" class="form-control ui-autocomplete-input" id="inputProductCode">
+                            </div>
+                            <div class="col-md-4 ui-front">
                                 <label for="inputProduct" class="form-label">Producto</label>
-                                <input placeholder="Nombre o Código" type="text" class="form-control" id="inputProduct">
+                                <input placeholder="Nombre" type="text" class="form-control ui-autocomplete-input" id="inputProduct">
                             </div>
                             <div class="col-md-2">
                                 <label for="inputCantidad" class="form-label">Cantidad</label>
@@ -187,12 +197,13 @@
                     </div>
                         <br>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+                            <button type="button" class="btn btn-primary button-add" data-bs-dismiss="modal">Agregar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                 </div>
             </div>
         </div>
+        <?php $i++ ?>
         @endforeach
 
         <!-- modal editar -->
@@ -274,7 +285,6 @@
                                         <label for="price-modal" class="col-form-label">Precio de venta:</label>
                                         <input id="parts-modal{{$i}}" type="text" class="form-control priceModal" value="{{ $product['precioVenta'] }}">
                                         <label for="parts-modal{{$i}}" class="col-form-label">Cantidad a vender:</label>
-                                        <input id="parts-modal{{$i}}" type="text" class="form-control cuantityModal" name="cuantityModal">
                                     </div>
                                 </div>
                                 <div class="mb-3">

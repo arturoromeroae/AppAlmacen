@@ -3,6 +3,7 @@ $(document).ready(function(){
     const idResponse = response;  
     // url getcarrito
     const urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
+    //////// INICIO AJAX OBTENER CARRITO ////////
     // ajax para cargar carrito
     $.ajax({
         type:"GET",
@@ -104,6 +105,96 @@ $(document).ready(function(){
             // almacenar usuario en localstorage
             const user = localStorage.getItem('user');
             $(".username").attr('value', user);
+            // vaciando todos los inputs al presionar el boton agregar productos
+            $('#addMore').click(function () { 
+                $('#inputProductCode').val('');
+                $('#inputProduct').val('');
+                $('#inputCantidad').val('');
+                $('#inputPrecio').val('');
+                $('#inputSubtotal').val('');
+                $('#inputDescripcion').val('');
+                $('#productIdModal').val('');
+                $('#productCodeModal').val('');
+                $('#productNameModal').val('');
+                $('#productPriceModal').val('');
+                $('#productCuantityModal').val('');
+            });
+
+            /////////////// INICIO PRESIONAR AGREGAR ///////////////
+            // añadir al presionar el boton dentro de la pantalla repuestos
+            $(".button-add").click(function(){
+                // asignacion de variables con jQuery
+                var now_id = $(this).attr('id');
+                const cuantity = $('.cuantityModal').val();
+                var productModalId = $('.idModal').val();
+                var productCode = $('.codeModal').val();
+                var productName = $('.nameModal').val();
+                var productDescription = $('.inputDescripcion').val();
+                var productPrice = $('.priceModal').val();
+                var productPriceDefault = $('.priceDefault').val();
+                var productCuantity = $('.cuantityModal').val();
+
+                // condicional para cantidad de productos
+                if (cuantity) {
+                    
+                    var count = parseInt($('.name-b').length);
+                    $('.count-inputs').val(count + 1);
+                    var subtotal = Math.round((productCuantity * productPrice) * 100) / 100;
+                    var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
+                    var total_product = Math.round((igv_product + subtotal) * 100) / 100;
+                    var markup = `<tr id=" + rowId + "> 
+                                    <td> 
+                                        <input type='checkbox' name='record' class='select'>
+                                    </td> 
+                                    <td name=codeTable${count}>
+                                        ${productCode}
+                                        <input name="idBillTable${count}" type="text" value="${idResponse}" hidden>
+                                        <input name=codeTable${count} class='code-b' type='number' value=${productCode} style='display:none;'>
+                                        <input type="text" class="form-control" name="idTable${count}" value="${productModalId}" hidden>
+                                    </td> 
+                                    <td name=nameTable${count}>
+                                        ${productName}
+                                        <input name=codeModal${count} class='name-b' type='text' value=${productName} style='display:none;'>
+                                    </td> 
+                                    <td class='productPrice price'>
+                                        ${productPrice} 
+                                        <input class='price-b' name=priceTable${count} type='number' value=${productPrice} style='display:none;' hidden>
+                                    </td> 
+                                    <td class='productCuantity cuantity'>
+                                        ${productCuantity} 
+                                        <input class='cuantity-b' name=cuantityTable${count} type='number' value=${productCuantity} style='display:none;'>
+                                    </td> 
+                                    <td class='productSubtotal subtotal'>
+                                        ${subtotal}
+                                        <input name=subtotalTable${count} type='number' value=${subtotal} style='display:none;'>
+                                    </td> 
+                                    <td class='productIgv'>
+                                        ${igv_product}
+                                        <input name=igvTable${count} type='number' value=${igv_product} style='display:none;'>
+                                    </td>
+                                    <td class='productTotal total'>
+                                        ${total_product}
+                                        <input name=totalTable${count} type='number' value=${total_product} style='display:none;'>
+                                    </td>
+                                </tr>`;
+                    $("#table-bill tbody").append(markup);
+                        
+                    
+                }
+
+                // activa la funcion para calcular precio y cantidad
+                $('#table-bill .productTotal').each(function() {
+                    calculateColumn();
+                });
+
+                // activa la funcion para calcular subtotal
+                $('#table-bill .productSubtotal').each(function() {
+                    calculateColumnSubtotal();
+                });
+                
+
+            });
+            /////////////// FIN PRESIONAR AGREGAR ///////////////
         },
         // despues de cargar el contenido
         complete:function(data){
@@ -118,6 +209,7 @@ $(document).ready(function(){
             $('.count-inputs').val(count);
         }
     });
+    //////////////// FIN AJAX OBTENER CARRITO //////////////////
 
     $('#client').change(function (e) {
         const clientName = $('#client').val();
@@ -168,21 +260,115 @@ $(document).ready(function(){
 
         }
     });
-    // url de productos
     
-    $('#inputProduct').keyup(function () {
-        $( function() {
-            const inputCode = $('#inputProduct').val();
-            const urlProducts = `http://appdemo1.solarc.pe/api/Productos/GetProductos?codProducto=${inputCode}`
-            console.log(urlProducts);
-            $( "#inputProduct" ).autocomplete({
-                source: urlProducts['data'][i][nombreProducto]
-            });
+    $('#inputProduct').click(function () {
+            
+        // url de nombres productos
+        const urlProducts = `http://appdemo1.solarc.pe/api/Productos/GetProductos`
+        // obteniendo valores del json productos con ajax
+        $.ajax({
+            url: urlProducts,
+            type: "GET",
+            datatype: "json",
+            success: function(data){
+                client = data['data'];
+                const prod = [];
+                for (let i = 0; i < client.length; i++) {
+                    const x = client[i]['nombreProducto'];
+                    prod.push(x);
+                }
+                // jQuery ui autocomplete
+                $( "#inputProduct" ).autocomplete({
+                    source: prod
+                });
+                // Al salir del inputProduct
+                $('#inputProduct').focusout(function(){
+                    for (let i = 0; i < client.length; i++) {
+                        const name = client[i]['nombreProducto'];
+                        if (name == $('#inputProduct').val()) {
+                            $('#inputPrecio').val(client[i]['precioBase']);
+                            // Input codigo producto
+                            $('#inputProductCode').val(client[i]['codProd']);
+                            // Input descripcion
+                            $('#inputDescripcion').val(client[i]['descripcion']);
+                            // Input cantidad
+                            $('#inputCantidad').val(1);
+                            // Input subtotal
+                            $('#inputSubtotal').val(client[i]['precioBase'] * $('#inputCantidad').val());
+                            // Input oculto de id para agregar a tabla
+                            $('#productIdModal').val(client[i]['idProducto']);
+                            // Input oculto de codigo para agregar a tabla
+                            $('#productCodeModal').val(client[i]['codProd']);
+                            // Input oculto de nombre para agregar a tabla
+                            $('#productNameModal').val(client[i]['nombreProducto']);
+                            // Input oculto de cantidad para precio a tabla
+                            $('#productPriceModal').val($('#inputPrecio').val());
+                            // Input oculto de cantidad para agregar a tabla
+                            $('#productCuantityModal').val($('#inputCantidad').val());
+                        }
+                    }
+                });
+                // Al salir del inputCantidad
+                $('#inputCantidad').focusout(function(){
+                    $('#inputSubtotal').val($('#inputPrecio').val() * $('#inputCantidad').val());
+                    $('#productCuantityModal').val($('#inputCantidad').val());
+                });
+            }
         });
+        
     });
 
-    // obteniendo valores del json productos con ajax
-    
+    $('#inputProductCode').click(function () {
+            
+        // url de codigo productos
+        const urlProductsCode = `http://appdemo1.solarc.pe/api/Productos/GetProductos`
+        // obteniendo valores del json productos con ajax
+        $.ajax({
+            url: urlProductsCode,
+            type: "GET",
+            datatype: "json",
+            success: function(data){
+                codeprod = data['data'];
+                const codprod = [];
+                for (let i = 0; i < codeprod.length; i++) {
+                    const x = codeprod[i]['codProd'];
+                    codprod.push(x);
+                }
+                // jQuery ui autocomplete
+                $( "#inputProductCode" ).autocomplete({
+                    source: codprod
+                });
+
+                $('#inputProductCode').focusout(function(){
+                    for (let i = 0; i < codeprod.length; i++) {
+                        const code = codeprod[i]['codProd'];
+                        if (code == $('#inputProductCode').val()) {
+                            $('#inputPrecio').val(codeprod[i]['precioBase']);
+                            $('#inputProduct').val(codeprod[i]['nombreProducto']);
+                            $('#inputDescripcion').val(codeprod[i]['descripcion']);
+                            $('#inputCantidad').val(1);
+                            $('#inputSubtotal').val(codeprod[i]['precioBase'] * $('#inputCantidad').val());
+                            // Input oculto de id para agregar a tabla
+                            $('#productIdModal').val(codeprod[i]['idProducto']);
+                            // Input oculto de codigo para agregar a tabla
+                            $('#productCodeModal').val(codeprod[i]['codProd']);
+                            // Input oculto de nombre para agregar a tabla
+                            $('#productNameModal').val(codeprod[i]['nombreProducto']);
+                            // Input oculto de cantidad para precio a tabla
+                            $('#productPriceModal').val($('#inputPrecio').val());
+                            // Input oculto de cantidad para agregar a tabla
+                            $('#productCuantityModal').val($('#inputCantidad').val());
+                        }
+                    }
+                });
+                $('#inputCantidad').focusout(function(){
+                    $('#inputSubtotal').val($('#inputPrecio').val() * $('#inputCantidad').val());
+                    $('#productCuantityModal').val($('#inputCantidad').val());
+                });
+            }
+        });
+        
+    });
 
     // cuando el select cambia se ejecuta la funcion
     $('.type_shop').change(function () {
@@ -340,89 +526,6 @@ $(document).ready(function(){
         }
     });
 
-    // añadir al presionar el boton dentro de la pantalla repuestos
-    $(".button-add").click(function(){
-        // asignacion de variables con jQuery
-        var now_id = $(this).attr('id');
-        var productModalId = $('.idModal');
-        var productCode = $('.codeModal');
-        var productName = $('.nameModal');
-        var productDescription = $('.descriptionModal');
-        var productPrice = $('.priceModal');
-        var productPriceDefault = $('.priceDefault');
-        var productCuantity = $('.cuantityModal');
-
-        var i;
-
-        // agregando productos a la tabla
-        for (i = 0; i < productCode.length; i++) {
-            // asigancion de variables
-            var product_code = productCode[i];
-            var product_name = productName[i];
-            var product_description = productDescription[i];
-            var product_price = productPrice[i];
-            var product_price_default = productPriceDefault[i];
-            var product_cuantity = productCuantity[i];
-            var product_id = productModalId[i];
-
-            // comparando el id actual con el id del producto
-            if (String(now_id) == String(product_code.id) &&
-            String(product_code.id) != undefined &&
-            String(now_id) != undefined) {
-
-                // asignacion de variables
-                var code = product_code.value;
-                var name = product_name.value;
-                var description = product_description.value;
-                var price1 = product_price.value;
-                var price2 = product_price_default.value;
-
-                // condicional para el precio del producto
-                if (price1 == null || price1 == undefined || price1 == 0) {
-                    var price = price2;
-                }else{
-                    var price = price1;
-                }
-                var cuantity = product_cuantity.value;
-                var id = product_id.value;
-            }
-        }
-
-        // encontrar todos los elementos tr con el id y la clase
-        // asignacion de variables
-        var idNum = ($('#table-bill tbody').find('tr').length);
-        var rowId = 'row-' + idNum;
-        var productId = idNum;
-        var count = parseInt($('.tableSelect').length) + 1;
-        var input_count = $('.count-inputs').val(count);
-
-        // condicional para cantidad de productos
-        if (cuantity == 0) {
-            cuantity = 1;
-            var subtotal = price * cuantity;
-            var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
-            var total_product = Math.round((igv_product + subtotal) * 100) / 100;
-            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=codeTable" + productId + " class='code-b' type='number' value=" + code + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "<input name=codeModal" + productId + " class='name-b' type='text' value=" + name + " style='display:none;'> </td> <td class='productPrice price'>" + price + " <input class='price-b' name=priceTable" + productId + " type='number' value=" + price + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity + " <input class='cuantity-b' name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productId + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productId + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
-            $("#table-bill tbody").append(markup);
-        }else{
-            var subtotal = price * cuantity;
-            var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
-            var total_product = Math.round((igv_product + subtotal) * 100) / 100;
-            var markup = "<tr id=" + rowId + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productId + ">" + code + " <input name=codeTable" + productId + " class='code-b' type='number' value=" + code + " style='display:none;'> </td> <td name=nameTable" + productId + ">" + name + "<input name=codeModal" + productId + " class='name-b' type='text' value=" + name + " style='display:none;'> </td> <td class='productPrice price'>" + price + " <input class='price-b' name=priceTable" + productId + " type='number' value=" + price + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity + " <input class='cuantity-b' name=cuantityTable" + productId + " type='number' value=" + cuantity + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productId + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productId + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productId + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
-            $("#table-bill tbody").append(markup);
-        }
-
-        // activa la funcion para calcular precio y cantidad
-        $('#table-bill .productTotal').each(function() {
-            calculateColumn();
-        });
-
-        // activa la funcion para calcular subtotal
-        $('#table-bill .productSubtotal').each(function() {
-            calculateColumnSubtotal();
-        });
-
-    });
 
     // fecha factura
     var getDate = new Date();
