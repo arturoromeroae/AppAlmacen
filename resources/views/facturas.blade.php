@@ -154,8 +154,6 @@
         </form>
 
         <!-- modal agregar -->
-        <?php $i=0 ?>
-        @foreach($productsArray['data'] as $product)
         <div class="modal fade" id="edit-modal-1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -203,11 +201,9 @@
                 </div>
             </div>
         </div>
-        <?php $i++ ?>
-        @endforeach
+        <!-- fin modal agregar -->
 
         <!-- modal editar -->
-        @foreach($productsArray['data'] as $product)
         <div class="modal fade" id="edit-modal-1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -247,75 +243,8 @@
                 </div>
             </div>
         </div>
-        @endforeach
-
-        <!-- modal editar cantidad productos -->
-        <!-- <?php $i=0 ?>
-        @foreach($productsArray['data'] as $product)
-            <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel">Agregar productos al carrito</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <p class="h3 text-center text-capitalize">{{ $product['nombreProducto'] }}</p>
-                        <div class="modal-body">
-                            <form id="myform" action="">
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="h5">Codigo: <strong>{{ $product['codProd'] }}</strong></p>
-                                        <br>
-                                        <p class="h5">Descripcion: {{ $product['descripcion'] }}</p>
-                                        <br>
-                                        <p class="h5">Stock del producto: <strong>{{ $product['stock'] }}</strong></p>
-                                        <br>
-                                        <p class="h5">Precio de Venta Actual: <strong>{{ $product['precioVenta'] }}</strong></p>
-                                        <input type="text" class="form-control" name="codeModal" value="{{ $product['codProd'] }}" hidden>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input id="parts-modal{{$i}}" type="text" class="form-control idModal" value="{{ $product['idProducto'] }}" hidden>
-                                        <input id="parts-modal{{$i}}" type="text" class="form-control codeModal" value="{{ $product['codProd'] }}" hidden>
-                                        <input id="parts-modal{{$i}}" type="text" class="form-control nameModal" value="{{ $product['nombreProducto'] }}" hidden>
-                                        <input id="parts-modal{{$i}}" type="text" class="form-control descriptionModal"  value="{{ $product['descripcion'] }}" hidden>
-                                        <input id="parts-modal{{$i}}" type="text" class="form-control priceDefault" value="{{ $product['precioVenta'] }}" hidden>
-                                        <label for="price-modal" class="col-form-label">Precio de venta:</label>
-                                        <input id="parts-modal{{$i}}" type="text" class="form-control priceModal" value="{{ $product['precioVenta'] }}">
-                                        <label for="parts-modal{{$i}}" class="col-form-label">Cantidad a vender:</label>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <textarea class="form-control" hidden>{{ $product['descripcion'] }}</textarea>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <input type="number" class="form-control" name="stockModal" value="{{ $product['stock'] }}" hidden>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="number" step=".01" class="form-control" name="priceModal" value="{{ $product['precioVenta'] }}" hidden>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="modal-footer text-center">
-                                    <div class="col-md-12 text-center">
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('mantenimiento') }}" class="btn btn-info">Editar repuestos</a>
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                            <a id="parts-modal{{$i}}" type="button" data-bs-dismiss="modal" class="btn btn-primary button-add">Agregar al carrito</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php $i++ ?>
-        @endforeach -->
-
+        <!-- fin modal editar -->
+        
     </div>
 </div>
 

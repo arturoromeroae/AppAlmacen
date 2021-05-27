@@ -3,6 +3,7 @@ $(document).ready(function(){
     const idResponse = response;  
     // url getcarrito
     const urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
+
     //////// INICIO AJAX OBTENER CARRITO ////////
     // ajax para cargar carrito
     $.ajax({
@@ -34,8 +35,8 @@ $(document).ready(function(){
                 const sellPrice = data['data'][i].precioVenta;
                 // variable cantidad del producto
                 const cuantyProd = data['data'][i].cantidad;
-                // contruye tr en la tabla de productos
-                var markup = `<tr> 
+                // construye 'tr' en la tabla de productos
+                const markup = `<tr> 
                                 <td> <input type='checkbox' name='record' class='select tableSelect'> </td> 
                                 <td>
                                     <input name="idBillTable${i}" type="text" value="${idResponse}" hidden>
@@ -68,6 +69,7 @@ $(document).ready(function(){
                                     ${(Math.round((igv + subtot) * 100) / 100)}
                                 </td>
                             </tr>`;
+                // agrega los 'tr' al html
                 $("#table-bill tbody").append(markup);
             }
             // obtener el precio subtotal
@@ -92,9 +94,9 @@ $(document).ready(function(){
                     sumaTotal += parseFloat($(this).text()||0,10) // suma el precio total de cada producto
                 });
 
-                var money = $('.pay-bill').val();
-                var money2 = $(".total-bill").val(Math.round(sumaTotal * 100) / 100);
-                var money3 = $(".send-bill").attr('value', sumaTotal);
+                const money = $('.pay-bill').val();
+                const money2 = $(".total-bill").val(Math.round(sumaTotal * 100) / 100);
+                const money3 = $(".send-bill").attr('value', sumaTotal);
                 $(".resultado").val(sumaTotal); // coloca el valor de la suma del precio de cada producto en el input
 
             }
@@ -124,25 +126,30 @@ $(document).ready(function(){
             // añadir al presionar el boton dentro de la pantalla repuestos
             $(".button-add").click(function(){
                 // asignacion de variables con jQuery
-                var now_id = $(this).attr('id');
+                const now_id = $(this).attr('id');
                 const cuantity = $('.cuantityModal').val();
-                var productModalId = $('.idModal').val();
-                var productCode = $('.codeModal').val();
-                var productName = $('.nameModal').val();
-                var productDescription = $('.inputDescripcion').val();
-                var productPrice = $('.priceModal').val();
-                var productPriceDefault = $('.priceDefault').val();
-                var productCuantity = $('.cuantityModal').val();
+                const productModalId = $('.idModal').val();
+                const productCode = $('.codeModal').val();
+                const productName = $('.nameModal').val();
+                const productDescription = $('.inputDescripcion').val();
+                const productPrice = $('.priceModal').val();
+                const productPriceDefault = $('.priceDefault').val();
+                const productCuantity = $('.cuantityModal').val();
 
-                // condicional para cantidad de productos
+                // condicional para cantidad de productos:
+                // si existe una cantidad ejecuta el codigo
                 if (cuantity) {
                     
-                    var count = parseInt($('.name-b').length);
-                    $('.count-inputs').val(count + 1);
-                    var subtotal = Math.round((productCuantity * productPrice) * 100) / 100;
-                    var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
-                    var total_product = Math.round((igv_product + subtotal) * 100) / 100;
-                    var markup = `<tr id=" + rowId + "> 
+                    const count = parseInt($('.name-b').length); // contador
+                    $('.count-inputs').val(count + 1); // aumentando el contando al agregar productos
+                    // valor subtotal
+                    const subtotal = Math.round((productCuantity * productPrice) * 100) / 100;
+                    // valor igv
+                    const igv_product = Math.round((subtotal * 0.18) * 100) / 100;
+                    // valor total del producto
+                    const total_product = Math.round((igv_product + subtotal) * 100) / 100;
+                    // construye el 'tr' de la tabla
+                    const markup = `<tr id=" + rowId + "> 
                                     <td> 
                                         <input type='checkbox' name='record' class='select'>
                                     </td> 
@@ -177,9 +184,8 @@ $(document).ready(function(){
                                         <input name=totalTable${count} type='number' value=${total_product} style='display:none;'>
                                     </td>
                                 </tr>`;
+                    // agrega los 'tr' al html
                     $("#table-bill tbody").append(markup);
-                        
-                    
                 }
 
                 // activa la funcion para calcular precio y cantidad
@@ -204,22 +210,24 @@ $(document).ready(function(){
             $("#bill-section").show();
 
             // contador de productos en la venta
-            var count = parseInt($('.name-b').length);
-            console.log(count);
-            $('.count-inputs').val(count);
+            const count = parseInt($('.name-b').length);
+            // console.log(count);
+            $('.count-inputs').val(count); // asignando valor al contador
         }
     });
     //////////////// FIN AJAX OBTENER CARRITO //////////////////
 
+    // cuando el input cliente cambia ejecuta la funcion
     $('#client').change(function (e) {
+        // obteniendo el valor dentro del input y se le asigna a la variable
         const clientName = $('#client').val();
-
+        // asignando el valor al input 'nameClient'
         $('.nameClient').attr('value', clientName);
     });
-
+    // ocultando el input 'ruc-input!
     $("#ruc-input").css("display", "");
     // se le asigna el valor de la url con el json de los clientes
-    var urlClient = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
+    const urlClient = "http://appdemo1.solarc.pe/api/Cliente/GetClientes";
 
     // obteniendo valores del json clientes con ajax
     $.ajax({
@@ -228,13 +236,13 @@ $(document).ready(function(){
         datatype: "json",
         success: function(data){
             client = data['data'];
-            var fuseOptions = {keys: ["rucCliente", "dni"]};
-            var options = {display: "rucCliente", key: "dni", fuseOptions: fuseOptions};
+            const fuseOptions = {keys: ["rucCliente", "dni"]};
+            const options = {display: "rucCliente", key: "dni", fuseOptions: fuseOptions};
             $("#ruc-client").fuzzyComplete(client, options);
 
             // si el input cambia realiza la siguiente funcion
             $('#ruc-client').focusout(function () {
-                var currentClient = $('#ruc-client').val(); // se asigna valor del input cliente
+                const currentClient = $('#ruc-client').val(); // se asigna valor del input cliente
 
                 // recorriendo array de nombres
                 for (let i = 0; i < client.length; i++) {
@@ -260,7 +268,7 @@ $(document).ready(function(){
 
         }
     });
-    
+    // al presinar el input 'inputProduct' ejecuta la funcion
     $('#inputProduct').click(function () {
             
         // url de nombres productos
@@ -272,20 +280,29 @@ $(document).ready(function(){
             datatype: "json",
             success: function(data){
                 client = data['data'];
+                // asignamos a 'prod' un array vacio a la variable
                 const prod = [];
+                // recorremos todos los nombres de los productos
                 for (let i = 0; i < client.length; i++) {
+                    // se le asigna el nombre de cada producto a 'x'
                     const x = client[i]['nombreProducto'];
+                    // se agregan los productos al array vacio
                     prod.push(x);
                 }
                 // jQuery ui autocomplete
                 $( "#inputProduct" ).autocomplete({
                     source: prod
                 });
-                // Al salir del inputProduct
+                // Al salir del foco del 'inputProduct' ejecuta la funcion
                 $('#inputProduct').focusout(function(){
+                    // recorre todos los productos en la db
                     for (let i = 0; i < client.length; i++) {
+                        // le asigna el nombre de cada producto a 'name'
                         const name = client[i]['nombreProducto'];
+                        // condicional para comparar el producto seleccionado con los que se
+                        // encuentran en la db.
                         if (name == $('#inputProduct').val()) {
+                            // Input precio base producto
                             $('#inputPrecio').val(client[i]['precioBase']);
                             // Input codigo producto
                             $('#inputProductCode').val(client[i]['codProd']);
@@ -310,14 +327,17 @@ $(document).ready(function(){
                 });
                 // Al salir del inputCantidad
                 $('#inputCantidad').focusout(function(){
+                    // asignando el resultado de la operacion al input 'inputSubtotal'
                     $('#inputSubtotal').val($('#inputPrecio').val() * $('#inputCantidad').val());
+                    // asignando el valor de la cantidad al input 'productCuantityModal'
+                    // el cual toma el POST
                     $('#productCuantityModal').val($('#inputCantidad').val());
                 });
             }
         });
         
     });
-
+    // al persionar el input 'inputProductCode'
     $('#inputProductCode').click(function () {
             
         // url de codigo productos
@@ -329,6 +349,7 @@ $(document).ready(function(){
             datatype: "json",
             success: function(data){
                 codeprod = data['data'];
+                // asignamos a 'codprod' un array vacio
                 const codprod = [];
                 for (let i = 0; i < codeprod.length; i++) {
                     const x = codeprod[i]['codProd'];
@@ -338,15 +359,24 @@ $(document).ready(function(){
                 $( "#inputProductCode" ).autocomplete({
                     source: codprod
                 });
-
+                // Al salir del foco del 'inputProductCode' ejecuta la funcion
                 $('#inputProductCode').focusout(function(){
+                    // recorre todos los productos en la db
                     for (let i = 0; i < codeprod.length; i++) {
+                        // le asigna el codigo de cada producto a 'code'
                         const code = codeprod[i]['codProd'];
+                        // condicional para comparar el producto seleccionado con los que se
+                        // encuentran en la db.
                         if (code == $('#inputProductCode').val()) {
+                            // Input de precio base
                             $('#inputPrecio').val(codeprod[i]['precioBase']);
+                            // Input nombre del producto
                             $('#inputProduct').val(codeprod[i]['nombreProducto']);
+                            // Input de descripcion
                             $('#inputDescripcion').val(codeprod[i]['descripcion']);
+                            // Input de cantidad
                             $('#inputCantidad').val(1);
+                            // Input de subtotal
                             $('#inputSubtotal').val(codeprod[i]['precioBase'] * $('#inputCantidad').val());
                             // Input oculto de id para agregar a tabla
                             $('#productIdModal').val(codeprod[i]['idProducto']);
@@ -361,8 +391,12 @@ $(document).ready(function(){
                         }
                     }
                 });
+                // al salir del foco del input 'inputCantidad'
                 $('#inputCantidad').focusout(function(){
+                    // asignando el resultado de la operacion al input 'inputSubtotal'
                     $('#inputSubtotal').val($('#inputPrecio').val() * $('#inputCantidad').val());
+                    // asignando el valor de la cantidad al input 'productCuantityModal'
+                    // el cual toma el POST
                     $('#productCuantityModal').val($('#inputCantidad').val());
                 });
             }
@@ -422,67 +456,6 @@ $(document).ready(function(){
             $(this).closest('tr').remove() // remueve el producto marcado
         });
         calculateColumn(); // se llama a la funcion
-    });
-
-    // al presionar el boton agrega produtos a la tabla dentro de la pantalla factura
-    $(".button-add-bill").click(function(){
-
-        // variables de los inputs jQuery
-        var now_id_table = $(this).attr('id');
-        var productTableId = $('.idShop');
-        var productTableCode = $('.codeShop');
-        var productTableName = $('.nameShop');
-        var productTableDescription = $('.descriptionModal');
-        var productTablePrice = $('.priceModal');
-        var productTablePrice = $('.priceShop');
-        var productTableCuantity = $('.stockShop');
-        var productTableTotal = $('.stockShop');
-
-        var i;
-        // agregando productos a la tabla
-        for (i = 0; i < productTableId.length; i++) {
-            var product_id_shop = productTableId[i];
-            var product_code_shop = productTableCode[i];
-            var product_name_shop = productTableName[i];
-            var product_price_shop = productTablePrice[i];
-            var product_cuantity_shop = productTableCuantity[i];
-
-            if (String(now_id_table) == String(product_id_shop.id) &&
-            String(product_id_shop.id) != undefined &&
-            String(now_id_table) != undefined) {
-                var id_table = product_id_shop.value;
-                var code_table = product_code_shop.value;
-                var name_table = product_name_shop.value;
-                var price_table = product_price_shop.value;
-                // var cuantity_table = product_cuantity_shop.value;
-            }
-        }
-
-        // asignacion de variables
-        var idNumTable = ($('#table-bill tbody').find('tr').length); // encontrar tr con la clase
-        var rowIdTable = 'row-' + idNumTable; // formateando el id de los elementos en la tabal
-        var productIdTable = idNumTable;
-        var cuantity_table = 1;
-        var count = parseInt($('.select').length);
-        var input_count = $('.count').val(count);
-        var subtotal = price_table * cuantity_table;
-        var igv_product = Math.round((subtotal * 0.18) * 100) / 100;
-        var total_product = Math.round((igv_product + subtotal) * 100) / 100;  
-
-        // crea un <tr> cada vez que se presiona el boton
-        var markup = "<tr id=" + rowIdTable + "> <td> <input type='checkbox' name='record' class='select'> </td> <td name=codeTable" + productIdTable + ">" + code_table + " <input name=codeTable" + productIdTable + " class='code-b' type='text' value=" + code_table + " style='display:none;'> </td> <td name=nameTable" + productIdTable + ">" + name_table + "<input name=codeModal" + productIdTable + " class='name-b' type='text' value=" + name_table + " style='display:none;'> </td> <td class='productPrice price'>" + price_table + " <input class='price-b' name=priceTable" + productIdTable + " type='number' value=" + price_table + " style='display:none;' hidden> </td> <td class='productCuantity cuantity'>" + cuantity_table + " <input class='cuantity-b' name=cuantityTable" + productIdTable + " type='number' value=" + cuantity_table + " style='display:none;'> </td> <td class='productSubtotal subtotal'>" + subtotal + " <input name=subtotalTable" + productIdTable + " type='number' value=" + subtotal + " style='display:none;'></td> <td class='productIgv'>" + igv_product + " <input name=igvTable" + productIdTable + " type='number' value=" + igv_product + " style='display:none;'></td> <td class='productTotal total'>" + total_product + " <input name=totalTable" + productIdTable + " type='number' value=" + total_product + " style='display:none;'></td> </tr>";
-        $("#table-bill tbody").append(markup);
-
-        // llama la funcion para calcular total
-        $('#table-bill .productTotal').each(function() {
-            calculateColumn();
-        });
-
-        // llama la funcion para calcular subtotal
-        $('#table-bill .productSubtotal').each(function() {
-            calculateColumnSubtotal();
-        });
-
     });
 
     // ejecuta la funcion cada vez que se suelta una tecla
@@ -569,6 +542,7 @@ $(document).ready(function(){
                 Precio: (`${(Math.round($(`input[name="priceTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
                 Total: (`${(Math.round($(`input[name="totalTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
             };
+            // agrega cada valor al array vacio
             result.push(name);
         }
 
