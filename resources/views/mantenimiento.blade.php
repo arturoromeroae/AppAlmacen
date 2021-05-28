@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css') }}">
 
 @section('content')
-
 @isset($result_maintance)
     <!-- muestra success o error -->
     <?php echo $result_maintance; ?>

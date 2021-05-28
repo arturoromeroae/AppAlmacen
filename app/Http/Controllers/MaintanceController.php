@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\UploadedFile;
 
 use App\Http\Controllers\Controller;
 
@@ -45,7 +46,15 @@ class MaintanceController extends Controller
         $model = $request->select_modelo; // modelo del producto
         $description = $request->description; // descrpcion del producto
         $cuantity = $request->cuantity; // cantidad del producto
-        $photo = $request->image_product; // imagen del producto
+        
+        $this->validate($request, [
+            'image_product' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $photo = $request->file('image_product'); // imagen del producto
+        $new_name = rand() . '.' . $photo->getClientOriginalExtension(); // nombre de las imagenes
+        $photo->move(public_path("images"), $new_name);
+        $route_img = public_path("images"); // ruta de imagenes
 
         if( $model == 0 && $brand == 0 ){
             $modelProduct = 1;
@@ -71,8 +80,8 @@ class MaintanceController extends Controller
             'idUnidadMedida' => 1,
             'idTienda' => 1,
             'precioBase' => (float)$price,
-            'imagen' => 'string',
-            'rutaImagen' => 'string',
+            'imagen' => $new_name,
+            'rutaImagen' => $route_img,
             'idProducto' => 0,
             'cantidad' => (int)$cuantity,
         ];
@@ -92,11 +101,26 @@ class MaintanceController extends Controller
         $res = Http::post('http://appdemo1.solarc.pe/api/Productos/Productos', $product);
 
         if(($res -> getStatusCode()) == 200 ){
-            $result_maintance = 'Se <strong>agregó</strong> el producto <strong>correctamente!</strong>.';
+            $result_maintance = 
+            '
+            <div class="alert alert-success alert-dismissible fade show alert-form mt-5" role="alert">
+                Se <strong>agregó</strong> el producto <strong>correctamente!</strong>.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
+            print_r($product);
         }else{
-            $result_maintance = '<strong>Se produjo un error</strong>.';
+            $result_maintance = 
+            '
+            <div class="alert alert-danger alert-dismissible fade show alert-form mt-5" role="alert">
+                <strong>Se produjo un error</strong>.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
+            echo $res->getBody();
+            print_r($product);
         };
         return view('mantenimiento', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'result_maintance'));
 
@@ -132,7 +156,7 @@ class MaintanceController extends Controller
             'idTienda' => 1,
             'precioBase' => (float)$priceModal,
             'imagen' => 'string',
-            'rutaImagen' => "string",
+            'rutaImagen' => 'string',
             'idProducto' => $idModal,
             'cantidad' => (int)$cuantityModal
         ];
@@ -165,6 +189,7 @@ class MaintanceController extends Controller
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
+            
         }else{
             $result_maintance = 
             '
