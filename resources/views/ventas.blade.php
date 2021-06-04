@@ -82,7 +82,7 @@
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button id="null-sell" type="button" class="btn btn-primary">Aceptar</button>
+                <button id="null-sell" type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
             </div>
             </div>
         </div>

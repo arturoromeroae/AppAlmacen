@@ -50,7 +50,7 @@ oTable = $('#table-sells').DataTable({
         {"data" : "total"},
         {"data" : "estado"},
         {"data" : "usuario"},
-        {"data": "idVentaCab", render: function (idVentaCab) { return '<a id="' + idVentaCab + '" class="nulled" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">Anular</a>'; }} 
+        {"data": "idVentaCab", render: function (idVentaCab) { return '<a id="' + idVentaCab + '" class="nulled" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;"><i class="material-icons" style="font-size:25px; margin-left: 40%;">remove_shopping_cart</i></a>'; }} 
     ],
     responsive: true,
     processing: false,
@@ -182,6 +182,7 @@ $('#null-sell').click(function () {
     // enter you logic when the fetch is successful
         console.log(data)
         console.log('exito')
+        location.reload();
     })
     .catch(error => {
     // enter your logic for when there is an error (ex. error toast)
