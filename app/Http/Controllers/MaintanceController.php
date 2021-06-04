@@ -46,15 +46,8 @@ class MaintanceController extends Controller
         $model = $request->select_modelo; // modelo del producto
         $description = $request->description; // descrpcion del producto
         $cuantity = $request->cuantity; // cantidad del producto
-        
-        $this->validate($request, [
-            'image_product' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
-
-        $photo = $request->file('image_product'); // imagen del producto
-        $new_name = rand() . '.' . $photo->getClientOriginalExtension(); // nombre de las imagenes
-        $photo->move(public_path("images"), $new_name);
-        $route_img = public_path("images"); // ruta de imagenes
+        $price_sell = $request->price_sell; // precio de venta del producto
+        $image_input = $request->image_product; // imagen del product
 
         if( $model == 0 && $brand == 0 ){
             $modelProduct = 1;
@@ -68,6 +61,20 @@ class MaintanceController extends Controller
         }else{
             $modelProduct = $model;
             $brandProduct = $brand;
+        }
+
+        if ($image_input == null || $image_input == '') {
+            $route_img = 'string';
+            $new_name = 'string'; 
+        }else{
+            $this->validate($request, [
+                'image_product' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+            
+            $route_img = public_path("images"); // ruta de imagenes
+            $photo = $request->file('image_product'); // imagen del producto
+            $new_name = rand() . '.' . $photo->getClientOriginalExtension(); // nombre de las imagenes
+            $photo->move(public_path("images"), $new_name);
         }
 
         // array del formulario de mantenimiento
@@ -84,6 +91,7 @@ class MaintanceController extends Controller
             'rutaImagen' => $route_img,
             'idProducto' => 0,
             'cantidad' => (int)$cuantity,
+            'precioVenta' => (float)$price_sell
         ];
         // obtener productos
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');

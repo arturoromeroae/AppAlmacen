@@ -57,6 +57,7 @@
                     <th data-align="right" scope="col">Total</th>
                     <th data-align="right" scope="col">Estado</th>
                     <th data-align="center" scope="col">Usuario</th>
+                    <th data-align="center" scope="col">Anular</th>
                 </tr>
             </thead>
                 
@@ -66,7 +67,27 @@
         </table>
     </div>
     <!-- Final tabla de ventas -->
-
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Anular Ventas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center fs-4">
+                <input type="text" class="form-control" id="idSell" hidden>
+                <input type="number" class="form-control" id="nulledSell" hidden>
+                ¿Esta seguro que desea anular la venta <strong><span id="nSell"></span></strong>?
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button id="null-sell" type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     

@@ -539,7 +539,7 @@ $(document).ready(function(){
                 Código: $(`input[name="codeTable${x}"]`).val(),
                 Nombre: $(`input[name="codeModal${x}"]`).val(),
                 Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
-                Precio: (`${(Math.round($(`input[name="priceTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
+                Precio: (`${(Math.round($(`input[name="totalTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
                 Total: (`${(Math.round($(`input[name="totalTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
             };
             // agrega cada valor al array vacio

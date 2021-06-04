@@ -203,9 +203,13 @@
                             <label for="name" class="form-label">Nombre *</label>
                             <input type="text" class="form-control" id="name_product" name="name" required>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <label for="price" class="form-label">Precio Base *</label>
                             <input type="number" step=".01" class="form-control" id="price_base_product" name="price" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="price-sell" class="form-label">Precio Venta *</label>
+                            <input type="number" step=".01" class="form-control" id="price_sell_product" name="price_sell" required>
                         </div>
                         <div class="col-md">
                             <label for="cuantity" class="form-label">Cantidad *</label>
