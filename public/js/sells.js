@@ -172,7 +172,7 @@ $('#null-sell').click(function () {
             "rucCliente": "string",
             "razonSocial": "string",
             "idOrigen": 1,
-            "isAnulado": 0,
+            "isAnulado": 1,
             "idVentaCab": idSell,
             "ventaDet": productsDetail
         })
