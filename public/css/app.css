@@ -39,3 +39,21 @@ main{
     font-size: 12px;
     text-decoration: none;
 }
+
+#table-stock{
+    width: 100% !important;
+}
+
+#table-maintance{
+    width: 100% !important;
+}
+
+#table-stock-report {
+    width: 100% !important;
+}
+
+#inputs-report{
+    margin: auto;
+    margin-top: 3%;
+}
+

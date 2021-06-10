@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap.css') }}">
 <link rel="stylesheet" href="{{ url('DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 @section('content')
 
@@ -69,6 +70,12 @@
         <!-- botones de reportes -->
         <div class="container mt-2">
             <button id="report-stk" class="btn btn-primary" type="button">Descargar</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportStockModal">
+                Reporte de Stock
+            </button>
+        </div>
+        <div class="container mt-2">
+            
         </div>
 
     </div>
@@ -169,6 +176,67 @@
         </div>
     </div>
     @endforeach
+
+    <!-- Modal Reporte Stock -->
+    <div class="modal fade" id="reportStockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reporte Stock</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row m-2">
+                        <div class="col-md-2">
+                            <label for="inputDateStart" class="form-label">Fecha Inicial:</label>
+                            <input type="text" class="form-control" id="inputDateStart">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="inputDateEnd" class="form-label">Fecha Final:</label>
+                            <input type="text" class="form-control" id="inputDateEnd">
+                        </div>
+                    </div>
+                    <table
+                    id="table-stock-report"
+                    class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap"
+                    data-search-highlight="true">
+                        <thead class="bg-dark" style="color:white;">
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Cantidad</th>
+                                <th>P. Base</th>
+                                <th>P. Venta</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                           
+                        </tbody>
+                    </table>
+                    <div id="inputs-report" class="col-md-4">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Invertido</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Venta</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Ganancia</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Imprimir</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
 </div>
@@ -191,6 +259,9 @@
 
 <!-- table2csv -->
 <script src="{{ url('Data-To-CSV-File-table2csv/src/table2csv.js') }}"></script>
+
+<!-- jQuery UI-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- JavaScript Local -->
 <script type="text/javascript" src="{{ url('js/table-stock.js') }}"></script>

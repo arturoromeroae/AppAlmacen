@@ -22,7 +22,11 @@ $(document).ready(function(){
             // condicional para recorrer cada producto
             for (let i = 0; i < data['data'].length; i++) {
                 // variable igv del producto
-                const igv = (data['data'][i].subTotal) * 0.18;
+                if ($('#inputGroupSelect01').val() == 0 || $('#inputGroupSelect01').val() == 1 || $('#inputGroupSelect01').val() == 2) {
+                    var igv = 0.00
+                }else{
+                    var igv = (data['data'][i].subTotal) * 0.18;
+                }
                 // variable subtotal del producto
                 const subtot = data['data'][i].subTotal;
                 // variable codigo del producto
@@ -66,7 +70,7 @@ $(document).ready(function(){
                                 </td>
                                 <td class='productTotal'>
                                     <input type="text" class="form-control" name="totalTable${i}" value="${subtot + (Math.round(igv * 100) / 100)}" hidden>
-                                    ${(Math.round((igv + subtot) * 100) / 100)}
+                                    ${(Math.round((subtot) * 100) / 100)}
                                 </td>
                             </tr>`;
                 // agrega los 'tr' al html

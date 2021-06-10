@@ -76,3 +76,64 @@ $("#report-stk").click(function(tableEle, separator = ','){
         trimContent: true // Trims the content of individual <th>, <td> tags of whitespaces.
     });
 });
+
+var modalUrl = 'http://appdemo1.solarc.pe/api/Productos/GetRepStock';
+
+ModalTable = $('#table-stock-report').DataTable({
+    "ajax": modalUrl,
+    "columns": [
+        {"data" : "codProd"},
+        {"data" : "nombreProducto"},
+        {"data" : "descripcion"},
+        {"data" : "precioBase"},
+        {"data" : "cantidad"},
+        {"data" : "precioVenta"}
+    ],
+    responsive: true,
+    processing: true,
+    "bInfo": true,
+    "language": {
+        "sProcessing": "Procesando...",
+        "lengthMenu": "Mostrar _MENU_ registros por pagina",
+        'sZeroRecords': 'No se encontraron resultados',
+        'sEmptyTable': 'Ningún dato disponible en esta tabla',
+        'sInfo': 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+        'sInfoEmpty': 'Mostrando registros del 0 al 0 de un total de 0 registros',
+        'sInfoFiltered': '(filtrado de un total de _MAX_ registros)',
+        'sInfoPostFix': '',
+        'sSearch': 'Buscar:',
+        'sUrl': '',
+        'sInfoThousands': ',',
+        'sLoadingRecords': 'Cargando...',
+        'oPaginate': {
+            'sFirst': 'Primero ',
+            'sLast': 'Último ',
+            'sNext': 'Siguiente ',
+            'sPrevious': 'Anterior '
+        }
+    }
+//"serverSide": true,
+});
+
+$( function() {
+    $( "#inputDateStart" ).datepicker({
+        dateFormat: "yy.mm.dd",
+        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+        monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+    });
+} );
+    
+$( function() {
+    $( "#inputDateEnd" ).datepicker({
+        dateFormat: "yy.mm.dd",
+        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+        monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
+    });
+} );
+
+$("body").delegate("#DatePicker", "focusin", function () {
+    $(this).datepicker();
+});
+
+$("#inputDateStart").val(`${getYr}.${getMonFormat}.${getDy}`);
+$("#inputDateEnd").val(`${getYr}.${getMonFormat}.${getDy}`);
