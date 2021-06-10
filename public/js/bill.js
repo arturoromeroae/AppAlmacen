@@ -58,7 +58,7 @@ $(document).ready(function(){
                                 </td> 
                                 <td class='productSubtotal subtotal'>
                                     <input type="text" class="form-control subtotal-table${i}" name="subtotalTable${i}" value="${subtot}" hidden>
-                                    ${subtot}
+                                    ${parseFloat(subtot / 1.18).toFixed(2)}
                                 </td>
                                 <td class='total-product'>
                                     <input type="text" class="form-control" name="igvTable${i}" value="${Math.round(igv * 100) / 100}" hidden>
@@ -172,7 +172,7 @@ $(document).ready(function(){
                                         <input class='cuantity-b' name=cuantityTable${count} type='number' value=${productCuantity} style='display:none;'>
                                     </td> 
                                     <td class='productSubtotal subtotal'>
-                                        ${subtotal}
+                                        ${parseFloat(subtotal / 1.18).toFixed(2)}
                                         <input name=subtotalTable${count} type='number' value=${subtotal} style='display:none;'>
                                     </td> 
                                     <td class='productIgv'>
