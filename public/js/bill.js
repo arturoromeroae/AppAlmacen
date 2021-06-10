@@ -22,11 +22,7 @@ $(document).ready(function(){
             // condicional para recorrer cada producto
             for (let i = 0; i < data['data'].length; i++) {
                 // variable igv del producto
-                if ($('#inputGroupSelect01').val() == 0 || $('#inputGroupSelect01').val() == 1 || $('#inputGroupSelect01').val() == 2) {
-                    var igv = 0.00
-                }else{
-                    var igv = (data['data'][i].subTotal) * 0.18;
-                }
+                var igv = (data['data'][i].subTotal) / 1.18;
                 // variable subtotal del producto
                 const subtot = data['data'][i].subTotal;
                 // variable codigo del producto
@@ -66,7 +62,7 @@ $(document).ready(function(){
                                 </td>
                                 <td class='total-product'>
                                     <input type="text" class="form-control" name="igvTable${i}" value="${Math.round(igv * 100) / 100}" hidden>
-                                    ${Math.round(igv * 100) / 100}
+                                    ${parseFloat(subtot - igv).toFixed(2)}
                                 </td>
                                 <td class='productTotal'>
                                     <input type="text" class="form-control" name="totalTable${i}" value="${subtot + (Math.round(igv * 100) / 100)}" hidden>
@@ -147,11 +143,11 @@ $(document).ready(function(){
                     const count = parseInt($('.name-b').length); // contador
                     $('.count-inputs').val(count + 1); // aumentando el contando al agregar productos
                     // valor subtotal
-                    const subtotal = Math.round((productCuantity * productPrice) * 100) / 100;
+                    const subtotal = productCuantity * productPrice;
                     // valor igv
-                    const igv_product = Math.round((subtotal * 0.18) * 100) / 100;
+                    const igv_product = subtotal / 1.18;
                     // valor total del producto
-                    const total_product = Math.round((igv_product + subtotal) * 100) / 100;
+                    const total_product = Math.round(subtotal * 100) / 100;
                     // construye el 'tr' de la tabla
                     const markup = `<tr id=" + rowId + "> 
                                     <td> 
@@ -180,7 +176,7 @@ $(document).ready(function(){
                                         <input name=subtotalTable${count} type='number' value=${subtotal} style='display:none;'>
                                     </td> 
                                     <td class='productIgv'>
-                                        ${igv_product}
+                                        ${parseFloat(subtotal - igv_product).toFixed(2)}
                                         <input name=igvTable${count} type='number' value=${igv_product} style='display:none;'>
                                     </td>
                                     <td class='productTotal total'>
