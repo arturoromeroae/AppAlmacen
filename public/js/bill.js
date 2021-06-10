@@ -22,7 +22,7 @@ $(document).ready(function(){
             // condicional para recorrer cada producto
             for (let i = 0; i < data['data'].length; i++) {
                 // variable igv del producto
-                var igv = (data['data'][i].subTotal) / 1.18;
+                const igv = (data['data'][i].subTotal) / 1.18;
                 // variable subtotal del producto
                 const subtot = data['data'][i].subTotal;
                 // variable codigo del producto
