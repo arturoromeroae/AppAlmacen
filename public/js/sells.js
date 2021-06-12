@@ -39,7 +39,7 @@ $("#dateend").val(`${getYr}.${getMonFormat}.${getDy}`);
 
 select = $('#users').val();
 
-var url = `http://appdemo1.solarc.pe/api/Venta/ConsultaVenta?IdSede=1&Usuario=${select}&TipoComprobante=1&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}`;
+const url = `http://appdemo1.solarc.pe/api/Venta/ConsultaVenta?IdSede=1&Usuario=${select}&TipoComprobante=1&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}`;
 
 oTable = $('#table-sells').DataTable({
     "ajax": url,

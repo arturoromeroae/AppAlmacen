@@ -41,25 +41,13 @@
                 </thead>
 
                 <tbody>
-                    @if ($productsArray['data'] != null)
-                    @foreach($productsArray['data'] as $product)
-                    <tr>
-                        <td class="fs-6"><input id="parts-modal-shop{{$i}}" type="text" class="form-control idShop" value="{{ $product['idProducto'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['codProd'] }}</a></td>
-                        <td class="fs-6"><input id="parts-modal-shop{{$i}}" type="text" class="form-control codeShop" value="{{ $product['codProd'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['nombreProducto'] }}</a></td>
-                        <td class="fs-6"><input id="parts-modal-shop{{$i}}" type="text" class="form-control nameShop" value="{{ $product['nombreProducto'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['descripcion'] }}</a></td>
-                        <td class="fs-6"><input id="parts-modal-shop{{$i}}" type="text" class="form-control stockShop" value="{{ $product['stock'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['stock'] }}</a></td>
-                        <td class="fs-6"><input id="parts-modal-shop{{$i}}" type="text" class="form-control priceShop" value="{{ $product['precioVenta'] }}" hidden><a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}">{{ $product['precioVenta'] }}</a></td>
-                        <td class="fs-6"><a id="parts-modal-shop{{$i}}" class="nav-link hover-table button-add-table click"><i class="material-icons" style="font-size:17px;">add_shopping_cart</i></a></td>
-                    </tr>
-                    <?php $i++ ?>
-                    @endforeach
-                    @endif
+                    
                 </tbody>
             </table>
         </div>
 
         <!-- Carrito -->
-        <div class="text-center">
+        <div class="text-center mt-5">
             <!-- Titulo de carrito -->
             <p class="h4 text-center mt-1">Productos en el carrito <i class="material-icons" style="font-size:25px;">shopping_cart</i></p>
             <form id="myparts" action="{{ route('repuestos') }}/1" method="POST">
@@ -86,7 +74,7 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Cantidad</th>
-                            <th scope="col">Subtotal</th>
+                            <th scope="col">Total</th>
                         </tr>
                     </thead>
                     

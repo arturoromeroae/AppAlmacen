@@ -48,7 +48,7 @@ main{
     width: 100% !important;
 }
 
-#table-stock-report {
+#table-stock-report, #table-parts {
     width: 100% !important;
 }
 
@@ -56,4 +56,3 @@ main{
     margin: auto;
     margin-top: 3%;
 }
-
