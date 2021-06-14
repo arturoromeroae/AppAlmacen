@@ -48,7 +48,7 @@ main{
     width: 100% !important;
 }
 
-#table-stock-report, #table-parts {
+#table-stock-report, #table-parts, #table-catalog-report {
     width: 100% !important;
 }
 

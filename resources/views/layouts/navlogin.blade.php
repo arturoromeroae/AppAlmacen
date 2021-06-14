@@ -39,7 +39,7 @@
                   <span class="navbar-toggler-icon"></span>
                   </button>-->
 
-          <img src="{{ url('images/Motorcycle-09.png') }}" alt="logo" width="50" height="24">
+          <img src="{{ url('images/sin_fondo_clara.png') }}" alt="logo" width="50" height="24">
           <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

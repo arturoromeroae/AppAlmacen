@@ -100,7 +100,6 @@ $('#search').click(function () {
 
 $('#table-sells tbody').on('click', 'tr', function () {
     var getDataTable = oTable.row( this ).data();
-    console.log('hello');
     $('#idSell').val(getDataTable['idVentaCab']);
     $('#nulledSell').val(1);
     $('#nSell').html(getDataTable['numero']);
@@ -180,8 +179,6 @@ $('#null-sell').click(function () {
     .then(res => res.json())
     .then(data => {
     // enter you logic when the fetch is successful
-        console.log(data)
-        console.log('exito')
         location.reload();
     })
     .catch(error => {

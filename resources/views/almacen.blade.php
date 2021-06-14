@@ -70,14 +70,13 @@
         <!-- botones de reportes -->
         <div class="container mt-2">
             <button id="report-stk" class="btn btn-primary" type="button">Descargar</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportStockModal">
+            <button id="report-stock" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportStockModal">
                 Reporte de Stock
             </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportCatalog">
+                Reporte de Catálogo
+            </button>
         </div>
-        <div class="container mt-2">
-            
-        </div>
-
     </div>
 
     <!-- modal editar cantidad -->
@@ -195,6 +194,10 @@
                             <label for="inputDateEnd" class="form-label">Fecha Final:</label>
                             <input type="text" class="form-control" id="inputDateEnd">
                         </div>
+                        <div class="col-1 mt-2">
+                            <br>
+                            <a id="filter" class="btn btn-dark" href="#investment" role="button">Filtrar</a>
+                        </div>
                     </div>
                     <table
                     id="table-stock-report"
@@ -218,16 +221,55 @@
                     <div id="inputs-report" class="col-md-4">
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Invertido</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
+                            <input id="investment" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Venta</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
+                            <input id="sells" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Ganancia</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
+                            <input id="profits" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled>
                         </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="print-stock" type="button" class="btn btn-primary">Imprimir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Reporte Catálogo -->
+    <div class="modal fade" id="reportCatalog" tabindex="-1" aria-labelledby="reportCatalog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reporte Catálogo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <table
+                            id="table-catalog-report"
+                            class="table table-hover table-condensed table-striped table-bordered dt-responsive nowrap"
+                            data-search-highlight="true">
+                            <thead class="bg-dark" style="color:white;">
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Descripcion</th>
+                                    <th>Cantidad</th>
+                                    <th>P. Venta</th>
+                                    <th>Imagen</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -265,4 +307,7 @@
 
 <!-- JavaScript Local -->
 <script type="text/javascript" src="{{ url('js/table-stock.js') }}"></script>
+
+<!-- PDF -->
+<script src="{{ url('jsPDF-1.3.2/dist/jspdf.min.js') }}"></script>
 @endsection
