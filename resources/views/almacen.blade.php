@@ -73,7 +73,7 @@
             <button id="report-stock" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportStockModal">
                 Reporte de Stock
             </button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportCatalog">
+            <button id="report-catalog" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportCatalog">
                 Reporte de Catálogo
             </button>
         </div>
@@ -274,7 +274,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Imprimir</button>
+                    <button id="print-catalog" type="button" class="btn btn-primary">Imprimir</button>
                 </div>
             </div>
         </div>
@@ -310,4 +310,7 @@
 
 <!-- PDF -->
 <script src="{{ url('jsPDF-1.3.2/dist/jspdf.min.js') }}"></script>
+<script src="{{ url('jsPDF-1.3.2/plugins/jspdf.plugin.autotable.js') }}"></script>
+<script src="{{ url('jsPDF-1.3.2/plugins/addimage.js') }}"></script>
+<script src="../../node_modules/image-to-base64/image-to-base64.min.js"></script>
 @endsection
