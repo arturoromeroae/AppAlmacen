@@ -311,7 +311,7 @@ $('#report-stock').click(function () {
                         data['data'][x]['descripcion'],
                         data['data'][x]['precioBase'],
                         data['data'][x]['cantidad'],
-                        data['data'][x]['precioVenta']
+                        parseFloat(data['data'][x]['precioVenta']).toFixed(2)
                     ];
                     // agrega cada valor al array vacio
                     result.push(name);
@@ -372,7 +372,7 @@ $('#report-catalog').click(function () {
                         data_catalog['data'][x]['nombreProducto'],
                         data_catalog['data'][x]['descripcion'],
                         data_catalog['data'][x]['cantidad'],
-                        data_catalog['data'][x]['precioVenta']
+                        parseFloat(data_catalog['data'][x]['precioVenta']).toFixed(2)
                     ];
                     // agrega cada valor al array vacio
                     result_catalog.push(catalog);
