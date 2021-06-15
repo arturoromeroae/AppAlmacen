@@ -228,7 +228,7 @@ ModalTable = $('#table-catalog-report').DataTable({
         {"data": {rutaImagen : "rutaImagen"}, render: function (data) { 
             return `
                     <div class="text-center">
-                        <img src="${data.rutaImagen}" width="70" height="70" class="rounded" alt="...">
+                        <img src="${data.rutaImagen}" width="70" height="70" class="rounded imgcatalog" alt="...">
                     </div>
                 `; }}
     ],

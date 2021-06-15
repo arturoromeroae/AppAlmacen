@@ -65,7 +65,7 @@ $(document).ready(function(){
                                     ${parseFloat(subtot - igv).toFixed(2)}
                                 </td>
                                 <td class='productTotal'>
-                                    <input type="text" class="form-control" name="totalTable${i}" value="${subtot + (Math.round(igv * 100) / 100)}" hidden>
+                                    <input type="text" class="form-control" name="totalTable${i}" value="${((subtot) * 100 / 100)}" hidden>
                                     ${(Math.round((subtot) * 100) / 100)}
                                 </td>
                             </tr>`;
@@ -539,7 +539,7 @@ $(document).ready(function(){
                 Código: $(`input[name="codeTable${x}"]`).val(),
                 Nombre: $(`input[name="codeModal${x}"]`).val(),
                 Cantidad: $(`input[name="cuantityTable${x}"]`).val(),
-                Precio: (`${(Math.round($(`input[name="totalTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
+                Precio: $(`input[name="priceTable${x}"]`).val(),
                 Total: (`${(Math.round($(`input[name="totalTable${x}"]`).val() * 100) / 100 ).toFixed(2)}`),
             };
             // agrega cada valor al array vacio
