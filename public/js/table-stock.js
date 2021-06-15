@@ -335,8 +335,8 @@ $('#report-stock').click(function () {
                         data['data'][x]['codProd'],
                         data['data'][x]['nombreProducto'],
                         data['data'][x]['descripcion'],
-                        data['data'][x]['precioBase'],
                         data['data'][x]['cantidad'],
+                        data['data'][x]['precioBase'],
                         parseFloat(data['data'][x]['precioVenta']).toFixed(2)
                     ];
                     // agrega cada valor al array vacio
@@ -345,7 +345,7 @@ $('#report-stock').click(function () {
 
                 doc.autoTable({
                     margin: { top: 60 },
-                    head: [['Código', 'Nombre', 'Descripción', 'Precio Base', 'Cantidad', 'Precio de Venta']],
+                    head: [['Código', 'Nombre', 'Descripción', 'Cantidad', 'Precio Base', 'Precio de Venta']],
                     body: result,
                     columnStyles: { 3: { halign: 'right'}, 4: { halign: 'right'}, 5: { halign: 'right'} },
                     didDrawCell: function(data) {
