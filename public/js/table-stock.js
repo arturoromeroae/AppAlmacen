@@ -106,22 +106,22 @@ ModalTable = $('#table-stock-report').DataTable({
                         }
                 `;}
         },
-        {"data" : {precioBase : "precioBase"}, render: function (data) { 
-            return `
-                    <input type="text" name="pricebase" value="${data.precioBase}" hidden>
-                    ${data.precioBase}
-                `; }
-        },
         {"data" : {cantidad : "cantidad"}, render: function (data) { 
             return `
                     <input type="text" name="cuantity" value="${data.cantidad}" hidden>
-                    ${data.cantidad}
+                    <p class="text-end">${data.cantidad}</p>
+                `; }
+        },
+        {"data" : {precioBase : "precioBase"}, render: function (data) { 
+            return `
+                    <input type="text" name="pricebase" value="${data.precioBase}" hidden>
+                    <p class="text-end">${data.precioBase}</p>
                 `; }
         },
         {"data" : {precioVenta : "precioVenta"}, render: function (data) { 
             return `
                     <input type="text" name="pricesell" value="${data.precioVenta}" hidden>
-                    ${data.precioVenta}
+                    <p class="text-end">${data.precioVenta}</p>
                 `; }
         },
     ],
@@ -220,17 +220,43 @@ ModalTable = $('#table-catalog-report').DataTable({
     ],
     "ajax": modaReportlUrl,
     "columns": [
-        {"data" : "codProd"},
-        {"data" : "nombreProducto"},
-        {"data" : "descripcion"},
-        {"data" : "cantidad"},
-        {"data" : "precioVenta"},
+        {"data" : {codProd : "codProd"}, render: function (data) { 
+            return `
+                    <input type="text" name="cuantity" value="${data.cantidad}" hidden>
+                    ${data.codProd}
+                `; }
+        },
+        {"data" : {nombreProducto : "nombreProducto"}, render: function (data) { 
+            return `
+                    <input type="text" name="cuantity" value="${data.cantidad}" hidden>
+                    ${data.nombreProducto}
+                `; }
+        },
+        {"data" : {descripcion : "descripcion"}, render: function (data) { 
+            return `
+                    <input type="text" name="cuantity" value="${data.cantidad}" hidden>
+                    ${data.descripcion}
+                `; }
+        },
+        {"data" : {cantidad : "cantidad"}, render: function (data) { 
+            return `
+                    <input type="text" name="cuantity" value="${data.cantidad}" hidden>
+                    <p class="text-end">${data.cantidad}</p>
+                `; }
+        },
+        {"data" : {precioVenta : "precioVenta"}, render: function (data) { 
+            return `
+                    <input type="text" name="cuantity" value="${data.precioVenta}" hidden>
+                    <p class="text-end">${data.precioVenta}</p>
+                `; }
+        },
         {"data": {rutaImagen : "rutaImagen"}, render: function (data) { 
             return `
                     <div class="text-center">
                         <img src="${data.rutaImagen}" width="70" height="70" class="rounded imgcatalog" alt="...">
                     </div>
-                `; }}
+                `; }
+        }
     ],
     responsive: true,
     processing: true,
@@ -321,6 +347,7 @@ $('#report-stock').click(function () {
                     margin: { top: 60 },
                     head: [['Código', 'Nombre', 'Descripción', 'Precio Base', 'Cantidad', 'Precio de Venta']],
                     body: result,
+                    columnStyles: { 3: { halign: 'right'}, 4: { halign: 'right'}, 5: { halign: 'right'} },
                     didDrawCell: function(data) {
                         data.settings.margin.top = 10;
                     }
@@ -382,7 +409,7 @@ $('#report-catalog').click(function () {
                     margin: { top: 40 },
                     head: [['Código', 'Nombre', 'Descripción', 'Cantidad', 'Precio de Venta', 'Imagen']],
                     body: result_catalog,
-                    
+                    columnStyles: { 3: { halign: 'right'}, 4: { halign: 'right'} },
                     didDrawCell: function(data) {
                         data.settings.margin.top = 10;
                         function imgTo64(url){
