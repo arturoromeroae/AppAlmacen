@@ -652,7 +652,7 @@ $(document).ready(function(){
 
         // muestra direccion de empresa
         doc.setFontSize(10);
-                doc.text(20, 35, 'Dirección: Av. Matias Manzanilla Nro. 760 (1 Cdra del Seguro)');
+                doc.text(20, 35, 'Dirección: Calle la mar 299 - Ica');
 
         // muestra una linea
         doc.line(20, 45, 85, 45)
