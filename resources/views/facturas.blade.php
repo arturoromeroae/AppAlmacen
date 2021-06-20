@@ -148,7 +148,7 @@
             <div class="col mt-4 mb-4">
 
                 <button type="submit" class="btn btn-primary submit-bill">Emitir comprobante</button>
-                <button type="" class="btn btn-danger">Borrar</button>
+                <button type="" class="btn btn-danger cancel">Cancelar Compra</button>
 
             </div>
         </form>

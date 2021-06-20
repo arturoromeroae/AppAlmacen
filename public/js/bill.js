@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+    $('.cancel').click(function (e) { 
+        e.preventDefault();
+        location.replace("/repuestos")
+    });
+
     // id de carrito, respuesta del post
     const idResponse = response;  
     // url getcarrito
