@@ -272,7 +272,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 <script src="{{ url('fuzzyComplete/src/js/fuzzycomplete.js') }}"></script>
 
-<!-- PDF -->
+<!-- JsPDF -->
 <script src="{{ url('jsPDF-1.3.2/dist/jspdf.min.js') }}"></script>
 
 @endsection
