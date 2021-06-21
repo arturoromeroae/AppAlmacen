@@ -36,15 +36,14 @@ window.customSearchFormatter = function(value, searchText) {
     return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: #bdd7fa;border: 1px solid blue;border-radius:90px;padding:4px">$1</span>')
 }
 
-
-$(".button-addon").click(function (e) {
-    var product = $('.stock-stock');
-    var now_id = $(this).attr('id');
-    var i;
+// calcula el aumento sobre el precio base al presionar el boton
+$(".button-addon").click(function () {
+    const product = $('.stock-stock');
+    const now_id = $(this).attr('id');
 
     // total = parseFloat(stock) + parseFloat(porcent);
     //
-    for (i = 0; i < product.length; i++) {
+    for (let i = 0; i < product.length; i++) {
         var my_product = product[i];
 
         if (String(now_id) == String(my_product.id)) {
@@ -54,7 +53,7 @@ $(".button-addon").click(function (e) {
 
     const $row = $(this).closest('.row'),
     price = $row.find('input.price-stock').val(),
-    porcent = stock * price/100;
+    porcent = stock * price / 100;
     total = stock + porcent
     $row.find('span.stock-print').html(total);
 
@@ -66,6 +65,7 @@ $(".button-addon").click(function (e) {
 
 });
 
+// descarga csv de la tabla
 $("#report-stk").click(function(tableEle, separator = ','){
     $("#table-stock").table2csv({
         filename:'tabla_stock_.csv',
@@ -83,7 +83,9 @@ $("#report-stk").click(function(tableEle, separator = ','){
 var modalUrl = 'http://appdemo1.solarc.pe/api/Productos/GetRepStock';
 // datatable para modal
 ModalTable = $('#table-stock-report').DataTable({
+    // obtener valores con ajax en datatable
     "ajax": modalUrl,
+    // columnas de la tabla
     "columns": [
         {"data" : {codProd : "codProd"}, render: function (data) { 
             return `
@@ -212,13 +214,16 @@ $('#filter').click(function (e) {
     });
 });
 
+// url para el ajax de la tabla
 var modaReportlUrl = 'http://appdemo1.solarc.pe/api/Productos/GetRepCatalogo';
 // datatable para modal reporte de catalogo
 ModalTable = $('#table-catalog-report').DataTable({
     buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
     ],
+    // obtener valores con ajax en datatable
     "ajax": modaReportlUrl,
+    // columnas de la tabla
     "columns": [
         {"data" : {codProd : "codProd"}, render: function (data) { 
             return `
