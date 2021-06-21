@@ -250,10 +250,10 @@ ModalTable = $('#table-catalog-report').DataTable({
                     <p class="text-end">${data.precioVenta}</p>
                 `; }
         },
-        {"data": {rutaImagen : "rutaImagen"}, render: function (data) { 
+        {"data": {rutaImagen : "rutaImagen", codProd : "codProd"}, render: function (data) {
             return `
                     <div class="text-center">
-                        <img src="${data.rutaImagen}" width="70" height="70" class="rounded imgcatalog" alt="...">
+                        <img src="${data.rutaImagen}" width="70" height="70" class="rounded imgcatalog" alt="">
                     </div>
                 `; }
         }
@@ -392,7 +392,7 @@ $('#report-catalog').click(function () {
                 doc.addImage(imgData, "JPEG", 15, 0, 45, 45);
                 // Genera la tabla
                 const result_catalog = [];
-                  
+                // recorre cada detalle del producto
                 for (let x = 0; x < data_catalog['data'].length; x++) {
                     var catalog = [
                         data_catalog['data'][x]['codProd'],
@@ -404,43 +404,51 @@ $('#report-catalog').click(function () {
                     // agrega cada valor al array vacio
                     result_catalog.push(catalog);
                 }
-                
-                doc.autoTable({
-                    margin: { top: 40 },
-                    head: [['Código', 'Nombre', 'Descripción', 'Cantidad', 'Precio de Venta', 'Imagen']],
-                    body: result_catalog,
-                    columnStyles: { 3: { halign: 'right'}, 4: { halign: 'right'} },
-                    didDrawCell: function(data) {
-                        data.settings.margin.top = 10;
-                        function imgTo64(url){
-                            var vm = this
-                            var xhr = new XMLHttpRequest();
-                            xhr.onload = function () {
-                                var arr = new Uint8Array(this.response);
-                                var raw = String.fromCharCode.apply(null, arr);
-                                var b64 = btoa(raw);
-                    
-                                var dataURL = 'data:image/' + dataType + ';base64,' + b64;
-                                
-                                console.log(dataURL);
-                                if (data.section === 'body' && data.column.index === 5) {
-                                    doc.addImage(`${dataURL}`, 'jpeg', data.cell.x + 2, data.cell.y + 2, 10, 10)
-                                }
-                            };
-                    
-                            var dataType = 'jpeg';
-                            xhr.open('GET', url);
-                            xhr.responseType = 'arraybuffer';
-                            xhr.send();
+
+                // funcion que convierte url en base 64
+                function convertImgToDataURLviaCanvas(url, callback) {
+                    var img = new Image();
+                    img.crossOrigin = 'Anonymous';
+                    img.onload = function() {
+                      var canvas = document.createElement('CANVAS');
+                      var ctx = canvas.getContext('2d');
+                      var dataURL;
+                      canvas.height = this.height;
+                      canvas.width = this.width;
+                      ctx.drawImage(this, 0, 0);
+                      dataURL = canvas.toDataURL("image/jpeg");
+                      callback(dataURL);
+                    };
+                  
+                    img.src = url;
+                }
+
+                // captura todos los inputs con la clase imgcatalog
+                const images = $('.imgcatalog').attr('src');
+
+                // llamada de la funcion para transformar a base 64
+                convertImgToDataURLviaCanvas( `${images}`, function(dataUri) {
+                    doc.autoTable({
+                        margin: { top: 40 },
+                        head: [['Código', 'Nombre', 'Descripción', 'Cantidad', 'Precio de Venta', 'Imagen']],
+                        body: result_catalog,
+                        columnStyles: { 3: { halign: 'right'}, 4: { halign: 'right'}, 5: { halign: 'center'} },
+                        bodyStyles: {minCellHeight: 15},
+                        didDrawCell: function(data) {
+                            data.settings.margin.top = 10;
+                            // imagen en la columna 5 del PDF
+                            if (data.column.index === 5 && data.cell.section === 'body') {
+                                var dim = data.cell.height - data.cell.padding('vertical');
+                                doc.addImage(dataUri, data.cell.x + 2, data.cell.y + 2, dim, dim);
+                            }
+
                         }
+                    });
 
-                        imgTo64(`${data_catalog['data'][0]['rutaImagen']}`);
-                        
-                    }
-                })
+                    // Descargar documento PDF
+                    doc.save(`reporte-catalogo-${getYr}-${getMonFormat}-${getDy}.pdf`);
+                });
 
-                // Descargar documento PDF
-                doc.save(`reporte-${getYr}-${getMonFormat}-${getDy}.pdf`);
             });
         }
     
