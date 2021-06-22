@@ -123,7 +123,7 @@ ModalTable = $('#table-stock-report').DataTable({
         {"data" : {precioVenta : "precioVenta"}, render: function (data) { 
             return `
                     <input type="text" name="pricesell" value="${data.precioVenta}" hidden>
-                    <p class="text-end">${data.precioVenta}</p>
+                    <p class="text-end">${parseFloat(data.precioVenta).toFixed(2)}</p>
                 `; }
         },
     ],
@@ -252,7 +252,7 @@ ModalTable = $('#table-catalog-report').DataTable({
         {"data" : {precioVenta : "precioVenta"}, render: function (data) { 
             return `
                     <input type="text" name="cuantity" value="${data.precioVenta}" hidden>
-                    <p class="text-end">${data.precioVenta}</p>
+                    <p class="text-end">${parseFloat(data.precioVenta).toFixed(2)}</p>
                 `; }
         },
         {"data": {rutaImagen : "rutaImagen", codProd : "codProd"}, render: function (data) {
