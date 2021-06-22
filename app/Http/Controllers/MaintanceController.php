@@ -151,6 +151,7 @@ class MaintanceController extends Controller
         $cuantityModal = $request->stockModal; // cantidad del producto
         $photoModal = $request->image_product; // imagen del producto
         $idModal = $request->idModal; // cantidad del producto
+        $priceSellModal = $request->priceSellModal; // precio de venta del producto
 
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
         $productsArray = $products -> json();
@@ -166,7 +167,8 @@ class MaintanceController extends Controller
             'imagen' => 'string',
             'rutaImagen' => 'string',
             'idProducto' => $idModal,
-            'cantidad' => (int)$cuantityModal
+            'cantidad' => (int)$cuantityModal,
+            'precioVenta' => (float)$priceSellModal
         ];
 
         $bran = [

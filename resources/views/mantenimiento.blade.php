@@ -110,9 +110,13 @@
                                 <label for="stock-modal" class="col-form-label">Cantidad:</label>
                                 <input type="number" class="form-control" name="stockModal" value="{{ $product['stock'] }}">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <label for="price-modal" class="col-form-label">Precio Base:</label>
                                 <input type="number" step=".01" class="form-control" name="priceModal" value="{{ $product['precioBase'] }}">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="price-modal" class="col-form-label">Precio Venta:</label>
+                                <input type="number" step=".01" class="form-control" name="priceSellModal" value="{{ $product['precioVenta'] }}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label">Marca</label>
