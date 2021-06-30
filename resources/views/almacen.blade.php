@@ -40,30 +40,8 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($productsArray['data'] != null)
-                @foreach($productsArray['data'] as $product)
                 <tr>
-                    <td class="fs-6">{{ $product['codProd'] }}</td>
-                    <td class="fs-6">{{ $product['nombreProducto'] }}</td>
-                    <td class="fs-6">{{ $product['descripcion'] }}</td>
-                    <td class="fs-6">{{ $product['stock'] }}</td>
-                    <td class="fs-6">{{ $product['precioBase'] }}</td>
-                    <td class="fs-6">{{ $product['precioVenta'] }}</td>
-                    <td class="fs-6">{{ $product['marca'] }}</td>
-                    <td class="fs-6">{{ $product['modelo'] }}</td>
-                    <td class="accion-stock">
-                        <div class="row" id="icons">
-							<div class="col-md-10" >
-								<div class="form-group row">
-									<a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">create</i></a>
-									<a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">delete</i></a>
-								</div>
-							</div>
-                        </div>
-                    </td>
                 </tr>
-                @endforeach
-                @endif
             </tbody>
         </table>
 
@@ -78,103 +56,6 @@
             </button>
         </div>
     </div>
-
-    <!-- modal editar cantidad -->
-    @if ($productsArray['data'] != null)
-    <?php $i=0; $x=10; ?>
-    @foreach($productsArray['data'] as $product)
-    <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">Modificacion de Stock y Precio Base</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="h3 text-capitalize text-center"><strong>{{ $product['nombreProducto'] }}</strong></p>
-                    <form id="myform" action="{{ route('almacen') }}/{{ $product['idProducto'] }}" method="POST">
-                        @csrf
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="code-modal" class="col-form-label">Codigo del Producto:</label>
-                                <input type="text" class="form-control" name="codeModal" value="{{ $product['codProd'] }}" disabled>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="stock-modal" class="col-form-label">Aumento de stock:</label>
-                                <input type="number" class="form-control" name="stockModal">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="stock-modal" class="col-form-label">Cantidad:</label>
-                                <input type="number" class="form-control" name="stock" value="{{ $product['stock'] }}" disabled>
-                            </div>
-                            <!-- <div class="col-sm-3">
-                                <label class="col-form-label mt-4">
-                                    <p class="h3">Total: <strong id="MiTotal"></strong></p>
-                                </label>
-                            </div> -->
-                            <div name="prueba" class="col-sm-6 row">
-                                <label for="stock-modal" class="col-form-label">Aumento sobre el precio base:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Total:&nbsp;<span class="stock-print">0.00</span></span>
-                                    <input id="minumero{{$i}}" max="100" min="0" step=".01" type="number" class="form-control price-stock" name="priceModal" aria-describedby="basic-addon1">
-                                    <span class="input-group-text basic-addon">%</span>
-                                    <button id="minumero{{$x}}" class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="stock-modal" class="col-form-label">Precio Base:</label>
-                                <input id="minumero{{$x}}" type="number" data-prod=@json($product["precioBase"]) class="form-control stock-stock" name="stockPrice" value="{{ $product['precioBase'] }}" disabled>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Modificar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php $i++; $x++; ?>
-    @endforeach
-    @endif
-
-    <!-- modal eliminar -->
-    @if ($productsArray['data'] != null)
-    @foreach($productsArray['data'] as $product)
-    <div class="modal fade" id="delete-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">Eliminar producto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="myform-delete" action="{{ route('almacen') }}/{{ $product['idProducto'] }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <h1 class="text-center">¿Desea eliminar el producto {{ $product['nombreProducto'] }}?</h1>
-                        <input type="number" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
-
-                        <br>
-                        <div class="modal-footer d-block text-center">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="padding-left: 20px; padding-right: 20px;">No</button>
-                            <button type="submit" class="btn btn-primary" style="padding-left: 25px; padding-right: 25px;">Si</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
 
     <!-- Modal Reporte Stock -->
     <div class="modal fade" id="reportStockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -273,6 +154,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a href="http://appdemo1.solarc.pe/Imagenes/Libro1.pdf"></a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button id="print-catalog" type="button" class="btn btn-primary">Imprimir</button>
                 </div>
@@ -283,10 +165,6 @@
 
 </div>
 
-<script>
-   var appSettings = @json( $product['precioBase']);
-</script>
-@endif
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

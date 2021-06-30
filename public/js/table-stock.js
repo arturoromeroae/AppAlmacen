@@ -3,67 +3,340 @@
     pagination: false,
     search: true,
 });*/
-
+const Urltable = 'http://appdemo1.solarc.pe/api/Productos/GetProductos';
 // datatable
 oTable = $('#table-stock').DataTable({
-			responsive: true,
-            processing: true,
-			"bInfo": true,
-			"language": {
-                "sProcessing": "Procesando...",
-                "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                'sZeroRecords': 'No se encontraron resultados',
-                'sEmptyTable': 'Ningún dato disponible en esta tabla',
-                'sInfo': 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-                'sInfoEmpty': 'Mostrando registros del 0 al 0 de un total de 0 registros',
-                'sInfoFiltered': '(filtrado de un total de _MAX_ registros)',
-                'sInfoPostFix': '',
-                'sSearch': 'Buscar:',
-                'sUrl': '',
-                'sInfoThousands': ',',
-                'sLoadingRecords': 'Cargando...',
-                'oPaginate': {
-                    'sFirst': 'Primero ',
-                    'sLast': 'Último ',
-                    'sNext': 'Siguiente ',
-                    'sPrevious': 'Anterior '
+     // obtener valores con ajax en datatable
+     "ajax": Urltable,
+     // columnas de la tabla
+     "columns": [
+         {"data" : {codProd : "codProd"}, render: function (data) { 
+             return `
+                     <input type="text" class="printcode" name="code" value="${data.codProd}" hidden>
+                     ${data.codProd}
+                 `; }
+         },
+         {"data" : {nombreProducto : "nombreProducto"}, render: function (data) { 
+             return `
+                     <input type="text" name="name" value="${data.nombreProducto}" hidden>
+                     ${data.nombreProducto}
+                 `; }
+         },
+         {"data" : {descripcion : "descripcion"}, render: function (data) { 
+             return `
+                         ${data.descripcion ?
+                             `<input type="text" name="desctip" value="${data.descripcion}" hidden>
+                             ${data.descripcion}`
+                         : 'Sin descripcion'
+                         }
+                 `;}
+         },
+         {"data" : {stock : "stock"}, render: function (data) { 
+             return `
+                     <input type="text" name="cuantity" value="${data.stock}" hidden>
+                     <p class="text-end">${data.stock}</p>
+                 `; }
+         },
+         {"data" : {precioBase : "precioBase"}, render: function (data) { 
+             return `
+                     <input type="text" name="pricebase" value="${data.precioBase}" hidden>
+                     <p class="text-end">${data.precioBase}</p>
+                 `; }
+         },
+         {"data" : {precioVenta : "precioVenta"}, render: function (data) { 
+             return `
+                     <input type="text" name="pricesell" value="${data.precioVenta}" hidden>
+                     <p class="text-end">${parseFloat(data.precioVenta).toFixed(2)}</p>
+                 `; }
+         },
+         {"data" : {marca : "marca"}, render: function (data) { 
+            return `
+                    <input type="text" name="pricesell" value="${data.marca}" hidden>
+                    <p class="text-end">${data.marca}</p>
+                `; }
+        },
+        {"data" : {modelo : "modelo"}, render: function (data) { 
+            return `
+                    <input type="text" name="pricesell" value="${data.modelo}" hidden>
+                    <p class="text-end">${data.modelo}</p>
+                `; }
+        },
+        {"data" : {
+                modelo : "modelo" , 
+                nombreProducto : "nombreProducto", 
+                codProd : "codProd",
+                idProducto : "idProducto",
+                stock : "stock",
+                precioBase : "precioBase"
+        }, render: function (data) { 
+            return `
+                <div class="">
+                    <a class="iconstable" data-bs-toggle="modal" data-bs-target="#Modaledit${data.idProducto}">
+                        <i class="material-icons" style="font-size:17px;">
+                            create
+                        </i>
+                    </a>
+                    <a class="iconstable" data-bs-toggle="modal" data-bs-target="#delete-modal-${data.idProducto}">
+                        <i class="material-icons" style="font-size:17px;">
+                            delete
+                        </i>
+                    </a>
+                </div>
+
+                <!-- Modal Editar -->
+                <div class="modal fade" id="Modaledit${data.idProducto}" tabindex="-1" aria-labelledby="ModalEditLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalEditLabel${data.codProd}">${data.nombreProducto}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p class="h3 text-capitalize text-center"><strong>${data.nombreProducto}</strong></p>
+                            
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control idModal" name="idModal" value="${data.idProducto}" hidden>
+                                    <input type="text" class="form-control nameModal" name="nameModal" value="${data.nombreProducto}" hidden>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="code-modal" class="col-form-label">Codigo del Producto:</label>
+                                        <input type="text" class="form-control codeModal" name="codeModal" value="${data.codProd}" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="stock-modal" class="col-form-label">Aumento de stock:</label>
+                                        <input type="number" class="form-control stockModal" name="stockModal">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="stock-modal" class="col-form-label">Cantidad:</label>
+                                        <input type="number" class="form-control" name="stock" value="${data.stock}" disabled>
+                                    </div>
+                                    <!-- <div class="col-sm-3">
+                                        <label class="col-form-label mt-4">
+                                            <p class="h3">Total: <strong id="MiTotal"></strong></p>
+                                        </label>
+                                    </div> -->
+                                    <div name="prueba" class="col-sm-6 row">
+                                        <label for="stock-modal" class="col-form-label">Aumento sobre el precio base:</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Total:&nbsp;<span class="stock-print">0.00</span></span>
+                                            <input id="price${data.idProducto}" max="100" min="0" step=".01" type="number" class="form-control price-stock" name="minumero${data.idProducto}" aria-describedby="basic-addon1">
+                                            <span class="input-group-text basic-addon">%</span>
+                                            <button id="calculate${data.idProducto}" name="minumero${data.idProducto}" class="btn btn-outline-primary button-addon" type="button">Calcular Precio</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="stock-modal" class="col-form-label">Precio Base:</label>
+                                            <input id="minumero${data.idProducto}" type="number" data-prod=@json(${data.precioBase}) class="form-control stock-stock" name="stockPrice" value="${data.precioBase}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary modify${data.idProducto}" data-bs-dismiss="modal">Modificar</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- modal eliminar -->
+                <div class="modal fade" id="delete-modal-${data.idProducto}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel">Eliminar producto</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h1 class="text-center">¿Desea eliminar el producto<br>${data.nombreProducto}?</h1>
+                                <input type="number" class="form-control" name="idModal" value="${data.idProducto}" hidden>
+
+                                    <br>
+                                <div class="modal-footer d-block text-center">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="padding-left: 20px; padding-right: 20px;">No</button>
+                                    <button type="button" class="btn btn-primary delete${data.idProducto}" style="padding-left: 25px; padding-right: 25px;">Si</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ${$(".button-addon").click(function () {
+                    // calcula el aumento sobre el precio base al presionar el boton
+                    const product = $('.stock-stock');
+                    const now_id = $(this).attr('name');
+                    console.log(now_id)
+                    // total = parseFloat(stock) + parseFloat(porcent);
+                    //
+                    for (let i = 0; i < product.length; i++) {
+                        var my_product = product[i];
+
+                        if (String(now_id) == String(my_product.id)) {
+                            var stock = parseFloat(my_product.value);
+                        }
+                    }
+
+                    const $row = $(this).closest('.row'),
+                    price = $row.find('input.price-stock').val(),
+                    porcent = stock * price / 100;
+                    total = stock + porcent
+                    $row.find('span.stock-print').html(parseFloat(total).toFixed(2));
+
+                    // if (typeof(TotalSuma) == undefined || isNaN(TotalSuma)) {
+                    //     document.querySelector('span[name = MiTotal]').innerHTML = valor1;
+                    // }else{
+                    //     document.querySelector('span[name = MiTotal]').innerHTML = TotalSuma;
+                    // }
+
+                })}
+                
+                ////////////////////// modal editar //////////////////////
+                ${$(`.modify${data.idProducto}`).click(function () {
+                    const idEdit = $('.idModal').val();
+                    const codeEdit = $('.codeModal').val();
+                    const stockEdit = $('.stockModal').val();
+                    const priceEdit = $('.price-stock').val();
+
+                    if(priceEdit == '' || priceEdit == null || priceEdit == undefined){
+                        var newprice = 0;
+                    } else {
+                        var newprice = priceEdit;
+                    }
+
+                    if(stockEdit == '' || stockEdit == null || stockEdit == undefined){
+                        var newstock = 0;
+                    } else {
+                        var newstock = stockEdit;
+                    }
+                    
+                    // actualizar stock del producto
+                    fetch('http://appdemo1.solarc.pe/api/Productos/ActualizaStock', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            "idProducto": idEdit,
+                            "codProd": codeEdit,
+                            "cantidad": newstock,
+                            "idOrigen": 1,
+                            "usuario": "string"
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                    // enter you logic when the fetch is successful
+                        console.log('done')
+                        location.reload();
+                    })
+                    .catch(error => {
+                    // enter your logic for when there is an error (ex. error toast)
+                    console.log(error)
+                    })
+
+                    // actualizar precio del producto
+                    fetch('http://appdemo1.solarc.pe/api/Productos/ActualizaPrecioBase', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            "idProducto": idEdit,
+                            "codProd": codeEdit,
+                            "porcentaje": newprice,
+                            "idOrigen": 1,
+                            "usuario": "string"
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                    // enter you logic when the fetch is successful
+                        console.log('done')
+                    })
+                    .catch(error => {
+                    // enter your logic for when there is an error (ex. error toast)
+                    console.log(error)
+                    })
+                })}
+
+                ////////////////////// modal eliminar //////////////////////
+                ${$(`.delete${data.idProducto}`).click(function () {
+                    const idDelete = $('.idModal').val();
+
+                    // actualizar stock del producto
+                    fetch('http://appdemo1.solarc.pe/api/Productos/ActualizarProducto', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            "codProd": "string",
+                            "nombreProducto": "string",
+                            "descripcion": "string",
+                            "idMarca": 0,
+                            "idModelo": 0,
+                            "idUnidadMedida": 0,
+                            "idTienda": 0,
+                            "precioBase": 0,
+                            "imagen": "string",
+                            "rutaImagen": "string",
+                            "idProducto": idDelete,
+                            "cantidad": 0,
+                            "precioVenta": 0
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                    // enter you logic when the fetch is successful
+                        console.log('done')
+                        location.reload();
+                    })
+                    .catch(error => {
+                    // enter your logic for when there is an error (ex. error toast)
+                    console.log(error)
+                    })
                 }
-            }
+                )}
+                -->
+                `; }
+        }
+     ],
+    responsive: true,
+    processing: true,
+    "bInfo": true,
+    "language": {
+        "sProcessing": "Procesando...",
+        "lengthMenu": "Mostrar _MENU_ registros por pagina",
+        'sZeroRecords': 'No se encontraron resultados',
+        'sEmptyTable': 'Ningún dato disponible en esta tabla',
+        'sInfo': 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+        'sInfoEmpty': 'Mostrando registros del 0 al 0 de un total de 0 registros',
+        'sInfoFiltered': '(filtrado de un total de _MAX_ registros)',
+        'sInfoPostFix': '',
+        'sSearch': 'Buscar:',
+        'sUrl': '',
+        'sInfoThousands': ',',
+        'sLoadingRecords': 'Cargando...',
+        'oPaginate': {
+            'sFirst': 'Primero ',
+            'sLast': 'Último ',
+            'sNext': 'Siguiente ',
+            'sPrevious': 'Anterior '
+        }
+    }
     //"serverSide": true,
 });
 
 window.customSearchFormatter = function(value, searchText) {
     return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: #bdd7fa;border: 1px solid blue;border-radius:90px;padding:4px">$1</span>')
 }
-
-// calcula el aumento sobre el precio base al presionar el boton
-$(".button-addon").click(function () {
-    const product = $('.stock-stock');
-    const now_id = $(this).attr('id');
-
-    // total = parseFloat(stock) + parseFloat(porcent);
-    //
-    for (let i = 0; i < product.length; i++) {
-        var my_product = product[i];
-
-        if (String(now_id) == String(my_product.id)) {
-            var stock = parseFloat(my_product.value);
-        }
-    }
-
-    const $row = $(this).closest('.row'),
-    price = $row.find('input.price-stock').val(),
-    porcent = stock * price / 100;
-    total = stock + porcent
-    $row.find('span.stock-print').html(total);
-
-    // if (typeof(TotalSuma) == undefined || isNaN(TotalSuma)) {
-    //     document.querySelector('span[name = MiTotal]').innerHTML = valor1;
-    // }else{
-    //     document.querySelector('span[name = MiTotal]').innerHTML = TotalSuma;
-    // }
-
-});
 
 // descarga csv de la tabla
 $("#report-stk").click(function(tableEle, separator = ','){
@@ -300,6 +573,7 @@ $('#report-stock').click(function () {
             // al presionar el boton imprimir en el modal reporte de stock
             $('#print-stock').click(function() {
                 // variable de jsPDF
+                data
                 var doc = new jsPDF();
 
                 // Logo de la empresa en base 64
@@ -373,7 +647,7 @@ $('#report-catalog').click(function () {
     $.ajax({
         type:"GET",
         datatype: "json",
-        url: `http://appdemo1.solarc.pe/api/Productos/GetRepCatalogo`,
+        url: `http://appdemo1.solarc.pe/Imagenes/Libro1.pdf`,
         success: function(data_catalog){
             // al presionar el boton imprimir en el modal reporte de stock
             $('#print-catalog').click(function() {
