@@ -47,7 +47,7 @@
                 </div>
                 <div class="col">
 
-                    <div id="client-input" style="display:;">
+                    <div id="client-input">
                         <label for="client">Cliente</label>
                         <input id="client" name="nameNotaVenta" type="text" class="form-control" placeholder="Cliente" aria-label="cliente">
                     </div>
@@ -274,5 +274,6 @@
 
 <!-- JsPDF -->
 <script src="{{ url('jsPDF-1.3.2/dist/jspdf.min.js') }}"></script>
+<script src="{{ url('jsPDF-1.3.2/plugins/jspdf.plugin.autotable.js') }}"></script>
 
 @endsection

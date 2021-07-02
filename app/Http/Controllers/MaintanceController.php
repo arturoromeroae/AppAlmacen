@@ -73,7 +73,7 @@ class MaintanceController extends Controller
             
             $route_img = public_path("images"); // ruta de imagenes
             $photo = $request->file('image_product'); // imagen del producto
-            $new_name = rand() . '.' . $photo->getClientOriginalExtension(); // nombre de las imagenes
+            $new_name = $code . '.' . $photo->getClientOriginalExtension(); // nombre de las imagenes
             $photo->move(public_path("images"), $new_name);
         }
 

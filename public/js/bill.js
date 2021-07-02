@@ -727,9 +727,6 @@ $(document).ready(function(){
         // doc.setFontSize(10);
         //         doc.text(20, 75, 'Cod.              Producto                                 Cantidad        Precio');
 
-        // Genera la tabla
-        doc.table(30, 125, generateData(5), headers, { autoSize: false, fontSize: 8 });
-
         // lista de informacion de la venta
         var info = [
             '\n' + '                    Monto a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
@@ -748,6 +745,42 @@ $(document).ready(function(){
         // Muestra: Monto a pagar, Descuento, Total a pagar, Pago con, Vuelto.
         doc.setFontSize(10);
                 doc.text(10, 75, `${infoBill.join("")}`);
+
+        // Genera la tabla
+        // doc.table(30, 125, generateData(5), headers, { autoSize: false, fontSize: 8 });
+
+        var all_inputs = $(".code-b").map(function() {
+            return this.innerHTML;
+        }).get();
+
+        // Valores de cada fila
+        const result_table = [];
+        for (let x = 0; x < all_inputs.length; x++) {
+            var name = [
+                $(`input[name="codeTable${x}"]`).val(),
+                $(`input[name="codeModal${x}"]`).val(),
+                $(`input[name="cuantityTable${x}"]`).val(),
+                $(`input[name="priceTable${x}"]`).val(),
+                (`${parseFloat($(`input[name="totalTable${x}"]`).val()).toFixed(2)}`)
+            ];
+            // agrega cada valor al array vacio
+            result_table.push(name);
+        }
+
+         // genera la tabla en pdf
+        doc.autoTable({
+            margin: { top: 130 },
+            theme: 'grid',
+            head: [['Código', 'Nombre', 'Cantidad', 'Precio', 'Total']],
+            body: result_table,
+            columnStyles: { halign: 'center'},
+            headStyles: {lineColor: [0, 0, 0], textColor: [0, 0, 0], fillColor: [255, 255, 255], lineWidth: 0.1},
+            bodyStyles: {lineColor: [0, 0, 0], textColor: [0, 0, 0]},
+            didDrawCell: function(data) {
+                data.settings.margin.top = 10;
+            }
+        });
+        console.log(result_table);
 
         // Descargar documento PDF
         doc.save(`factura-${$('.numberBillClient').val()}.pdf`);
