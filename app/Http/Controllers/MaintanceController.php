@@ -161,9 +161,11 @@ class MaintanceController extends Controller
         $priceSellModal = $request->priceSellModal; // precio de venta del producto
 
         $route_img_modal = public_path("images"); // ruta de imagenes
-        $photo_modal = $request->file('image_product_modal'); // imagen del producto
-        $new_name_modal = $codeModal . '.' . $photo_modal->getClientOriginalExtension(); // nombre de las imagenes
-        $photo_modal->move(public_path("images"), $new_name_modal);
+        if ($request->file('image_product_modal' != null)) {
+            $photo_modal = $request->file('image_product_modal'); // imagen del producto
+            $new_name_modal = $codeModal . '.' . $photo_modal->getClientOriginalExtension(); // nombre de las imagenes
+            $photo_modal->move(public_path("images"), $new_name_modal);
+        }
 
         $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
         $productsArray = $products -> json();
@@ -204,7 +206,9 @@ class MaintanceController extends Controller
         $selectArrayModelo = $selectModelo -> json();
 
         $r = Http::post('http://appdemo1.solarc.pe/api/Productos/ActualizarProducto', $pro);
-        $rimg = Http::post('http://appdemo1.solarc.pe/api/Productos/UploadFilePNG', $proimg);
+        if ($request->file('image_product_modal' != null)) {
+            $rimg = Http::post('http://appdemo1.solarc.pe/api/Productos/UploadFilePNG', $proimg);
+        }
 
         if( ($r -> getStatusCode()) == 200 ){
             $result_maintance = 
