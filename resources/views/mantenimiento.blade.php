@@ -86,7 +86,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="myform" action="{{ route('mantenimiento') }}/{{ $product['idProducto'] }}" method="POST">
+                    <form id="myform" action="{{ route('mantenimiento') }}/{{ $product['idProducto'] }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
@@ -117,6 +117,10 @@
                             <div class="col-sm-3">
                                 <label for="price-modal" class="col-form-label">Precio Venta:</label>
                                 <input type="number" step=".01" class="form-control" name="priceSellModal" value="{{ $product['precioVenta'] }}">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png"</strong>)</label>
+                                <input class="form-control" type="file" id="image_product_modal" name="image_product_modal">
                             </div>
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label">Marca</label>
@@ -246,7 +250,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label">Imagen del producto</label>
+                            <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png"</strong>)</label>
                             <input class="form-control" type="file" id="image_product" name="image_product">
                         </div>
                         <div class="col-md-6">

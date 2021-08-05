@@ -143,7 +143,6 @@
                                     <th>Descripcion</th>
                                     <th>Cantidad</th>
                                     <th>P. Venta</th>
-                                    <th>Imagen</th>
                                 </tr>
                             </thead>
 
@@ -154,9 +153,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="http://appdemo1.solarc.pe/Imagenes/Libro1.pdf"></a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button id="print-catalog" type="button" class="btn btn-primary">Imprimir</button>
+                    <a id="print-catalog" class="btn btn-primary">Imprimir</a>
                 </div>
             </div>
         </div>

@@ -12,46 +12,103 @@ $(document).ready(function(){
     oTable = $('#table-parts').DataTable({
         "ajax": urlProducts,
         "columns": [
-            {"data" : {codProd : "codProd", idProducto: "idProducto"}, render: function (data){
+            {"data" : {codProd : "codProd", idProducto: "idProducto", stock : "stock"}, render: function (data){
                 return `
                     <input id="parts-modal-shop${data.idProducto}" type="text" class="form-control codeShop" value="${data.codProd}" hidden>
-                    <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
-                        ${data.codProd}
-                    </a>
+                    ${data.stock <= 0 ?
+                        `
+                        <a class="nav-link hover-table click disabled" style="color: black;" aria-disabled="true" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${data.codProd}
+                        </a>
+                        `
+                        :
+                        `
+                        <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${data.codProd}
+                        </a>
+                        `
+                    }
                 `
             }},
-            {"data" : {idProducto : "idProducto", nombreProducto: "nombreProducto"}, render: function (data){
+            {"data" : {idProducto : "idProducto", nombreProducto: "nombreProducto", stock : "stock"}, render: function (data){
                 return `
                     <input id="parts-modal-shop${data.idProducto}" type="text" class="form-control nameShop" value="${data.nombreProducto}" hidden>
-                    <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
-                        ${data.nombreProducto}
-                    </a>
+                    ${data.stock <= 0 ?
+                        `
+                        <a class="nav-link hover-table click disabled" style="color: black;" aria-disabled="true" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${data.nombreProducto}
+                        </a>
+                        `
+                        :
+                        `
+                        <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${data.nombreProducto}
+                        </a>
+                        `
+                    }
                 `
             }},
             {"data" : "descripcion"},
             {"data" : {idProducto : "idProducto", stock : "stock"}, render: function (data) {
                 return `
                     <input id="parts-modal-shop${data.idProducto}" type="text" class="form-control stockShop" value="${data.stock}" hidden>
-                    <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
-                        ${data.stock}
-                    </a>
+                    ${data.stock == 1 ?
+                        `
+                        <a class="nav-link hover-table click" style="color: orange;" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            <strong>${data.stock}</strong>
+                        </a>
+                        `
+                        : data.stock <= 0 ?
+                        `
+                        <a class="nav-link hover-table click disabled" style="color: red;" aria-disabled="true" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                        <strong>${data.stock}</strong>
+                        </a>
+                        `
+                        :
+                        `
+                        <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${data.stock}
+                        </a>
+                        `
+                    }
                 `
             }},
-            {"data" : {idProducto : "idProducto", precioVenta : "precioVenta"}, render: function (data) {
+            {"data" : {idProducto : "idProducto", precioVenta : "precioVenta", stock : "stock"}, render: function (data) {
                 return `
                     <input id="parts-modal-shop${data.idProducto}" type="text" class="form-control priceShop" value="${data.precioVenta}" hidden>
-                    <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
-                        ${data.precioVenta}
-                    </a>
-                `
-            }},
-            {"data": {idProducto : "idProducto"}, render: function (data) { 
+                    ${data.stock <= 0 ?
+                        `
+                        <a class="nav-link hover-table click disabled" style="color: black;" aria-disabled="true" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${data.precioVenta}
+                        </a>
+                        `
+                        :
+                        `
+                        <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${data.precioVenta}
+                        </a>
+                        `
+                    }`
+                }
+            },
+            {"data": {idProducto : "idProducto", stock : "stock"}, render: function (data) {
                 return `
                     <input id="parts-modal-shop${data.idProducto}" type="text" class="form-control idShop" value="${data.idProducto}" hidden>
-                    <a id="parts-modal-shop${data.idProducto}" class="nav-link hover-table button-add-table" style="cursor: pointer; color:black;">
-                        <i class="material-icons" style="font-size:25px; margin-left: 40%;">shopping_cart</i>
-                    </a>
-                    `; }}
+                    ${data.stock <= 0 ?
+                        `
+                        <a id="parts-modal-shop${data.idProducto}" class="nav-link hover-table button-add-table disabled" aria-disabled="true" style="cursor: pointer; color:gray;">
+                            <i class="material-icons" style="font-size:25px; margin-left: 40%;">shopping_cart</i>
+                        </a>
+                        `
+                    :
+                        `
+                        <a id="parts-modal-shop${data.idProducto}" class="nav-link hover-table button-add-table" style="cursor: pointer; color:black;">
+                            <i class="material-icons" style="font-size:25px; margin-left: 40%;">shopping_cart</i>
+                        </a>
+                        `
+                    }`
+                }
+            }
         ],
         responsive: true,
         processing: true,
