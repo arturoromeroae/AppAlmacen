@@ -123,7 +123,7 @@
                                 <input class="form-control" type="file" id="image_product_modal" name="image_product_modal">
                             </div>
                             <div class="col-sm-6">
-                                <label for="price-modal" class="col-form-label">Marca</label>
+                                <label for="price-modal" class="col-form-label mt-3">Marca</label>
                                 <select class="form-select" aria-label="Default select example" id="select_marca" name="selectModalMarca" required>
 
                                     @foreach($selectArrayMarca['data'] as $selectMarca)
