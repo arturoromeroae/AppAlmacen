@@ -119,7 +119,7 @@
                                 <input type="number" step=".01" class="form-control" name="priceSellModal" value="{{ $product['precioVenta'] }}">
                             </div>
                             <div class="col-md-6 mt-2">
-                                <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png"</strong>)</label>
+                                <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png" tamaño máx 99 KB</strong>)</label>
                                 <input class="form-control" type="file" id="image_product_modal" name="image_product_modal">
                             </div>
                             <div class="col-sm-6">
@@ -250,7 +250,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png"</strong>)</label>
+                            <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png" tamaño máx 99 KB</strong>)</label>
                             <input class="form-control" type="file" id="image_product" name="image_product">
                         </div>
                         <div class="col-md-6">
