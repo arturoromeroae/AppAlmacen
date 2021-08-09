@@ -77,8 +77,9 @@
 
     <!-- inicio modal editar -->
     @if ($productsArray['data'] != null)
+    <?php $i=0 ?>
     @foreach($productsArray['data'] as $product)
-    <div class="modal fade" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade image_product_modal-{{ $product['idProducto'] }}" id="edit-modal-{{ $product['idProducto'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,11 +91,12 @@
                         @csrf
                         <div class="col-sm-6">
                             <input type="text" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
+                            <input type="text" class="form-control idModalHidden{{ $product['idProducto'] }}" value="image_product_modal-{{ $product['idProducto'] }}" hidden>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="code-modal" class="col-form-label">Codigo:</label>
-                                <input type="text" class="form-control" name="codeModal" value="{{ $product['codProd'] }}">
+                                <input type="text" class="form-control codeModal-{{ $product['idProducto'] }}" name="codeModal" value="{{ $product['codProd'] }}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="name-modal" class="col-form-label">Nombre:</label>
@@ -120,7 +122,7 @@
                             </div>
                             <div class="col-md-6 mt-2">
                                 <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png" tamaño máx 99 KB</strong>)</label>
-                                <input class="form-control" type="file" id="image_product_modal" name="image_product_modal">
+                                <input class="form-control" type="file" id="image_product_modal-{{ $product['idProducto'] }}" name="image_product_modal">
                             </div>
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label mt-4">Marca</label>
@@ -147,13 +149,14 @@
                             <!-- boton cancelar edicion del producto -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             <!-- boton modificar el producto -->
-                            <button type="submit" class="btn btn-primary">Modificar</button>
+                            <button type="submit" class="btn btn-primary send{{ $product['idProducto'] }}">Modificar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <?php $i++ ?>
     @endforeach
     @endif
     <!-- final modal editar -->
@@ -260,7 +263,7 @@
 
                         <div class="modal-footer">
                             <!-- boton guardar producto -->
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary addNew">Guardar</button>
                             <!-- boton cancelar -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
