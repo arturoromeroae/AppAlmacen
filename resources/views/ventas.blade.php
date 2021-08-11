@@ -91,17 +91,28 @@
 
     <!-- Modal -->
     <div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="printModalLabel">Imprimir Facturas</h5>
+                <h5 class="modal-title" id="printModalLabel">Imprimir Factura <span class="billNum"></span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <input id="idPed" type="number" value="" hidden>
-                <strong>Productos: </strong><div class="modal-print"></div>
+                <div class="h5 datePrint"></div>
+                <p class="h5 mt-3">Informacion del Cliente</p>
+                <div class="container">
+                    <strong>Razon Social: </strong><div class="socialPrint"></div>
+                </div>
                 <br>
-                <strong>Total: </strong><div class="hello"></div>
+                <p class="h5 ml-2">Informacion de Venta</p>
+                <div class="container d-flex">
+                    <strong>Tipo de venta: </strong> <div class="mx-3 typePrint"></div>
+                    <br>
+                    <strong>Productos: </strong> <div class="mx-3 modal-print"></div>
+                    <br>
+                    <strong>Total: </strong><div class=" mx-2 totalPrint"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

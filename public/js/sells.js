@@ -145,16 +145,33 @@ $('#table-sells tbody').on('click', 'tr', function () {
         success: function(data){
             for (let i = 0; i < data['data'].length; i++) {
                 var inputsPrint = `
-                    ${data['data'][i]['nombreProducto']},
+                    ${data['data'][i]['nombreProducto']}<br>
                 `;
                 $(".modal-print").append(inputsPrint);
             }
-
-            
-                var inputsPr = `
-                    ${data['data'][0]['total']}
-                `;
-                $(".hello").html(inputsPr);
+            // muestra numero de fecha
+            var inputsDt = `${data['data'][0]['fecha']}`;
+            $(".datePrint").html(inputsDt);
+            // muestra razon social
+            var inputsRz = `${data['data'][0]['razonSocial']}`;
+            $(".socialPrint").html(inputsRz);
+            // muestra numero de factura
+            var inputsNr = `${data['data'][0]['serie'] + data['data'][0]['numero']}`;
+            $(".billNum").html(inputsNr);
+            // muestra el total
+            var inputsPr = `${data['data'][0]['total']} /S.`;
+            $(".totalPrint").html(inputsPr);
+            // muestra numero de fecha
+            // condicional para el tipo de factura en el pdf
+            if (data['data'][0]['tipoVenta'] == 1) {
+                $(".typePrint").html('Nota de Venta');
+            } else if (data['data'][0]['tipoVenta'] == 2) {
+                $(".typePrint").html('Boleta de Venta');
+            } else if (data['data'][0]['tipoVenta'] == 3) {
+                $(".typePrint").html('Factura');
+            } else {
+                $(".typePrint").html('');
+            };
         }
     });
 });
