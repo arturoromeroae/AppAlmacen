@@ -58,6 +58,7 @@
                     <th data-align="right" scope="col">Estado</th>
                     <th data-align="center" scope="col">Usuario</th>
                     <th data-align="center" scope="col">Anular</th>
+                    <th data-align="center" scope="col">Imprimir</th>
                 </tr>
             </thead>
                 
@@ -75,7 +76,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Anular Ventas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center fs-4">
+            <div class="modal-body modal-delete text-center fs-4">
                 <input type="text" class="form-control" id="idSell" hidden>
                 <input type="number" class="form-control" id="nulledSell" hidden>
                 ¿Esta seguro que desea anular la venta <strong><span id="nSell"></span></strong>?
@@ -83,6 +84,28 @@
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                 <button id="null-sell" type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="printModalLabel">Imprimir Facturas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input id="idPed" type="number" value="" hidden>
+                <strong>Productos: </strong><div class="modal-print"></div>
+                <br>
+                <strong>Total: </strong><div class="hello"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="test1" type="button" class="btn btn-primary">Imprimir</button>
             </div>
             </div>
         </div>
@@ -100,5 +123,9 @@
     
     <!-- jQuery UI-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- JsPDF -->
+    <script src="{{ url('jsPDF-1.3.2/dist/jspdf.min.js') }}"></script>
+    <script src="{{ url('jsPDF-1.3.2/plugins/jspdf.plugin.autotable.js') }}"></script>
 
 @endsection
