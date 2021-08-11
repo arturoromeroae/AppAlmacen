@@ -107,11 +107,17 @@
                 <br>
                 <p class="h5 ml-2">Informacion de Venta</p>
                 <div class="container d-flex">
-                    <strong>Tipo de venta: </strong> <div class="mx-3 typePrint"></div>
+                    <div class="container d-block">
+                        <strong>Tipo de venta: </strong> <div class="typePrint"></div>
+                    </div>
                     <br>
-                    <strong>Productos: </strong> <div class="mx-3 modal-print"></div>
+                    <div class="container d-block">
+                        <strong>Productos: </strong> <div class="modal-print"></div>
+                    </div>
                     <br>
-                    <strong>Total: </strong><div class=" mx-2 totalPrint"></div>
+                    <div class="container d-block">
+                        <strong>Total: </strong><div class="totalPrint"></div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
