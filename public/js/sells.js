@@ -307,9 +307,9 @@ $('#test1').click(function () {
                 doc.setFontSize(10);
                     doc.text(20, 90, ``);
             } else {
-                // Muestra Razon Social
+                // Muestra Nombre
                 doc.setFontSize(10);
-                    doc.text(20, 65, `Razón Social: ${data['data'][0]['razonSocial']}`);
+                    doc.text(20, 65, `Cliente: ${data['data'][0]['razonSocial']}`);
             }
 
             // condicional para subtotal e igv
