@@ -102,7 +102,7 @@
                 <div class="h5 datePrint"></div>
                 <p class="h5 mt-3">Informacion del Cliente</p>
                 <div class="container">
-                    <strong>Razon Social: </strong><div class="socialPrint"></div>
+                    <strong>Nombre: </strong><div class="socialPrint"></div>
                 </div>
                 <br>
                 <p class="h5 ml-2">Informacion de Venta</p>
