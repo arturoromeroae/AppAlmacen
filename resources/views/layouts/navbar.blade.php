@@ -138,7 +138,7 @@
       </nav>
 
         <main id="main-page" class="flex-shrink-0">
-          <div class="container">
+          <div class="container" style="margin: 0;">
             <div class="bg-light p-5 rounded">
               @yield('content')
             </div>
