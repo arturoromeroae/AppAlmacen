@@ -9,6 +9,7 @@
 
     <!-- Google icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <title>{{ config('app.name', 'Logo') }}</title>
 
@@ -136,12 +137,12 @@
         </div>
       </nav>
 
-        <main class="flex-shrink-0">
-			<div class="container">
-				<div class="bg-light p-5 rounded">
-					@yield('content')
-				</div>
-			</div>
+        <main id="main-page" class="flex-shrink-0">
+          <div class="container">
+            <div class="bg-light p-5 rounded">
+              @yield('content')
+            </div>
+          </div>
         </main>
 
     </div>

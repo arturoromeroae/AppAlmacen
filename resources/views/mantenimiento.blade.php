@@ -29,49 +29,45 @@
             data-search-highlight="true">
             <thead class="bg-dark" style="color:white;">
                 <tr>
-                    <th data-halign="center" data-width="80" data-search-highlight-formatter="customSearchFormatter" data-field="code" scope="col">Código</th>
-                    <th data-width="200" data-search-highlight-formatter="customSearchFormatter" data-field="name" data-sortable="true" data-sort-name="name" data-sort-order="asc" scope="col">Nombre</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Descripcion</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Cantidad</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Base</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Venta</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Marca</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Modelo</th>
-                    <th data-width="90" data-align="center" scope="col">Acción</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>P. Base</th>
+                    <th>P. Venta</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Acción</th>
+                    <th>Imagen</th>
                 </tr>
             </thead>
 
             <tbody>
-                @if ($productsArray['data'] != null)
-                @foreach($productsArray['data'] as $product)
                 <tr>
-                    <td class="fs-6">{{ $product['codProd'] }}</td>
-                    <td class="fs-6">{{ $product['nombreProducto'] }}</td>
-                    <td class="fs-6">{{ $product['descripcion'] }}</td>
-                    <td class="fs-6">{{ $product['stock'] }}</td>
-                    <td class="fs-6">{{ $product['precioBase'] }}</td>
-                    <td class="fs-6">{{ $product['precioVenta'] }}</td>
-                    <td class="fs-6">{{ $product['marca'] }}</td>
-                    <td class="fs-6">{{ $product['modelo'] }}</td>
-                    <td class="fs-6">
-                        <div class="row" id="icons-table">
-							<div class="col-md-10" >
-								<div class="form-group row">
-									<a class="nav-link hover-table" href="#edit-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#edit-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">create</i></a>
-									<a class="nav-link hover-table" href="#delete-modal-{{ $product['idProducto'] }}" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product['idProducto'] }}"><i class="material-icons" style="font-size:17px;">delete</i></a>
-								</div>
-							</div>
-                        </div>
-                    </td>
+                    
                 </tr>
-                @endforeach
-                @endif
             </tbody>
         </table>
         <!-- boton agregar productos -->
-        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button id="test" type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Agregar Producto +
         </button>
+        <div class="btn-group mt-2" role="group" aria-label="Basic example">
+            <button id="addButtonBrand" class="btn btn-dark" data-bs-target="#exampleModal2"data-bs-toggle="modal">
+                Agregar Marca
+            </button>
+            <button id="editButtonBrand" class="btn btn-dark" data-bs-target="#editModalBrand" type="button" data-bs-toggle="modal">
+                Editar Marca
+            </button>
+        </div>
+        <div class="btn-group mt-2" role="group" aria-label="Basic example">
+            <button id="addButtonModel" class="btn btn-info" type="button" data-bs-target="#exampleModal3" data-bs-toggle="modal">
+                Agregar Modelo
+            </button>
+            <button id="editButtonModel" class="btn btn-info" type="button" data-bs-target="#editModal" data-bs-toggle="modal">
+                Editar Modelo
+            </button>
+        </div>
     </div>
     <!-- final de tabla -->
 
@@ -93,20 +89,26 @@
                             <input type="text" class="form-control" name="idModal" value="{{ $product['idProducto'] }}" hidden>
                             <input type="text" class="form-control idModalHidden{{ $product['idProducto'] }}" value="image_product_modal-{{ $product['idProducto'] }}" hidden>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="code-modal" class="col-form-label">Codigo:</label>
-                                <input type="text" class="form-control codeModal-{{ $product['idProducto'] }}" name="codeModal" value="{{ $product['codProd'] }}">
+                        <div class="d-flex">
+                            <div class="col-sm-3 mx-2" style="text-align: center;">
+                                <img class="img-thumbnail" src="http://appdemo1.solarc.pe/imagenes/{{ $product['codProd'] }}.png" style="max-width: 180px;">
                             </div>
-                            <div class="col-sm-6">
-                                <label for="name-modal" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" name="nameModal" value="{{ $product['nombreProducto'] }}">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="code-modal" class="col-form-label">Codigo:</label>
+                                    <input type="text" class="form-control codeModal-{{ $product['idProducto'] }}" name="codeModal" value="{{ $product['codProd'] }}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="name-modal" class="col-form-label">Nombre:</label>
+                                    <input type="text" class="form-control" name="nameModal" value="{{ $product['nombreProducto'] }}">
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="description-modal" class="col-form-label">Descripcion:</label>
+                                    <textarea class="form-control" name="descriptionModal">{{ $product['descripcion'] }}</textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="description-modal" class="col-form-label">Descripcion:</label>
-                            <textarea class="form-control" name="descriptionModal">{{ $product['descripcion'] }}</textarea>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="stock-modal" class="col-form-label">Cantidad:</label>
@@ -196,7 +198,7 @@
 
     <!-- Inicio modal formulario para agregar productos -->
     <div class="modal fade modal-fullscreen-sm-down" id="exampleModal" aria-labelledby="exampleModalLabel" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="text-align">Agregar productos</h5>
@@ -273,6 +275,150 @@
         </div>
     </div>
     <!-- Final modal formulario para agregar productos -->
+
+    <!-- Modal agregar marca -->
+    <div class="modal fade" id="exampleModal2" aria-hidden="true" aria-labelledby="ModalBrand" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div id="modal-body-add" class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="ModalBrand">Agregar Marcas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <label for="inputNewBrand" class="form-label">Marca</label>
+                <input type="text" id="inputNewBrand" class="form-control" aria-describedby="brandHelpBlock">
+                <div id="brandHelpBlock" class="form-text">
+                    Inserte el nombre de la marca.
+                </div>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button class="btn btn-primary" id="addBrand">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar marca -->
+    <div class="modal fade" id="editModalBrand" aria-hidden="true" aria-labelledby="ModalBrandEdit" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="ModalBrandEdit">Editar Marcas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Marcas en el sistema</label>
+                    <div id="loader" class="loader mt-3" ></div>
+                    <select id="selectEditBrand" class="form-select" size="5" aria-label="multiple select example">
+                        
+                    </select>
+                    <div id="brandHelpBlock" class="form-text">
+                        Seleccione la marca a <strong>editar o eliminar</strong>.
+                    </div>
+                    <label for="inputEditBrand" class="form-label mt-2">Marca a editar</label>
+                    <input type="number" id="valval" class="form-control" hidden>
+                    <input type="text" id="inputEditBrand" class="form-control">
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button class="btn btn-danger" id="addEditDeleteBrand" disabled
+                            data-bs-target="#questionDelete"
+                            data-bs-toggle="modal">Eliminar</button>
+                    <button class="btn btn-primary" id="addEditBrand" disabled>Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal alerta eliminar marca -->
+    <div class="modal fade" id="questionDelete" aria-hidden="true" aria-labelledby="ModalBrandQuestionDelete" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div id="modal-body-add" class="modal-content">
+                <div class="modal-header bg-warning border-warning" style="--bs-bg-opacity: .5;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-warning d-flex" style="--bs-bg-opacity: .5;">
+                    <i class="material-icons" style="font-size:50px;color:red">warning</i>
+                    <p id="modal-delete-brand" class="h2 text-center"></p>
+                </div>
+                <div class="modal-footer bg-warning border-warning" style="--bs-bg-opacity: .5;">
+                    <button class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                    <button class="btn btn-primary" id="deleteBrand" data-bs-dismiss="modal">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal agregar modelo -->
+    <div class="modal fade" id="exampleModal3" aria-hidden="true" aria-labelledby="ModalBrand" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div id="modal-body-add-model" class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="ModalBrand">Agregar Modelos</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <label for="inputNewModel" class="form-label">Modelo</label>
+            <input type="text" id="inputNewModel" class="form-control" aria-describedby="brandHelpBlock">
+            <div id="brandHelpBlock" class="form-text">
+                Inserte el nombre del modelo.
+            </div>
+            </div>
+            <div class="modal-footer bg-dark text-white">
+                <button class="btn btn-primary" id="addModel">Agregar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar modelo -->
+    <div class="modal fade" id="editModal" aria-hidden="true" aria-labelledby="ModalModelEdit" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">Editar Modelos</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Modelos en el sistema</label>
+                    <div id="loader-model" class="loader mt-3" ></div>
+                    <select id="selectEditModel" class="form-select" size="5" aria-label="multiple select example">
+                        
+                    </select>
+                    <div id="brandHelpBlock" class="form-text">
+                        Seleccione el modelo a <strong>editar o eliminar</strong>.
+                    </div>
+                    <label for="inputEditModel" class="form-label mt-2">Modelo a editar</label>
+                    <input type="number" id="valvalModel" class="form-control" hidden>
+                    <input type="text" id="inputEditModel" class="form-control">
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button class="btn btn-danger" id="addEditDeleteModel" disabled
+                            data-bs-target="#questionDeleteModel"
+                            data-bs-toggle="modal">Eliminar</button>
+                    <button class="btn btn-primary" id="addEditModel" disabled>Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal alerta eliminar modelo -->
+    <div class="modal fade" id="questionDeleteModel" aria-hidden="true" aria-labelledby="ModalBrandQuestionDeleteModel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div id="modal-body-add-model" class="modal-content">
+                <div class="modal-header bg-warning border-warning" style="--bs-bg-opacity: .5;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-warning d-flex" style="--bs-bg-opacity: .5;">
+                    <i class="material-icons" style="font-size:50px;color:red">warning</i>
+                    <p id="modal-delete-model" class="h2 text-center"></p>
+                </div>
+                <div class="modal-footer bg-warning border-warning" style="--bs-bg-opacity: .5;">
+                    <button class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                    <button class="btn btn-primary" id="deleteModel" data-bs-dismiss="modal">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

@@ -306,6 +306,14 @@ oTable = $('#table-stock').DataTable({
                 )}
                 -->
                 `; }
+        },
+        {"data": "codProd", render: function (codProd) {
+            return `
+                    <div class="text-center">
+                        <img src="http://appdemo1.solarc.pe/imagenes/${codProd}"
+                    </div>
+                `;
+            }
         }
      ],
     responsive: true,

@@ -54,13 +54,13 @@
         </div>
       </nav>
 
-        <main class="flex-shrink-0">
-			<div class="container">
-				<div class="bg-light p-5 rounded">
-					@yield('content')
-				</div>
-			</div>
-        </main>
+      <main class="flex-shrink-0">
+        <div class="container">
+          <div class="bg-light p-5 rounded">
+            @yield('content')
+          </div>
+        </div>
+      </main>
 
     </div>
 

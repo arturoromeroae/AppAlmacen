@@ -28,15 +28,16 @@
         data-search-highlight="true">
             <thead class="bg-dark" style="color:white;">
                 <tr>
-                    <th data-search-highlight-formatter="customSearchFormatter" data-width="80" scope="col">Código</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" data-width="300" scope="col">Nombre</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Descripcion</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Cantidad</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Base</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">P. Venta</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Marca</th>
-                    <th data-search-highlight-formatter="customSearchFormatter" scope="col">Modelo</th>
-                    <th class="accion-stock" data-width="100" width="100" scope="col">Acción</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>P. Base</th>
+                    <th>P. Venta</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th class="accion-stock" data-width="100" width="100">Acción</th>
+                    <th>Imagen</th>
                 </tr>
             </thead>
             <tbody>
