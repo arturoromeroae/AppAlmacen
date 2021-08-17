@@ -129,21 +129,23 @@
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label mt-4">Marca</label>
                                 <select class="form-select" aria-label="Default select example" id="select_marca" name="selectModalMarca" required>
-                                @if ($selectArrayMarca['data'] != null)
-                                    @foreach($selectArrayMarca['data'] as $selectMarca)
-                                        <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
-                                    @endforeach
-                                @endif
+                                    <option value="0" selected>Seleccione una marca</option>
+                                    @if ($selectArrayMarca['data'] != null)
+                                        @foreach($selectArrayMarca['data'] as $selectMarca)
+                                            <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label">Modelo</label>
                                 <select class="form-select" aria-label="Default select example" id="select_modelo" name="selectModalModelo" required>
-                                @if ($selectArrayModelo['data'] != null)
-                                    @foreach($selectArrayModelo['data'] as $selectModelo)
-                                        <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
-                                    @endforeach
-                                @endif
+                                    <option value="0" selected>Seleccione un modelo</option>
+                                    @if ($selectArrayModelo['data'] != null)
+                                        @foreach($selectArrayModelo['data'] as $selectModelo)
+                                            <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
 
