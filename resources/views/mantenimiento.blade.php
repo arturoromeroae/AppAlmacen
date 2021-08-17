@@ -141,7 +141,7 @@
                                 <label for="price-modal" class="col-form-label">Modelo</label>
                                 <select class="form-select" aria-label="Default select example" id="select_modelo" name="selectModalModelo" required>
                                     <option value="0" selected>Seleccione un modelo</option>
-                                    @if ($selectArrayModelo['data'] != null)
+                                    @if ($selectArrayModelo['messages'] == [])
                                         @foreach($selectArrayModelo['data'] as $selectModelo)
                                             <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
                                         @endforeach
@@ -251,7 +251,7 @@
                             <label for="formFile" class="form-label">Modelo</label>
                             <select class="form-select" aria-label="Default select example" id="select_modelo" name="select_modelo">
                                 <option value= "0" selected>Selecciona un modelo</option>
-                                @if ($selectArrayModelo['data'] != null)
+                                @if ($selectArrayModelo['messages'] == [])
                                     @foreach($selectArrayModelo['data'] as $selectModelo)
                                         <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
                                     @endforeach
