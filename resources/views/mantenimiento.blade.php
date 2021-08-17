@@ -15,7 +15,7 @@
     <?php echo $result_maintance; ?>
 @endisset
 
-<div id="container-maintance" class="container">
+<div id="container-maintance" class="container" style="margin: 0;">
 	<br />
 	<br />
     <!-- titulo -->

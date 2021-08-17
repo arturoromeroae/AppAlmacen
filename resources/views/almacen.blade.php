@@ -14,7 +14,7 @@
     <?php echo $result; ?>
 @endisset
 
-<div class="container">
+<div class="container" style="margin: 0;">
 	<br />
 	<br />
     <!-- titulo -->
