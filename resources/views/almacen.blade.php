@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 @section('content')
-
+<div id="alert" class="mt-5">
+</div>
 @isset($result)
     <?php echo $result; ?>
 @endisset
@@ -54,6 +55,9 @@
             </button>
             <button id="report-catalog" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reportCatalog">
                 Reporte de Catálogo
+            </button>
+            <button id="upload-xls" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#excelModal">
+                Cargar Excel
             </button>
         </div>
     </div>
@@ -161,6 +165,27 @@
         </div>
     </div>
     
+    <!-- Modal agregar excel -->
+    <div class="modal fade" id="excelModal" aria-hidden="true" aria-labelledby="ModalExcel" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div id="modal-body-add" class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="ModalExcel">Agregar Excel</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <label for="inputNewBrand" class="form-label"><strong>Archivo ".xlsx"</strong></label>
+                <input id="inputExcel" class="form-control" aria-describedby="excelHelpBlock" type="file">
+                <div id="excelHelpBlock" class="form-text">
+                    Inserte el archivo para actualizar la base de datos.
+                </div>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button class="btn btn-primary" data-bs-dismiss="modal" id="addExcel">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
