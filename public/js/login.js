@@ -1,3 +1,7 @@
+// limpiar local storage
+$(document).ready(function () {
+    localStorage.clear()
+});
 
 // obtener usuarios por ajax
 $('#loginButton').click(function (e) { 

@@ -5,6 +5,12 @@
     search: true,
 });*/
 
+$(document).ready(function () {
+  if (localStorage.getItem('userId') == "" || localStorage.getItem('userId') == null) {
+      window.location.replace("http://app-motos.herokuapp.com/");
+  }
+});
+
 oTable = $('#table-maintance').DataTable({
   "ajax": 'http://appdemo1.solarc.pe/api/Productos/GetProductos',
   "columns": [

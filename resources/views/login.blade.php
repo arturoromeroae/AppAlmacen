@@ -17,11 +17,16 @@
 <div id="errorLogin">
 </div>
 
-<div class="container mt-5 ml-5" style="margin-left:10%;">
-<div class="card text-white bg-dark" style="max-width: 50rem;">
+<div class="container ml-5" style="margin-left:10%;">
+  <div class="card text-white bg-dark" style="max-width: 50rem;">
+    <div class="bg-light" style="text-align: center;">
+        <img src="{{ url('images/sin_fondo.png') }}" style="margin-top: -90px; margin-bottom: -90px;" width="400">
+    </div>
+    <br>
+    <br>
     <h3 class="card-title text-center mt-3">Inicio de sesión</h3>
         <div class="card-body">
-            <form class="row m-5">
+            <form class="row">
                 <div class="row-sm">
                     <label for="inputUsername" class="form-label">Usuario</label>
                     <input type="text" class="form-control" id="inputUsername">
