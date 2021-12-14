@@ -147,10 +147,12 @@
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label mt-4">Marca</label>
                                 <select class="form-select" aria-label="Default select example" id="select_marca" name="selectModalMarca" required>
-                                    <option value="0" selected>Seleccione una marca</option>
                                     @if ($selectArrayMarca['data'] != null)
+                                        <option name="brand" value="{{ $product['marca'] }}" selected>{{ $product['marca'] }}</option>
                                         @foreach($selectArrayMarca['data'] as $selectMarca)
-                                            <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
+                                            @if ($selectMarca['valor'] != $product['marca'])
+                                                <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
+                                            @endif
                                         @endforeach
                                     @endif
                                 </select>
@@ -158,10 +160,12 @@
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label">Modelo</label>
                                 <select class="form-select" aria-label="Default select example" id="select_modelo" name="selectModalModelo" required>
-                                    <option value="0" selected>Seleccione un modelo</option>
+                                    <option name="brand" value="{{ $product['modelo'] }}" selected>{{ $product['modelo'] }}</option>
                                     @if ($selectArrayModelo['messages'] == [])
                                         @foreach($selectArrayModelo['data'] as $selectModelo)
-                                            <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
+                                            @if ($selectModelo['valor'] != $product['modelo'])
+                                                <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
+                                            @endif
                                         @endforeach
                                     @endif
                                 </select>

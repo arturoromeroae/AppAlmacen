@@ -35,7 +35,7 @@ oTable = $('#table-maintance').DataTable({
     {"data": "codProd", render: function (codProd) {
       return `
               <div class="text-center">
-                  <img src="http://appdemo1.solarc.pe/imagenes/${codProd}"
+                  <img src="http://appdemo1.solarc.pe/imagenes/${codProd}.png" width="100" height="100">
               </div>
           `;
       }
