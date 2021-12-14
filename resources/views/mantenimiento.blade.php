@@ -148,7 +148,15 @@
                                 <label for="price-modal" class="col-form-label mt-4">Marca</label>
                                 <select class="form-select" aria-label="Default select example" id="select_marca" name="selectModalMarca" required>
                                     @if ($selectArrayMarca['data'] != null)
-                                        <option name="brand" value="{{ $product['marca'] }}" selected>{{ $product['marca'] }}</option>
+                                        @if ($product['marca'] != "")
+                                            @foreach($selectArrayMarca['data'] as $selectMarca)
+                                                @if ($selectMarca['valor'] == $product['marca'])
+                                                    <option name="brand" value="{{ $selectMarca['idParam'] }}" selected>{{ $selectMarca['valor'] }}</option>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <option name="brand" value="0" selected>Seleccione una marca</option>
+                                        @endif
                                         @foreach($selectArrayMarca['data'] as $selectMarca)
                                             @if ($selectMarca['valor'] != $product['marca'])
                                                 <option name="brand" value="{{ $selectMarca['idParam'] }}">{{ $selectMarca['valor'] }}</option>
@@ -160,14 +168,22 @@
                             <div class="col-sm-6">
                                 <label for="price-modal" class="col-form-label">Modelo</label>
                                 <select class="form-select" aria-label="Default select example" id="select_modelo" name="selectModalModelo" required>
-                                    <option name="brand" value="{{ $product['modelo'] }}" selected>{{ $product['modelo'] }}</option>
-                                    @if ($selectArrayModelo['messages'] == [])
+                                @if ($selectArrayModelo['messages'] == [])
+                                    @if ($product['modelo'] != "")
                                         @foreach($selectArrayModelo['data'] as $selectModelo)
-                                            @if ($selectModelo['valor'] != $product['modelo'])
-                                                <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
+                                            @if ($selectModelo['valor'] == $product['modelo'])
+                                                <option name="model" value="{{ $selectModelo['idParam'] }}" selected>{{ $selectModelo['valor'] }}</option>
                                             @endif
                                         @endforeach
+                                    @else
+                                        <option name="model" value="0" selected>Seleccione un modelo</option>
                                     @endif
+                                    @foreach($selectArrayModelo['data'] as $selectModelo)
+                                        @if ($selectModelo['valor'] != $product['modelo'])
+                                            <option name="model" value="{{ $selectModelo['idParam'] }}">{{ $selectModelo['valor'] }}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
                                 </select>
                             </div>
 
