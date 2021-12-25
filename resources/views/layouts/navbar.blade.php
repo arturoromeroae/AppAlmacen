@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ url('images/sin_fondo.png') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -62,6 +63,20 @@
               <!--<a class="nav-link text-navbar hover-navbar text-align" aria-current="page" href="{{ url('/') }}"><i class="material-icons" style="font-size:25px;">home</i> Inicio</a>-->
                 <a id="nav-menu" aria-current="page" href="{{ url('/inicio') }}" class="nav-link text-navbar hover-navbar bi">
                   <i class="material-icons d-block mb-1" style="font-size:25px;">home</i> Inicio
+                </a>
+              </li>
+              @endif
+
+              @if(Request::path() === 'cotizar' or Request::path() === 'cotizar/1' or Request::path() === 'cotizar/1/12')
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi active" href="{{ url('/cotizar') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">receipt</i> Cotizaciones
+                </a>
+              </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link text-navbar hover-navbar bi" href="{{ url('/cotizar') }}">
+                  <i class="material-icons d-block mb-1" style="font-size:25px;">receipt</i> Cotizaciones
                 </a>
               </li>
               @endif
@@ -128,6 +143,7 @@
                                 Usuario
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdownEdit" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{{ url('/usuarios') }}">Agregar Usuarios</a></li>
                   <li><a id="logoutNav" class="dropdown-item" href="/">Cerrar Sesion</a></li>
                 </ul>
               </li>

@@ -1,19 +1,29 @@
+
 $(document).ready(function(){
     
     if (localStorage.getItem('userId') == "" || localStorage.getItem('userId') == null) {
         window.location.replace("http://app-motos.herokuapp.com/");
     }
-
+    const cot = localStorage.getItem("cotizacion");
+    
     $('.cancel').click(function (e) { 
         e.preventDefault();
         location.replace("/repuestos")
     });
+    var idResponse;
+    var urlCar;
 
-    // id de carrito, respuesta del post
-    const idResponse = response;  
+    if (localStorage.getItem('cotizacion') !== null) {
+        idResponse = cot;
+        urlCar = `http://appdemo1.solarc.pe/api/Cotiza/GetCotiza?IdVentaCab=${idResponse}`;
+        
+    }else{
+        // id de carrito, respuesta del post
+        idResponse = response;
+        urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
+    }
     // url getcarrito
-    const urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
-
+   console.log(idResponse)
     //////// INICIO AJAX OBTENER CARRITO ////////
     // ajax para cargar carrito
     $.ajax({
@@ -436,7 +446,7 @@ $(document).ready(function(){
     $('.type_shop').change(function () {
         var conceptName = $('.type_shop').find(":selected").val(); // obtener el valor seleccionado en el select
 
-        if (conceptName == 1 || conceptName == "") {
+        if (conceptName == 1 || conceptName == "" || conceptName == 4) {
             $("#dni-input").css("display", "none"); // input DNI
             $("#client-input").css("display", "block"); // input nombre cliente
             $("#ruc-input").css("display", "none"); // input RUC
@@ -447,6 +457,21 @@ $(document).ready(function(){
             $("#ruc-input").css("display", "block"); // input RUC
             $("#razon-input").css("display", "block"); // input razon social
             $("#dni-input").css("display", "block"); // input DNI
+        }
+
+        if (conceptName == 4) {
+            const totPay = $('#total-pay').val();
+            $('#bill').val(totPay);
+            $('.send-bill').val(totPay);
+            $('.back').attr('value', 0);
+            $('.back-bill').val(0.00);
+            $('#bill').prop("disabled", true);
+        }else{
+            $('#bill').val('');
+            $('.send-bill').val('');
+            $('.back').attr('value', '');
+            $('.back-bill').val('');
+            $('#bill').prop("disabled", false);
         }
     });
 
@@ -647,6 +672,9 @@ $(document).ready(function(){
         } else if (type_bill == 3) {
             doc.setFontSize(15);
                 doc.text(150, 40, 'Factura');
+        } else if (type_bill == 4) {
+            doc.setFontSize(15);
+                doc.text(150, 40, 'Cotización');
         } else {
             doc.setFontSize(15);
                 doc.text(159, 40, '');   
@@ -732,18 +760,33 @@ $(document).ready(function(){
         //         doc.text(20, 75, 'Cod.              Producto                                 Cantidad        Precio');
 
         // lista de informacion de la venta
-        var info = [
-            '\n' + '                    Monto a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
-            '                    Descuento: ' + $(discount).val() + ' ' + '\n' +
-            '                    Total a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
-            '                    Pago con: ' + $(cash).val() + ' '+ 'S/.' + '\n' +
-            '                    Vuelto: ' + ( Math.round( (cashback.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n \n' +
-            '                    Cuentas BCP: \n' +
-            '                    Corriente Soles: 3802552369086 \n' +
-            '                    CCI: 00238000255236908642\n' +
-            '                    Corriente Dólares: 3802519002157 \n' +
-            '                    CCI: 00238000251900215743'
-        ]
+        if (type_bill == 4) {
+            var info = [
+                '\n' + '                    Monto a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
+                '                    Descuento: ' + $(discount).val() + ' ' + '\n' +
+                '                    Total a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
+                '                    Pago con: ' + '' + '\n' +
+                '                    Vuelto: ' + '' + '\n \n' +
+                '                    Cuentas BCP: \n' +
+                '                    Corriente Soles: 3802552369086 \n' +
+                '                    CCI: 00238000255236908642\n' +
+                '                    Corriente Dólares: 3802519002157 \n' +
+                '                    CCI: 00238000251900215743'
+            ]
+        }else{
+            var info = [
+                '\n' + '                    Monto a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
+                '                    Descuento: ' + $(discount).val() + ' ' + '\n' +
+                '                    Total a pagar: ' + ( Math.round( (totalBill.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n' +
+                '                    Pago con: ' + $(cash).val() + ' '+ 'S/.' + '\n' +
+                '                    Vuelto: ' + ( Math.round( (cashback.val())* 100)/100 ).toFixed(2) + ' '+ 'S/.' + '\n \n' +
+                '                    Cuentas BCP: \n' +
+                '                    Corriente Soles: 3802552369086 \n' +
+                '                    CCI: 00238000255236908642\n' +
+                '                    Corriente Dólares: 3802519002157 \n' +
+                '                    CCI: 00238000251900215743'
+            ]
+        }
         infoBill.push(info);
 
         // Muestra: Monto a pagar, Descuento, Total a pagar, Pago con, Vuelto.

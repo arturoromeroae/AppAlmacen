@@ -1,7 +1,7 @@
 // limpiar local storage
 $(document).ready(function () {
     localStorage.clear()
-
+    
     window.addEventListener('beforeunload', function (e) {
         e.preventDefault();
         e.returnValue = 'Yes';

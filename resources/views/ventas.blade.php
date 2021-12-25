@@ -37,6 +37,7 @@
                 <option value="1">Nota de Venta</option>
                 <option value="2">Boleta de Venta</option>
                 <option value="3">Factura</option>
+                <option value="4">Cotizaciones</option>
             </select>
         </div>
         <div class="col-1">

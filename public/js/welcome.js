@@ -3,6 +3,8 @@ $(document).ready(function () {
         window.location.replace("http://app-motos.herokuapp.com/");
     }
 
+    window.localStorage.removeItem('cotizacion');
+
     window.addEventListener('beforeunload', function (e) {
         e.preventDefault();
         e.returnValue = '';

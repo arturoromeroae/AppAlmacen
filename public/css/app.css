@@ -50,3 +50,26 @@ main{
     margin: auto;
     margin-top: 3%;
 }
+
+.dataTables_processing{
+    z-index: 105;
+}
+
+.contenedor-image-stock{
+    cursor: zoom-in;
+}
+
+#increase-image img{
+    width: 100%;
+}
+
+.image-pr{
+    transition: ease-in-out 0.2s;
+}
+
+.image-pr:hover{
+    transition: linear 0.2s;
+    filter: grayscale(90%);
+    width: 110;
+    height: 110;
+}

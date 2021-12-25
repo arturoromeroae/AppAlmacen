@@ -7,6 +7,8 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SpareController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CotizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,12 @@ Route::any('/facturas', [BillController::class, 'sendBill'])->name('facturas');
 
 Route::get('/repuestos', [SpareController::class, 'index'])->name('repuestos');
 
+Route::get('/cotizar', [CotizeController::class, 'index'])->name('cotizar');
+
+Route::any('/cotizar/{id}', [CotizeController::class, 'shopCotize'])->name('cotizar.post');
+
 Route::any('/repuestos/{id}', [SpareController::class, 'shop'])->name('repuestos.post');
 
 Route::post('/repuestos/{id}/{product}', [SpareController::class, 'sendBill'])->name('repuestos.complete');
+
+Route::any('/usuarios', [UsersController::class, 'users'])->name('usuarios');

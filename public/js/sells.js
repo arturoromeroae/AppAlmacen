@@ -2,6 +2,8 @@ $(document).ready(function () {
     if (localStorage.getItem('userId') == "" || localStorage.getItem('userId') == null) {
         window.location.replace("http://app-motos.herokuapp.com/");
     }
+
+    window.localStorage.removeItem('cotizacion');
 });
 
 const comp = []
@@ -98,7 +100,7 @@ oTable = $('#table-sells').DataTable({
     //"serverSide": true,
 }); 
 
-// obtener el tipo de factura por ajax
+// obtener usuarios por ajax
 $.ajax({
 type:"GET",
 datatype: "json",
@@ -114,8 +116,14 @@ success: function(data){
 $('#search').click(function () {
     select = $('#users').val(); // obtener el valor seleccionado
     bill = $('#typeBill').val(); // obtener el valor seleccionado
-    oTable.ajax.url( `http://appdemo1.solarc.pe/api/Venta/ConsultaVenta?IdSede=1&Usuario=${select}&TipoComprobante=${bill}&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}` ).load();
-    var test = `http://appdemo1.solarc.pe/api/Venta/ConsultaVenta?IdSede=1&Usuario=${select}&TipoComprobante=${bill}&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}`
+    if (bill == 4) {
+        oTable.ajax.url( `http://appdemo1.solarc.pe/api/Cotiza/ConsultaCotiza?IdSede=1&Usuario=${select}&TipoComprobante=${bill}&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}` ).load();
+        var test = `http://appdemo1.solarc.pe/api/Cotiza/ConsultaCotiza?IdSede=1&Usuario=${select}&TipoComprobante=${bill}&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}`
+
+    }else{
+        oTable.ajax.url( `http://appdemo1.solarc.pe/api/Venta/ConsultaVenta?IdSede=1&Usuario=${select}&TipoComprobante=${bill}&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}` ).load();
+        var test = `http://appdemo1.solarc.pe/api/Venta/ConsultaVenta?IdSede=1&Usuario=${select}&TipoComprobante=${bill}&FechaDesde=${$("#datestart").val()}&FechaHasta=${$("#dateend").val()}`
+    }
 });
 
 $('#table-sells tbody').on('click', 'tr', function () {

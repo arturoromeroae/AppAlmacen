@@ -225,9 +225,34 @@ class SpareController extends Controller
             "ventaDet" => $blpr
         ];
 
+        $cotizeProducts = [
+            "fecha" => $fecha,
+            "idCliente" => $idCl,
+            "tipoVenta" => $all_products_bill['selectBill'],
+            "subTotal" => $all_products_bill['subtotalBill'],
+            "igv" => $all_products_bill['igvBill'],
+            "total" => $all_products_bill['totalBill'],
+            "vuelto" => $all_products_bill['backBill'],
+            "porcDscto" => $discountValuePor,
+            "valorDscto" => $discountValue,
+            "valorVenta" => $all_products_bill['subtotalBill'],
+            "idSede" => 1,
+            "idPedCab" => $all_products_bill['idBill'],
+            "usuario" => $all_products_bill['username'],
+            "rucCliente" => $ruc,
+            "razonSocial" => $razon,
+            "idOrigen" => 1,
+            "cotizaDet" => $blpr
+        ];
+
         // enviar factura
-        $shopBill = Http::post('http://appdemo1.solarc.pe/api/Venta/InsertaVenta', $billProducts);
-        $responseBill = $shopBill->json();
+        if ($all_products_bill['selectBill'] == 4) {
+            $shopBill = Http::post('http://appdemo1.solarc.pe/api/Cotiza/InsertaCotiza', $cotizeProducts);
+            $responseBill = $shopBill->json();
+        }else{
+            $shopBill = Http::post('http://appdemo1.solarc.pe/api/Venta/InsertaVenta', $billProducts);
+            $responseBill = $shopBill->json();
+        }
 
         // obteniendo codigo de respuesta
         if (($shopBill -> getStatusCode()) == 200) {
@@ -241,7 +266,7 @@ class SpareController extends Controller
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
-            // print_r($billProducts);
+            //print_r($billProducts);
         }else{
             $resultBill = 
             '

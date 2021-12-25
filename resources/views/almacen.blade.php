@@ -174,6 +174,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Imagen del producto <span id="pr-name"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="increase-image"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Modal agregar excel -->
     <div class="modal fade" id="excelModal" aria-hidden="true" aria-labelledby="ModalExcel" tabindex="-1">
