@@ -75,7 +75,7 @@
 @if ($cotizacionesArray['data'] != null)
 <?php $i=0 ?>
 @foreach($cotizacionesArray['data'] as $cotizaciones)
-    <div class="modal fade" id="cotize-modal-{{ $cotizaciones['idVentaCab'] }}" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cotize-modal-{{ $cotizaciones['idVentaCab'] }}" tabindex="-1" aria-labelledby="cotizeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -134,5 +134,6 @@
 <script src="{{ url('DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js') }}"></script>
 
 <!-- Archivo Javascript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ url('js/cotize.js') }}"></script>
 @endsection

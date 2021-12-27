@@ -32,7 +32,7 @@ class CotizeController extends Controller
         $selectModelo = HTTP::get('http://appdemo1.solarc.pe/api/Maestro/GetParametros?tabla=MODELO');
         $selectArrayModelo = $selectModelo -> json();
 
-        $cotizaciones = HTTP::get('http://appdemo1.solarc.pe/api/Cotiza/ConsultaCotiza?IdSede=1&Usuario=JGONZALES&TipoComprobante=4&FechaDesde=2021.12.01&FechaHasta=2021.12.23');
+        $cotizaciones = HTTP::get('http://appdemo1.solarc.pe/api/Cotiza/GetCotiza');
         $cotizacionesArray = $cotizaciones -> json();
 
         return view('cotizar', compact('productsArray', 'selectArrayMarca', 'selectArrayModelo', 'cotizacionesArray'));

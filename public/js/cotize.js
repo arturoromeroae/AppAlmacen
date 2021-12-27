@@ -49,7 +49,7 @@ oTable = $('#table-cotize').DataTable({
         {"data" : "usuario"},
         {"data" : "total"},
         {"data": "idVentaCab", render: function (idVentaCab) { 
-            return `<a id="${idVentaCab}" class="nulled link-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+            return `<a id="${idVentaCab}" class="nulled link-danger" data-bs-toggle="modal" data-bs-target="#cotizeModalLabel" style="cursor: pointer;">
                         <i class="material-icons" style="font-size:25px; margin-left: 40%;">remove_shopping_cart</i>
                     </a>`; 
             }
