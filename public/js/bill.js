@@ -616,7 +616,7 @@ $(document).ready(function(){
         var inputsName = $('.name-b');
         var inputsCuantity = $('.cuantity-b');
         var inputsPrice = $('.price-b');
-        var totalBill = $('.send-bill');
+        var totalBill = $("#total-pay");
         var subtotalBill = $('.subtotalClient');
         var discount = $('.rest-discount')
         var cash = $('.pay-bill')
@@ -788,7 +788,8 @@ $(document).ready(function(){
             ]
         }
         infoBill.push(info);
-
+        // console.log(subtotalBill.val());
+        
         // Muestra: Monto a pagar, Descuento, Total a pagar, Pago con, Vuelto.
         doc.setFontSize(10);
                 doc.text(10, 75, `${infoBill.join("")}`);
@@ -827,7 +828,7 @@ $(document).ready(function(){
                 data.settings.margin.top = 10;
             }
         });
-        console.log(result_table);
+        // console.log(result_table);
 
         // Descargar documento PDF
         doc.save(`factura-${$('.numberBillClient').val()}.pdf`);
