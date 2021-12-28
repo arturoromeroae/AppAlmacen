@@ -53,12 +53,14 @@ oTable = $('#table-cotize').DataTable({
             numero: "numero", 
             razonSocial : "razonSocial", 
             total: "total",
-            estado: "estado"
+            estado: "estado",
+            fecha: "fecha"
         }, render: function (data) {
             $(`#btn-delete${data.idVentaCab}`).click(function () {
                 $(`#nCotize${data.idVentaCab}`).text(`${data.numero}`);
                 $(`#idCotize${data.idVentaCab}`).attr("value", data.idVentaCab);
                 $(`#totalCotize${data.idVentaCab}`).attr("value", data.total);
+                $(`#totalCotize${data.idVentaCab}`).attr("value", data.fecha);
             })
             return `
                     <a id="btn-delete${data.idVentaCab}" class="nulled link-danger" data-bs-toggle="modal" data-bs-target="#deleteCotizeModal-${data.idVentaCab}" style="cursor: pointer;">
@@ -195,6 +197,92 @@ $('#table-cotize tbody').on('click', 'tr', function () {
                 localStorage.setItem("cotizacion", getDataTable.idVentaCab);
                 var origin = window.location.origin;
                 window.location.href=`${origin}/repuestos/1`;
+            });
+
+            const user = localStorage.getItem('user');
+            const productsDetail = [];
+
+            let counter = 0;
+            for (let i = 0; i < res.length; i++) {
+                
+                if (getDataTable.idVentaCab == res[i].idVentaCab) {
+                    counter++
+                    document.getElementById(`impr${getDataTable.idVentaCab}`).innerHTML += `<input value="${res[i].nombreProducto}" hidden>`
+    
+                    if (counter < 2) {
+                        $(`#dateCotize${getDataTable.idVentaCab}`).attr("value", res[i].fecha);
+                        $(`#subtCotize${getDataTable.idVentaCab}`).attr("value", res[i].subTotal);
+                    }
+                }
+            }
+
+            $(`#cancl-cotize-${getDataTable.idVentaCab}`).click(function () { 
+                document.getElementById(`impr${getDataTable.idVentaCab}`).innerHTML = ''
+            });
+
+            $(`#x-cotize-${getDataTable.idVentaCab}`).click(function () { 
+                document.getElementById(`impr${getDataTable.idVentaCab}`).innerHTML = ''
+            });
+
+            $(`#del-cotize-${getDataTable.idVentaCab}`).click(function () {
+                const idCotize = $(`#idCotize${getDataTable.idVentaCab}`).val();
+                const totCotize = $(`#totalCotize${getDataTable.idVentaCab}`).val();
+                const dateCotize = $(`#dateCotize${getDataTable.idVentaCab}`).val();
+                const subCotize = $(`#subtCotize${getDataTable.idVentaCab}`).val();
+                // console.log(subCotize)
+                // console.log(res.length)
+                
+                // for (let i = 0; i < $('.counterId').length; i++) {
+                //     const ids = {
+                //         'idVentaCab' : idSell,
+                //         'idProducto' : $(`.idProducts${i}`).val(),
+                //         'cantidad': $(`.cuantProducts${i}`).val(),
+                //         'precioVenta': $(`.pSellProducts${i}`).val(),
+                //         'valorVenta': $(`.valSellProducts${i}`).val(),
+                //         'subTotal': subSell,
+                //         'total': totSell,
+                //         'idOrigen' : 1,
+                //         'isAnulado' : 1
+                //     };
+                //     productsDetail.push(ids);
+                // }
+                
+                // fetch('http://appdemo1.solarc.pe/api/Venta/InsertaVenta', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         "fecha": dateSell,
+                //         "idCliente": 0,
+                //         "tipoVenta": 0,
+                //         "subTotal": subSell,
+                //         "igv": 0.18,
+                //         "total": totSell,
+                //         "vuelto": 0,
+                //         "porcDscto": 0,
+                //         "valorDscto": 0,
+                //         "valorVenta": 0,
+                //         "idSede": 1,
+                //         "idPedCab": 0,
+                //         "usuario": user,
+                //         "rucCliente": "string",
+                //         "razonSocial": "string",
+                //         "idOrigen": 1,
+                //         "isAnulado": 1,
+                //         "idVentaCab": idSell,
+                //         "ventaDet": productsDetail
+                //     })
+                // })
+                // .then(res => res.json())
+                // .then(data => {
+                // // enter you logic when the fetch is successful
+                //     location.reload();
+                // })
+                // .catch(error => {
+                // // enter your logic for when there is an error (ex. error toast)
+                // console.log(error)
+                // })
             });
         },
         // despues de cargar el contenido
