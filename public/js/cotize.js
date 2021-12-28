@@ -57,7 +57,6 @@ oTable = $('#table-cotize').DataTable({
             fecha: "fecha"
         }, render: function (data) {
             $(`#btn-delete${data.idVentaCab}`).click(function () {
-                $(`#nCotize${data.idVentaCab}`).text(`${data.numero}`);
                 $(`#idCotize${data.idVentaCab}`).attr("value", data.idVentaCab);
                 $(`#totalCotize${data.idVentaCab}`).attr("value", data.total);
                 $(`#totalCotize${data.idVentaCab}`).attr("value", data.fecha);
@@ -215,6 +214,8 @@ $('#table-cotize tbody').on('click', 'tr', function () {
                     }
                 }
             }
+
+            $(`#nCotize${getDataTable.idVentaCab}`).text(`${getDataTable.numero}`);
 
             $(`#cancl-cotize-${getDataTable.idVentaCab}`).click(function () { 
                 document.getElementById(`impr${getDataTable.idVentaCab}`).innerHTML = ''
