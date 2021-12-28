@@ -48,10 +48,23 @@ oTable = $('#table-cotize').DataTable({
         {"data" : "estado"},
         {"data" : "usuario"},
         {"data" : "total"},
-        {"data": "idVentaCab", render: function (idVentaCab) { 
-            return `<a id="${idVentaCab}" class="nulled link-danger" data-bs-toggle="modal" data-bs-target="#cotizeModalLabel" style="cursor: pointer;">
+        {"data": {
+            idVentaCab : "idVentaCab", 
+            numero: "numero", 
+            razonSocial : "razonSocial", 
+            total: "total",
+            estado: "estado"
+        }, render: function (data) {
+            $(`#btn-delete${data.idVentaCab}`).click(function () {
+                $(`#nCotize${data.idVentaCab}`).text(`${data.numero}`);
+                $(`#idCotize${data.idVentaCab}`).attr("value", data.idVentaCab);
+                $(`#totalCotize${data.idVentaCab}`).attr("value", data.total);
+            })
+            return `
+                    <a id="btn-delete${data.idVentaCab}" class="nulled link-danger" data-bs-toggle="modal" data-bs-target="#deleteCotizeModal-${data.idVentaCab}" style="cursor: pointer;">
                         <i class="material-icons" style="font-size:25px; margin-left: 40%;">remove_shopping_cart</i>
-                    </a>`; 
+                    </a>
+                    `;
             }
         },
         {"data": {
