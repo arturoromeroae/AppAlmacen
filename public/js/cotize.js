@@ -60,9 +60,11 @@ oTable = $('#table-cotize').DataTable({
                 $(`#idCotize${data.idVentaCab}`).attr("value", data.idVentaCab);
                 $(`#totalCotize${data.idVentaCab}`).attr("value", data.total);
                 $(`#totalCotize${data.idVentaCab}`).attr("value", data.fecha);
-            })
+                console.log('hola')
+            });
+
             return `
-                    <a id="btn-delete${data.idVentaCab}" class="nulled link-danger" data-bs-toggle="modal" data-bs-target="#deleteCotizeModal-${data.idVentaCab}" style="cursor: pointer;">
+                    <a id="btn-delete${data.idVentaCab}" class="nulled link-danger" data-bs-toggle="modal" data-bs-target="#deleteCotizeModal" style="cursor: pointer;">
                         <i class="material-icons" style="font-size:25px; margin-left: 40%;">remove_shopping_cart</i>
                     </a>
                     `;
@@ -76,7 +78,7 @@ oTable = $('#table-cotize').DataTable({
                     estado: "estado"
                 }, 
             render: function (data) {
-                $(`#cotiza-link-${data.idVentaCab}`).click(function (e) { 
+                $(`#cotiza-link-${data.idVentaCab}`).click(function () { 
                     $('.titulo-cotiza').text(`${data.numero}`);
                     $('.client-cotiza').text(`${data.razonSocial}`);
                     $('.status-cotiza').text(`${data.estado}`);
@@ -85,10 +87,7 @@ oTable = $('#table-cotize').DataTable({
                         type: "GET",
                         url: `http://appdemo1.solarc.pe/api/Cotiza/GetCotiza?IdVentaCab=${data.idVentaCab}`,
                         beforeSend: function(){
-                            // muestra spinner loading
-                            $(`#loader-${data.idVentaCab}`).show();
-                            // esconde pantalla de facturas
-                            $(`#cotizaForm${data.idVentaCab}`).hide();
+                            
                         },
                         data: "data",
                         dataType: "json",
@@ -102,17 +101,14 @@ oTable = $('#table-cotize').DataTable({
                         },
                         // despues de cargar el contenido
                         complete:function(response){
-                            // esconde spinner loading
-                            $(`#loader-${data.idVentaCab}`).hide();
-                            // muestra pantalla de facturas
-                            $(`#cotizaForm${data.idVentaCab}`).show();
+                            
                         }
                     });
                 
                 });
             return `
                     <input id="cotiza-${data.idVentaCab}" type="text" class="form-control tester" value="${data.idVentaCab}" hidden>
-                    <a id="cotiza-link-${data.idVentaCab}" class="nulled" aria-disabled="true" href="#cotize-modal-${data.idVentaCab}" data-bs-toggle="modal" data-bs-target="#cotize-modal-${data.idVentaCab}">
+                    <a id="cotiza-link-${data.idVentaCab}" class="nulled cotiza-link" aria-disabled="true" href="#cotize-modal" data-bs-toggle="modal" data-bs-target="#cotize-modal">
                         <i class="material-icons" style="font-size:25px; margin-left: 40%;">shopping_cart</i>
                     </a>
                     `; 
@@ -172,14 +168,16 @@ $('#table-cotize tbody').on('click', 'tr', function () {
     $('.client-cotiza').text(`${getDataTable.razonSocial}`);
     $('.status-cotiza').text(`${getDataTable.estado}`);
     $('.pay-cotiza').text(`S/${getDataTable.total}`);
+    $(`#idCab`).attr("value", getDataTable.idVentaCab);
+
     $.ajax({
         type: "GET",
         url: `http://appdemo1.solarc.pe/api/Cotiza/GetCotiza?IdVentaCab=${getDataTable.idVentaCab}`,
         beforeSend: function(){
             // muestra spinner loading
-            $(`#loader-${getDataTable.idVentaCab}`).show();
+            $(`#loader`).show();
             // esconde pantalla de facturas
-            $(`#cotizaForm${getDataTable.idVentaCab}`).hide();
+            $(`#cotizaForm`).hide();
         },
         data: "data",
         dataType: "json",
@@ -191,7 +189,7 @@ $('#table-cotize tbody').on('click', 'tr', function () {
             }
             $('.products-cotiza').html(`${prod}`);
             
-            $(`#venderCotizacion-${getDataTable.idVentaCab}`).click(function () { 
+            $(`#venderCotizacion`).click(function () { 
                 $('#idCab').attr('value', getDataTable.idVentaCab);
                 localStorage.setItem("cotizacion", getDataTable.idVentaCab);
                 var origin = window.location.origin;
@@ -289,9 +287,9 @@ $('#table-cotize tbody').on('click', 'tr', function () {
         // despues de cargar el contenido
         complete:function(response){
             // esconde spinner loading
-            $(`#loader-${getDataTable.idVentaCab}`).hide();
+            $(`#loader`).hide();
             // muestra pantalla de facturas
-            $(`#cotizaForm${getDataTable.idVentaCab}`).show();
+            $(`#cotizaForm`).show();
         }
     });
 });

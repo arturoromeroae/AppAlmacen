@@ -23,7 +23,7 @@ $(document).ready(function(){
         urlCar = `http://appdemo1.solarc.pe/api/Carrito/GetCarrito?IdCarrito=${idResponse}`;
     }
     // url getcarrito
-   console.log(idResponse)
+   
     //////// INICIO AJAX OBTENER CARRITO ////////
     // ajax para cargar carrito
     $.ajax({

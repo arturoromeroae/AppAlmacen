@@ -72,11 +72,9 @@
 </section>
 
 <!-- Modals -->
-@if ($cotizacionesArray['data'] != null)
-<?php $i=0 ?>
-@foreach($cotizacionesArray['data'] as $cotizaciones)
+
     <!-- Modal vender -->
-    <div class="modal fade" id="cotize-modal-{{ $cotizaciones['idVentaCab'] }}" tabindex="-1" aria-labelledby="cotizeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cotize-modal" tabindex="-1" aria-labelledby="cotizeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,8 +83,8 @@
                 </div>
                 <p class="h3 text-center text-capitalize titulo-cotiza"></p>
                 <div class="modal-body">
-                    <div id="loader-{{ $cotizaciones['idVentaCab'] }}" class="loader mt-3" ></div>
-                    <form id="cotizaForm{{ $cotizaciones['idVentaCab'] }}" action="" style="display: none;">
+                    <div id="loader" class="loader mt-3" ></div>
+                    <form id="cotizaForm" action="" style="display: none;">
                         <input id="idCab" type="text" value="" hidden>
                         <div class="row">
                             <div class="col-sm-6">
@@ -109,7 +107,7 @@
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                         Cancelar <i class="material-icons" style="font-size:15px;">highlight_off</i>
                                     </button>
-                                    <button id="venderCotizacion-{{ $cotizaciones['idVentaCab'] }}" type="button" class="btn btn-primary">
+                                    <button id="venderCotizacion" type="button" class="btn btn-primary">
                                         Vender <i class="material-icons" style="font-size:15px;">shopping_cart</i>
                                     </button>
                                 </div>
@@ -122,31 +120,28 @@
     </div>
 
     <!-- Modal eliminar -->
-    <div class="modal fade" id="deleteCotizeModal-{{ $cotizaciones['idVentaCab'] }}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteCotizeModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Anular Ventas</h5>
-                <button id="x-cotize-{{ $cotizaciones['idVentaCab'] }}" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="x-cotize" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-delete text-center fs-4">
-                <input type="text" id="idCotize{{ $cotizaciones['idVentaCab'] }}" hidden>
-                <input type="text" id="totalCotize{{ $cotizaciones['idVentaCab'] }}" hidden>
-                <input type="text" id="dateCotize{{ $cotizaciones['idVentaCab'] }}" hidden>
-                <input type="text" id="subtCotize{{ $cotizaciones['idVentaCab'] }}" hidden>
-                <div id="impr{{ $cotizaciones['idVentaCab'] }}"></div>
-                ¿Esta seguro que desea anular la cotizacion <strong><span id="nCotize{{ $cotizaciones['idVentaCab'] }}"></span></strong>?
+                <input type="text" id="idCotize" hidden>
+                <input type="text" id="totalCotize" hidden>
+                <input type="text" id="dateCotize" hidden>
+                <input type="text" id="subtCotize" hidden>
+                <div id="impr"></div>
+                ¿Esta seguro que desea anular la cotizacion <strong><span id="nCotize"></span></strong>?
             </div>
             <div class="modal-footer text-center">
-                <button id="cancl-cotize-{{ $cotizaciones['idVentaCab'] }}" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button id="del-cotize-{{ $cotizaciones['idVentaCab'] }}" type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                <button id="cancl-cotize" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button id="del-cotize" type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
             </div>
             </div>
         </div>
     </div>
-<?php $i++ ?>
-@endforeach
-@endif
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
