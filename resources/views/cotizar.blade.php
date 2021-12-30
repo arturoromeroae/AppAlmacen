@@ -124,20 +124,28 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Anular Ventas</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Anular Cotización</h5>
                 <button id="x-cotize" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-delete text-center fs-4">
+                <div id="loadDelete" style="display: none;">
+                    <div class="spinner-grow text-dark" role="status" style="width: 4rem; height: 4rem;">
+                    </div>
+                    <br>
+                    <span class="m-5">Anulando Cotización...</span>
+                </div>
                 <input type="text" id="idCotize" hidden>
                 <input type="text" id="totalCotize" hidden>
                 <input type="text" id="dateCotize" hidden>
                 <input type="text" id="subtCotize" hidden>
                 <div id="impr"></div>
-                ¿Esta seguro que desea anular la cotizacion <strong><span id="nCotize"></span></strong>?
+                <div id="deleteInfo">
+                    ¿Esta seguro que desea anular la cotizacion <strong><span id="nCotize"></span></strong>?
+                </div>
             </div>
             <div class="modal-footer text-center">
                 <button id="cancl-cotize" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button id="del-cotize" type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                <button id="del-cotize" type="button" class="btn btn-primary">Aceptar</button>
             </div>
             </div>
         </div>
