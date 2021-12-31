@@ -269,7 +269,7 @@ class SpareController extends Controller
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
-            print_r($billProducts);
+            // print_r($billProducts);
         }else{
             $resultBill = 
             '
@@ -278,8 +278,8 @@ class SpareController extends Controller
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             ';
-            print_r($billProducts);
-            echo($shopBill);
+            // print_r($billProducts);
+            // echo($shopBill);
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
