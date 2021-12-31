@@ -115,6 +115,32 @@ $(document).ready(function(){
                         `
                     }`
                 }
+            },
+            {"data": {codProd :"codProd", nombreProducto : "nombreProducto"}, render: function (data) {
+                // $(document).on('mouseenter', `.image-product${data.codProd}`, function () { 
+                //     $(`#text-view-image${data.codProd}`).css("display", "block");
+                // })
+    
+                // $(document).on('mouseleave', `.image-product${data.codProd}`,function(){
+                //     $(`#text-view-image${data.codProd}`).css("display", "none");
+                // })
+    
+                const image_url = `http://appdemo1.solarc.pe/imagenes/${data.codProd}.png`
+    
+                $(document).on('click', `.image-stock-s${data.codProd}`, function(){
+                    $("#pr-name").html(`${data.nombreProducto}`)
+                    $("#increase-image").html(`<img src="http://appdemo1.solarc.pe/imagenes/${data.codProd}.png" onerror="this.onerror=null; this.src='../images/default-image.jpg'">`)
+                })
+                
+                return `
+                    <div class="text-center contenedor-image-stock image-stock-s${data.codProd}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <p id="text-view-image${data.codProd}" style="display:none;position: absolute;z-index: 100;margin: 20;color:white;">
+                            <strong>Ampliar<br>Imagen</strong>
+                        </p>
+                        <img class="image-product${data.codProd} image-pr" src="${image_url}" onerror="this.onerror=null; this.src='../images/default-image.jpg'" width="100" height="100">
+                    </div>
+                `;
+                }
             }
         ],
         responsive: true,
