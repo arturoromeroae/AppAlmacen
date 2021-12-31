@@ -204,14 +204,17 @@ class SpareController extends Controller
             ];
             array_push($blpr, $ar);
         }
-
+        
+        $add = $all_products_bill['subtotalBill'] * $all_products_bill['igvBill'];
+        $tot = $add + $all_products_bill['subtotalBill'];
+        
         $billProducts = [
             "fecha" => $fecha,
             "idCliente" => $idCl,
             "tipoVenta" => $all_products_bill['selectBill'],
             "subTotal" => $all_products_bill['subtotalBill'],
             "igv" => $all_products_bill['igvBill'],
-            "total" => $all_products_bill['totalBill'],
+            "total" => $tot,
             "vuelto" => $all_products_bill['backBill'],
             "porcDscto" => $discountValuePor,
             "valorDscto" => $discountValue,
@@ -231,7 +234,7 @@ class SpareController extends Controller
             "tipoVenta" => $all_products_bill['selectBill'],
             "subTotal" => $all_products_bill['subtotalBill'],
             "igv" => $all_products_bill['igvBill'],
-            "total" => $all_products_bill['totalBill'],
+            "total" => $tot,
             "vuelto" => $all_products_bill['backBill'],
             "porcDscto" => $discountValuePor,
             "valorDscto" => $discountValue,
@@ -266,7 +269,7 @@ class SpareController extends Controller
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
-            //print_r($billProducts);
+            print_r($billProducts);
         }else{
             $resultBill = 
             '
@@ -275,6 +278,8 @@ class SpareController extends Controller
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             ';
+            print_r($billProducts);
+            echo($shopBill);
             // obtener productos
             $products = HTTP::get('http://appdemo1.solarc.pe/api/Productos/GetProductos');
             $productsArray = $products -> json();
