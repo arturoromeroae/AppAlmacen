@@ -104,13 +104,13 @@ $(document).ready(function(){
                     ${data.stock <= 0 ?
                         `
                         <a id="parts-modal-shop${data.idProducto}" class="nav-link hover-table button-add-table disabled" aria-disabled="true" style="cursor: pointer; color:gray;">
-                            <i class="material-icons" style="font-size:25px; margin-left: 40%;">shopping_cart</i>
+                            <i class="material-icons" style="font-size:30px; margin-left: 40%;">shopping_cart</i>
                         </a>
                         `
                     :
                         `
                         <a id="parts-modal-shop${data.idProducto}" class="nav-link hover-table button-add-table" style="cursor: pointer; color:black;">
-                            <i class="material-icons" style="font-size:25px; margin-left: 40%;">shopping_cart</i>
+                            <i class="material-icons" style="font-size:30px; margin-left: 40%;">shopping_cart</i>
                         </a>
                         `
                     }`
