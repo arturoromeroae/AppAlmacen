@@ -35,9 +35,11 @@ oTable = $('#table-maintance').DataTable({
         }
     },
     {"data": "codProd", render: function (codProd) {
+      const image_url = `http://appdemo1.solarc.pe/imagenes/${codProd}.png`
+      const image_url_jpg = `http://appdemo1.solarc.pe/imagenes/${codProd}.jpg`
       return `
               <div class="text-center">
-                  <img src="http://appdemo1.solarc.pe/imagenes/${codProd}.png" width="100" height="100">
+                  <img src="${image_url}" onerror="this.onerror=null; this.src='${image_url_jpg}'" width="100" height="100">
               </div>
           `;
       }

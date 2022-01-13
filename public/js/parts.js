@@ -126,10 +126,11 @@ $(document).ready(function(){
                 // })
     
                 const image_url = `http://appdemo1.solarc.pe/imagenes/${data.codProd}.png`
+                const image_url_jpg = `http://appdemo1.solarc.pe/imagenes/${data.codProd}.jpg`
     
                 $(document).on('click', `.image-stock-s${data.codProd}`, function(){
                     $("#pr-name").html(`${data.nombreProducto}`)
-                    $("#increase-image").html(`<img src="http://appdemo1.solarc.pe/imagenes/${data.codProd}.png" onerror="this.onerror=null; this.src='../images/default-image.jpg'">`)
+                    $("#increase-image").html(`<img src="${image_url}" onerror="this.onerror=null; this.src='${image_url_jpg}'">`)
                 })
                 
                 return `
@@ -137,7 +138,7 @@ $(document).ready(function(){
                         <p id="text-view-image${data.codProd}" style="display:none;position: absolute;z-index: 100;margin: 20;color:white;">
                             <strong>Ampliar<br>Imagen</strong>
                         </p>
-                        <img class="image-product${data.codProd} image-pr" src="${image_url}" onerror="this.onerror=null; this.src='../images/default-image.jpg'" width="100" height="100">
+                        <img class="image-product${data.codProd} image-pr" src="${image_url}" onerror="this.onerror=null; this.src='${image_url_jpg}'" width="100" height="100">
                     </div>
                 `;
                 }
