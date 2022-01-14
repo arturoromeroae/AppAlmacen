@@ -98,6 +98,30 @@ $(document).ready(function(){
                     }`
                 }
             },
+            {"data" : {idProducto : "idProducto", ubicacion : "ubicacion", stock : "stock"}, render: function (data) {
+                let ubi = data.ubicacion;
+                if (ubi == null) {
+                    ubi = "Desconocida";
+                } else {
+                    ubi = data.ubicacion;
+                } 
+                return `
+                    <input id="parts-modal-shop${data.idProducto}" type="text" class="form-control priceShop" value="${data.ubicacion}" hidden>
+                    ${data.stock <= 0 ?
+                        `
+                        <a class="nav-link hover-table click disabled" style="color: black;" aria-disabled="true" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${ubi}
+                        </a>
+                        `
+                        :
+                        `
+                        <a class="nav-link hover-table click" href="#edit-modal-${data.idProducto}" data-bs-toggle="modal" data-bs-target="#edit-modal-${data.idProducto}">
+                            ${ubi}
+                        </a>
+                        `
+                    }`
+                }
+            },
             {"data": {idProducto : "idProducto", stock : "stock"}, render: function (data) {
                 return `
                     <input id="parts-modal-shop${data.idProducto}" type="text" class="form-control idShop" value="${data.idProducto}" hidden>

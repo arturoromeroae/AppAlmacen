@@ -37,6 +37,7 @@
                     <th>P. Venta</th>
                     <th>Marca</th>
                     <th>Modelo</th>
+                    <th>Ubicación</th>
                     <th>Acción</th>
                     <th>Imagen</th>
                 </tr>
@@ -109,7 +110,7 @@
                         </div>
                         <div class="d-flex">
                             <div class="col-sm-3 mx-2" style="text-align: center;">
-                                <img class="img-thumbnail" src="http://appdemo1.solarc.pe/imagenes/{{ $product['codProd'] }}.png" style="max-width: 180px;">
+                                <img class="img-thumbnail" src="http://appdemo1.solarc.pe/imagenes/{{ $product['codProd'] }}.png" onerror="this.onerror=null; this.src='http://appdemo1.solarc.pe/imagenes/{{ $product['codProd'] }}.jpg';" style="max-width: 180px;">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -141,10 +142,10 @@
                                 <input type="number" step=".01" class="form-control" name="priceSellModal" value="{{ $product['precioVenta'] }}">
                             </div>
                             <div class="col-md-6 mt-2">
-                                <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png" tamaño máx 99 KB</strong>)</label>
+                                <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png"  y ".jpg" tamaño máx 99 KB</strong>)</label>
                                 <input class="form-control" type="file" id="image_product_modal-{{ $product['idProducto'] }}" name="image_product_modal">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <label for="price-modal" class="col-form-label mt-4">Marca</label>
                                 <select class="form-select" aria-label="Default select example" id="select_marca" name="selectModalMarca" required>
                                     @if ($selectArrayMarca['data'] != null)
@@ -165,7 +166,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <label for="price-modal" class="col-form-label">Modelo</label>
                                 <select class="form-select" aria-label="Default select example" id="select_modelo" name="selectModalModelo" required>
                                 @if ($selectArrayModelo['messages'] == [])
@@ -186,7 +187,10 @@
                                 @endif
                                 </select>
                             </div>
-
+                            <div class="col-sm-2">
+                                <label for="name-modal" class="col-form-label">Ubicación:</label>
+                                <input type="text" class="form-control" name="ubicationModal" value="{{ $product['ubicacion'] }}">
+                            </div>
                         </div>
                         <br>
                         <div class="modal-footer">
@@ -274,7 +278,7 @@
                         <!-- <div class="col-md-12 mt-0">
                             <button type="button" class="btn btn-primary" onclick="addRow()">Agregar Producto a la tabla</button>
                         </div> -->
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <label for="formFile" class="form-label">Marca</label>
                             <select class="form-select" aria-label="Default select example" id="select_marca" name="select_marca">
                                 <option value= "0" selected>Selecciona una marca</option>
@@ -285,7 +289,7 @@
                                 @endif
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <label for="formFile" class="form-label">Modelo</label>
                             <select class="form-select" aria-label="Default select example" id="select_modelo" name="select_modelo">
                                 <option value= "0" selected>Selecciona un modelo</option>
@@ -296,8 +300,12 @@
                                 @endif
                             </select>
                         </div>
+                        <div class="col-sm-2">
+                            <label for="ubication_modal" class="col-form-label">Ubicación:</label>
+                            <input type="text" id="ubication_modal" class="form-control" name="ubicationModal" value="{{ $product['ubicacion'] }}">
+                        </div>
                         <div class="col-md-6">
-                            <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png" tamaño máx 99 KB</strong>)</label>
+                            <label for="formFile" class="form-label">Imagen del producto (<strong>Solo imágenes ".png" y ".jpg" tamaño máx 99 KB</strong>)</label>
                             <input class="form-control" type="file" id="image_product" name="image_product">
                         </div>
                         <div class="col-md-6">

@@ -48,6 +48,7 @@ class MaintanceController extends Controller
         $cuantity = $request->cuantity; // cantidad del producto
         $price_sell = $request->price_sell; // precio de venta del producto
         $image_input = $request->image_product; // imagen del product
+        $ubication_modal = $request->ubicationModal; // imagen del product
 
         if( $model == 0 && $brand == 0 ){
             $modelProduct = 1;
@@ -91,7 +92,8 @@ class MaintanceController extends Controller
             'rutaImagen' => 'string',
             'idProducto' => 0,
             'cantidad' => (int)$cuantity,
-            'precioVenta' => (float)$price_sell
+            'precioVenta' => (float)$price_sell,
+            'ubicacion' => $ubication_modal
         ];
 
         // obtener productos
@@ -152,6 +154,7 @@ class MaintanceController extends Controller
         $cuantityModal = $request->stockModal; // cantidad del producto
         $idModal = $request->idModal; // cantidad del producto
         $priceSellModal = $request->priceSellModal; // precio de venta del producto
+        $ubicationModal = $request->ubicationModal; // precio de venta del producto
 
         // $route_img_modal = public_path("images"); // ruta de imagenes
         // if ($request->file('image_product_modal' != null)) {
@@ -175,7 +178,8 @@ class MaintanceController extends Controller
             'rutaImagen' => 'string',
             'idProducto' => $idModal,
             'cantidad' => (int)$cuantityModal,
-            'precioVenta' => (float)$priceSellModal
+            'precioVenta' => (float)$priceSellModal,
+            'ubicacion' => $ubicationModal
         ];
 
         $bran = [

@@ -69,6 +69,18 @@ oTable = $('#table-stock').DataTable({
                     <p class="text-end">${data.modelo}</p>
                 `; }
         },
+        {"data" : {ubicacion : "ubicacion"}, render: function (data) {
+            let ubi = data.ubicacion;
+            if (ubi == null) {
+                ubi = "Desconocida";
+            } else {
+                ubi = data.ubicacion;
+            } 
+            return `
+                    <input type="text" name="pricesell" value="${ubi}" hidden>
+                    <p class="text-end">${ubi}</p>
+                `; }
+        },
         {"data" : {
                 modelo : "modelo" , 
                 nombreProducto : "nombreProducto", 
@@ -326,10 +338,13 @@ oTable = $('#table-stock').DataTable({
 
             const image_url = `http://appdemo1.solarc.pe/imagenes/${data.codProd}.png`
             const image_url_jpg = `http://appdemo1.solarc.pe/imagenes/${data.codProd}.jpg`
+            function checkURL(url) {
+                return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+            }
 
             $(document).on('click', `.image-stock-s${data.codProd}`, function(){
                 $("#pr-name").html(`${data.nombreProducto}`)
-                $("#increase-image").html(`<img src="http://appdemo1.solarc.pe/imagenes/${data.codProd}.png" onerror="this.onerror=null; this.src='../images/default-image.jpg'">`)
+                $("#increase-image").html(`<img src="${image_url}" onerror="this.onerror=null; this.src='${image_url_jpg}'">`)
             })
             
             return `

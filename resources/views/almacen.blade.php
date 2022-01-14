@@ -37,6 +37,7 @@
                     <th>P. Venta</th>
                     <th>Marca</th>
                     <th>Modelo</th>
+                    <th>Ubicación</th>
                     <th class="accion-stock" data-width="100" width="100">Acción</th>
                     <th>Imagen</th>
                 </tr>

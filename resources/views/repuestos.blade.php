@@ -33,9 +33,10 @@
                     <tr>
                         <th scope="col">Código</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Descripcion</th>
+                        <th scope="col">Descripción</th>
                         <th data-align="right" scope="col">Cantidad</th>
                         <th data-align="right" scope="col">P. Venta</th>
+                        <th scope="col">Ubicación</th>
                         <th data-align="center" scope="col">Agregar</th>
                         <th data-align="center" scope="col">Imagen</th>
                     </tr>

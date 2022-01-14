@@ -24,6 +24,7 @@ oTable = $('#table-maintance').DataTable({
     {"data" : "precioVenta"},
     {"data" : "marca"},
     {"data" : "modelo"},
+    {"data" : "ubicacion"},
     {"data": "idProducto", render: function (idProducto) { 
         return `<a class="nav-link hover-table" href="#edit-modal-${ idProducto }" data-bs-toggle="modal" data-bs-target="#edit-modal-${ idProducto }">
                   <i class="material-icons" style="font-size:17px;">create</i>
