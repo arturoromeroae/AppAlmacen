@@ -1,3 +1,7 @@
+if (localStorage.getItem('userId') == "" || localStorage.getItem('userId') == null) {
+    window.location.replace("/");
+}
+
 // fecha factura
 var getDate = new Date();
 var getDy = getDate.getDate();

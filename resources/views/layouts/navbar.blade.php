@@ -143,7 +143,8 @@
                                 Usuario
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdownEdit" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{{ url('/usuarios') }}">Agregar Usuarios</a></li>
+                  <li><a class="dropdown-item" href="{{ url('/cuenta') }}">Cuenta</a></li>
+                  <li id="add-users-menu"><a class="dropdown-item" href="{{ url('/usuarios') }}">Agregar Usuarios</a></li>
                   <li><a id="logoutNav" class="dropdown-item" href="/">Cerrar Sesion</a></li>
                 </ul>
               </li>

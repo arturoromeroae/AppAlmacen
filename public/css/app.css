@@ -73,3 +73,11 @@ main{
     width: 110;
     height: 110;
 }
+
+.del-users{
+    cursor: pointer;
+}
+
+.del-users:hover{
+    color: #0d6efd;
+}

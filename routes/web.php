@@ -8,6 +8,7 @@ use App\Http\Controllers\SpareController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\CotizeController;
 
 /*
@@ -52,5 +53,7 @@ Route::any('/cotizar/{id}', [CotizeController::class, 'shopCotize'])->name('coti
 Route::any('/repuestos/{id}', [SpareController::class, 'shop'])->name('repuestos.post');
 
 Route::post('/repuestos/{id}/{product}', [SpareController::class, 'sendBill'])->name('repuestos.complete');
+
+Route::any('/cuenta', [CuentaController::class, 'cuenta'])->name('cuenta');
 
 Route::any('/usuarios', [UsersController::class, 'users'])->name('usuarios');
