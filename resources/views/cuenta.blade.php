@@ -3,7 +3,7 @@
 @section('content')
 <div class="alert-user"></div>
 
-<section class="container">
+<section class="container acount-container">
     <br />
 	<br />
     <!-- titulo -->
@@ -50,7 +50,7 @@
     </div>
 </section>
 
-<!-- Modal Eliminar -->
+<!-- Modal Eliminar Mi Usuario -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -84,7 +84,7 @@
         <table id="table-users" class="table">
             <thead>
                 <tr>
-                    <th scope="col">Usuario</th>
+                    <th scope="col">Usuarios</th>
                     <th scope="col">Eliminar</th>
                 </tr>
             </thead>
@@ -92,6 +92,27 @@
                 
             </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="tableModal" tabindex="-1" aria-labelledby="tableModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="tableModalLabel">Eliminar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <input id="dUs" type="text" hidden>
+        <input id="dId" type="text" hidden>
+        ¿Esta seguro que desea eliminar el usuario <span class="user-del-table"></span>?
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button id="acceptDeleteTable" type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
